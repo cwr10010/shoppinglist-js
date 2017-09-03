@@ -1,68 +1,80 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
+import { LoggingService } from './logging.service';
 import { ShoppingListItem } from '../model/shoppinglist';
+import { LocalStorageService } from './local-storage.service';
+import { HttpClient } from './http-client.module';
 
 @Injectable()
 export class ShoppingListService {
 
-    private shoppinglistUrl = 'api/shoppinglist';
-
-    private headers = new Headers({'Content-Type': 'application/json'});
-
-    constructor(private http: Http) { }
+    constructor(
+        private http: HttpClient,
+        private localStorage: LocalStorageService,
+        private log: LoggingService) { }
 
     getItems(): Promise<ShoppingListItem[]> {
-        return this.http.get(this.shoppinglistUrl)
+        return this.http.get(this.basePath(), true)
                 .toPromise()
-                .then(response => response.json().data as ShoppingListItem[])
-                .catch(this.handleError);
-    }
-
-    getItem(id: Number): Promise<ShoppingListItem> {
-        const url = `${this.shoppinglistUrl}/${id}`;
-        return this.http.get(url)
-                .toPromise()
-                .then(response => response.json().data as ShoppingListItem)
-                .catch(this.handleError);
-    }
-
-    update(item: ShoppingListItem): Promise<ShoppingListItem> {
-        const url = `${this.shoppinglistUrl}/${item.id}`
-        return this.http.put(url, JSON.stringify(item), { headers: this.headers })
-                .toPromise()
-                .then(() => item)
-                .catch(this.handleError);
+                .then(response => response.json() as ShoppingListItem[])
+                .catch(response => this.handleError(response));
     }
 
     create(name: string, description: string, order: Number, read: boolean): Promise<ShoppingListItem> {
         return this.http.post(
-                this.shoppinglistUrl,
-                JSON.stringify({
+                this.basePath(),
+                JSON.stringify([{
                     name: name,
                     description: description,
                     order: order,
-                    read: read}),
-                {
-                    headers: this.headers
-                })
+                    read: read}]),
+                true)
                 .toPromise()
-                .then(response => response.json().data as ShoppingListItem)
+                .then(response => response.json() as ShoppingListItem)
+                .catch(response => this.handleError(response));
+    }
+
+    getItem(id: Number): Promise<ShoppingListItem> {
+        const url = `${this.basePath()}/${id}`;
+        return this.http.get(url, true)
+                .toPromise()
+                .then(response => response.json() as ShoppingListItem)
                 .catch(this.handleError);
+    }
+
+    update(item: ShoppingListItem): Promise<ShoppingListItem> {
+        const url = `${this.basePath()}/${item.id}`
+        return this.http.post(url, JSON.stringify(item), true)
+                .toPromise()
+                .then(() => item)
+                .catch(response => this.handleError(response));
     }
 
     delete(id: string): Promise<void> {
-        const url = `${this.shoppinglistUrl}/${id}`;
-        return this.http.delete(url, { headers: this.headers })
+        const url = `${this.basePath()}/${id}`;
+        return this.http.delete(url, true)
                 .toPromise()
                 .then(() => null)
-                .catch(this.handleError);
+                .catch(response => this.handleError(response));
+    }
+
+    private basePath(): string {
+        return `/users/${this.localStorage.readUserId()}/shopping-list`;
     }
 
     private handleError(error: any): Promise<any> {
-        console.error('An error occurred', error);
-        return Promise.reject(error.message || error);
+        switch (error.status) {
+            case 401:
+            case 403:
+                this.log.debug('reset token', error);
+                this.localStorage.resetToken();
+                return Promise.all([])
+            default:
+                this.log.warn('An error occurred', error);
+                this.localStorage.resetToken();
+                return Promise.reject(error);
+        }
     }
 }

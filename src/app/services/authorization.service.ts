@@ -1,69 +1,67 @@
 import { Injectable } from '@angular/core'
-import { Headers, Http } from '@angular/http';
 
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/toPromise';
 
 import { LocalStorageService } from './local-storage.service';
 import { LoggingService } from './logging.service';
+import { HttpClient } from './http-client.module';
 
 @Injectable()
 export class AuthorizationService {
-
-    private TOKEN_KEY = "X-SLS-AUTHTOKEN";
-    private AUTHORIZATION_HEADER = "Authorization";
     private authUrl = "/auth";
-    private headers = new Headers({'Content-Type': 'application/json'});
 
     constructor(
-        private http: Http,
-        private localStorage: LocalStorageService,
+        private http: HttpClient,
+        private storageService: LocalStorageService,
         private log: LoggingService) {}
 
     authorize(name: string, password: string): void {
-        this.log.info("foo");
-        var token = this.http.post(
+        this.http.post(
             this.authUrl,
             JSON.stringify({
-                    name: name,
+                    username: name,
                     password: password}),
-            {
-                headers: this.headers
-            }).toPromise()
-            .then(response => response.json().data as Token)
-            .then((token: Token) => {
-                localStorage.store(this.TOKEN_KEY, token.token);
-            })
-            .catch(message => this.handleError(message.toString()));
+            false)
+            .toPromise()
+            .then(response => response.json() as Token)
+            .then((token: Token) => this.storageService.storeToken(token.token))
+            .catch(response => this.handleError(response));
     }
 
     refresh() {
-        this.http.get(
-            this.authUrl,
-            {
-                headers: this.getHeadersWithAuthToken()
-            })
-            .map(response => response.json().data as Token)
-            .map((token: Token) => localStorage.setItem(this.TOKEN_KEY, token.token));
+        const currentToken = this.storageService.readToken()
+        if (currentToken) {
+            this.http.get(
+                this.authUrl,
+                true)
+                .toPromise()
+                .then(response => response.json() as Token)
+                .then((token: Token) => this.storageService.storeToken(token.token))
+                .catch(response => this.handleError(response));
+        }
     }
 
-    getHeadersWithAuthToken(): Headers {
-        const authHeader: string = this.AUTHORIZATION_HEADER;
-        const authValue: string = `Bearer ${this.getAuthToken()}`;
-        return new Headers({
-            'Content-Type': 'application/json',
-            authHeader: authValue
-        });
+    logout() {
+        this.storageService.resetToken();
     }
 
     getAuthToken(): string {
-        return localStorage.getItem(this.TOKEN_KEY);
+        return this.storageService.readToken();
     }
 
-    handleError(error: any): Promise<any> {
-        //console.log(this.log);
-        this.log.error('An error occurred', error);
-        return Promise.reject(error.message || error);
+    private handleError(error: Response): Promise<any> {
+        switch (error.status) {
+            case 400:
+            case 401:
+            case 403:
+                this.log.debug('reset token', error);
+                this.storageService.resetToken();
+                return Promise.all([])
+            default:
+                this.log.warn('An error occurred', error);
+                this.storageService.resetToken();
+                return Promise.reject(error);
+        }
     }
 }
 

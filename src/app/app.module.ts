@@ -8,6 +8,8 @@ import { CookieService } from 'ngx-cookie-service';
 // Mock Services
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 
+import { HttpClient } from './services/http-client.module';
+
 import { InMemoryDataService }  from './services/in-memory-data.service';
 import { ShoppingListService } from './services/shoppinglist.service';
 import { ShoppingListItemSearchService } from './services/item-search.service';
@@ -29,7 +31,7 @@ import { AppRoutingModule } from './app-routing.module';
     BrowserModule,
     FormsModule,
     HttpModule,
-    InMemoryWebApiModule.forRoot(InMemoryDataService),
+    //InMemoryWebApiModule.forRoot(InMemoryDataService),
     AppRoutingModule
   ],
   declarations: [
@@ -46,7 +48,8 @@ import { AppRoutingModule } from './app-routing.module';
       CookieService,
       LocalStorageService,
       AuthorizationService,
-      LoggingService
+      LoggingService,
+      HttpClient
   ],
   bootstrap: [ AppComponent ]
 })

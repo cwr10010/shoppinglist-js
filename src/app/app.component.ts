@@ -1,22 +1,30 @@
 import { Component } from '@angular/core';
 
+import { AuthorizationService } from './services/authorization.service';
+
 import '../assets/css/styles.css';
 
 @Component({
   selector: 'my-app',
-  template: `
-    <h1>{{title}}</h1>
-    <login></login>
-    <nav>
-    <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
-    <a routerLink="/shoppinglist" routerLinkActive="active">Shoppinglist</a>
-    </nav>
-    <router-outlet></router-outlet>
-  `,
+  templateUrl: './app.component.html',
   styleUrls: [
     './app.component.css'
   ]
 })
 export class AppComponent {
-  title = 'Shopping List App';
+    title = 'Shopping List App';
+
+    constructor(private authorizationService: AuthorizationService) {}
+
+    isLoggedin(): boolean {
+        if (this.authorizationService.getAuthToken()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    doLogout() {
+        this.authorizationService.logout();
+    }
 }

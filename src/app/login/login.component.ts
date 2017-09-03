@@ -1,6 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { AuthorizationService } from '../services/authorization.service';
+import { LoggingService } from '../services/logging.service';
 import { User } from '../model/user';
 
 @Component({
@@ -12,24 +13,16 @@ import { User } from '../model/user';
 })
 export class LoginComponent implements OnInit {
 
-    @Input() user: User;
-
-    constructor(private authorizationService: AuthorizationService) {}
+    constructor(private authorizationService: AuthorizationService,
+        private log: LoggingService) {}
 
     ngOnInit(): void {
-
+        this.authorizationService.refresh();
     }
 
     doLogin(username: string, password: string): void {
-        console.log(`doLogin(${username}, ${password})`);
+        this.log.debug(`doLogin(${username}, ${password})`);
         this.authorizationService.authorize(username, password);
     }
 
-    isLoggedin(): boolean {
-        if (this.authorizationService.getAuthToken()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 }

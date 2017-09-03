@@ -1,0 +1,12 @@
+<h1>{{title}}</h1>
+<div *ngIf="!isLoggedin()">
+    <login></login>
+</div>
+<div *ngIf="isLoggedin()">
+    <nav>
+        <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+        <a routerLink="/shoppinglist" routerLinkActive="active">Shoppinglist</a>
+        <a (click)="doLogout()">logout</a>
+    </nav>
+    <router-outlet></router-outlet>
+</div>

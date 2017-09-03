@@ -1,17 +1,45 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
+import { LoggingService } from './logging.service';
 
 @Injectable()
-export class LocalStorageService implements OnInit {
+export class LocalStorageService {
 
     localStorageAvailable: boolean = false;
 
-    constructor(private cookieService: CookieService) { }
-
-    ngOnInit(): void {
+    constructor(
+        private log: LoggingService,
+        private cookieService: CookieService) {
         if (localStorage) {
             this.localStorageAvailable = true;
         }
+    }
+
+    storeToken(token: string) {
+        this.store(TOKEN_KEY, token);
+    }
+
+    readToken(): string {
+        return this.read(TOKEN_KEY);
+    }
+
+    resetToken() {
+        this.remove(TOKEN_KEY);
+    }
+
+    readUserId(): string {
+        const token = this.readToken();
+        this.log.debug("token: " + token );
+        if (token) {
+            const parts = token.split('.')
+            if (parts.length === 3) {
+                this.log.debug("token parts: " + parts );
+                const tokenContent = atob(parts[1]);
+                this.log.debug("token content: " + tokenContent );
+                return JSON.parse(tokenContent)['id']
+            }
+        }
+        return null;
     }
 
     store(key: string, value: any): void {
@@ -51,4 +79,15 @@ export class LocalStorageService implements OnInit {
         }
         return data;
     }
+
+    remove(key: string): void {
+        if (this.localStorageAvailable) {
+            localStorage.removeItem(key);
+        }
+        else {
+            this.cookieService.delete(key);
+        }
+    }
 }
+
+export const TOKEN_KEY = "X-SLS-AUTHTOKEN";
