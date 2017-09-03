@@ -12,8 +12,9 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 
-import { ShoppingListItemSearchService } from '../services/item-search.service';
 import { ShoppingListItem } from '../model/shoppinglist';
+import { ShoppingListItemSearchService } from '../services/item-search.service';
+import { LoggingService } from '../services/logging.service';
 
 @Component({
     selector: 'item-search',
@@ -28,7 +29,10 @@ export class ShoppingListItemSearchComponent implements OnInit {
     shoppinglist: Observable<ShoppingListItem[]>;
     private searchTerms = new Subject<string>();
 
-    constructor(private itemSearchService: ShoppingListItemSearchService, private router: Router) { }
+    constructor(
+        private itemSearchService: ShoppingListItemSearchService,
+        private router: Router,
+        private log: LoggingService) { }
 
     search(term: string): void {
         this.searchTerms.next(term);
@@ -40,7 +44,7 @@ export class ShoppingListItemSearchComponent implements OnInit {
             .distinctUntilChanged()
             .switchMap(term => term ? this.itemSearchService.search(term) : Observable.of<ShoppingListItem[]>([]))
             .catch(error => {
-                console.log(error);
+                this.log.warn(error);
                 return Observable.of<ShoppingListItem[]>([]);
             })
     }

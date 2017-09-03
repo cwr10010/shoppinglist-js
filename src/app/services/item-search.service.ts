@@ -4,8 +4,8 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
 import { ShoppingListItem } from '../model/shoppinglist';
-import { HttpClient } from './http-client.module';
 import { LocalStorageService } from './local-storage.service';
+import { HttpClient } from './http-client.module';
 
 @Injectable()
 export class ShoppingListItemSearchService {

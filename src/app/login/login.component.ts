@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 
 import { AuthorizationService } from '../services/authorization.service';
 import { LoggingService } from '../services/logging.service';
-import { User } from '../model/user';
 
 @Component({
     selector: 'login',

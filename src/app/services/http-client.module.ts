@@ -11,7 +11,7 @@ import { LocalStorageService, TOKEN_KEY } from './local-storage.service';
 @Injectable()
 export class HttpClient {
 
-    remoteHost: string = 'http://localhost:8080';
+    remoteHost: string = 'http://localhost:8080/api';
 
     constructor(
         private http: Http,

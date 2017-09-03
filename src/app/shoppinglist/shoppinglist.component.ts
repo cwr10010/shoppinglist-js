@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { ShoppingListService } from '../services/shoppinglist.service';
 import { ShoppingListItem } from '../model/shoppinglist';
+import { ShoppingListService } from '../services/shoppinglist.service';
 
 @Component({
   selector: 'my-shoppinglist',

@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 
 import 'rxjs/add/operator/toPromise';
 
-import { LoggingService } from './logging.service';
 import { ShoppingListItem } from '../model/shoppinglist';
+import { LoggingService } from './logging.service';
 import { LocalStorageService } from './local-storage.service';
 import { HttpClient } from './http-client.module';
 
