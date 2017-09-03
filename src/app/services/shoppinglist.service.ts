@@ -22,7 +22,7 @@ export class ShoppingListService {
                 .catch(response => this.handleError(response));
     }
 
-    create(name: string, description: string, order: Number, read: boolean): Promise<ShoppingListItem> {
+    create(name: string, description: string, order: Number, read: boolean): Promise<ShoppingListItem[]> {
         return this.http.post(
                 this.basePath(),
                 JSON.stringify([{
@@ -32,16 +32,16 @@ export class ShoppingListService {
                     read: read}]),
                 true)
                 .toPromise()
-                .then(response => response.json() as ShoppingListItem)
+                .then(response => response.json() as ShoppingListItem[])
                 .catch(response => this.handleError(response));
     }
 
-    getItem(id: Number): Promise<ShoppingListItem> {
+    getItem(id: string): Promise<ShoppingListItem> {
         const url = `${this.basePath()}/${id}`;
         return this.http.get(url, true)
                 .toPromise()
                 .then(response => response.json() as ShoppingListItem)
-                .catch(this.handleError);
+                .catch(response => this.handleError(response));
     }
 
     update(item: ShoppingListItem): Promise<ShoppingListItem> {
@@ -73,7 +73,6 @@ export class ShoppingListService {
                 return Promise.all([])
             default:
                 this.log.warn('An error occurred', error);
-                this.localStorage.resetToken();
                 return Promise.reject(error);
         }
     }

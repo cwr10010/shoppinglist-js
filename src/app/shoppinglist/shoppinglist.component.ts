@@ -41,8 +41,8 @@ export class ShoppingListComponent implements OnInit {
       description = description.trim()
       if (!name || !description) { return; }
       this.shoppingListService.create(name, description, order, read)
-        .then(item => {
-          this.shoppingList.push(item);
+        .then(items => {
+          this.shoppingList.push(items[0]);
           this.selectedItem = null;
           console.log(this.shoppingList);
         });

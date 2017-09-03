@@ -25,7 +25,7 @@ export class ItemDetailsComponent implements OnInit {
 
     ngOnInit(): void {
         this.route.paramMap
-            .switchMap((params: ParamMap) => this.shoppingListService.getItem(+params.get('id')))
+            .switchMap((params: ParamMap) => this.shoppingListService.getItem(params.get('id')))
             .subscribe(item => this.item = item)
     }
 
