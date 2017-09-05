@@ -3,6 +3,8 @@ import { BrowserModule }  from '@angular/platform-browser';
 import { FormsModule }   from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
 import { CookieService } from 'ngx-cookie-service';
 
 import { HttpClient } from './services/http-client.module';
@@ -21,12 +23,15 @@ import { ShoppingListItemSearchComponent } from './item-search/item-search.compo
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { MdGridListModule, MdButtonModule, MdFormFieldModule, MdInputModule, MdCardModule, MdMenuModule, MdIconModule, MdChipsModule, MdAutocompleteModule, MdOptionModule, MdListModule } from '@angular/material';
 
 @NgModule({
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
+    BrowserAnimationsModule,
+    MdGridListModule, MdButtonModule, MdFormFieldModule, MdInputModule, MdCardModule, MdMenuModule, MdIconModule, MdChipsModule, MdAutocompleteModule, MdOptionModule, MdListModule,
     AppRoutingModule
   ],
   declarations: [

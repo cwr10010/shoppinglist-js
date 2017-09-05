@@ -1,12 +1,25 @@
-<h1>{{title}}</h1>
+<h1 class="app-title">{{title}}</h1>
 <div *ngIf="!isLoggedin()">
     <login></login>
 </div>
 <div *ngIf="isLoggedin()">
-    <nav>
-        <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
-        <a routerLink="/shoppinglist" routerLinkActive="active">Shoppinglist</a>
-        <a (click)="doLogout()">logout</a>
-    </nav>
-    <router-outlet></router-outlet>
+    <div>
+        <div>
+            <button md-icon-button [mdMenuTriggerFor]="menu"  class="menu-icon">
+                <md-icon>more_vert</md-icon>
+            </button>
+            </div>
+            <div>
+            <item-search></item-search>
+        </div>
+
+        <md-menu #menu="mdMenu">
+            <a md-menu-item routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+            <a md-menu-item routerLink="/shoppinglist" routerLinkActive="active">Shoppinglist</a>
+            <a (click)="doLogout()" md-menu-item >Logout</a>
+        </md-menu>
+        <div class="content">
+        <router-outlet></router-outlet>
+        </div>
+    </div>
 </div>

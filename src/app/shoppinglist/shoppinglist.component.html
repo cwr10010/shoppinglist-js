@@ -1,24 +1,33 @@
-<h2>{{title}}</h2>
 
 <div>
-<label>Name:</label> <input #itemName />
-<label>Description:</label><input #itemDescription />
-<label>Position:</label><input #itemOrder />
-<button (click)="add(itemName.value, itemDescription.value, itemOrder.value, false); itemName.value=''; itemDescription.value=''; itemOrder.value='';">Add</button>
+  <md-form-field>
+  <input mdInput #itemName placeholder="Name" />
+  </md-form-field>
+</div>
+<div>
+    <md-form-field>
+  <input mdInput #itemDescription placeholder="Description" />
+  </md-form-field>
+</div>
+<div>
+    <md-form-field>
+  <input mdInput #itemOrder placeholder="Position" />
+  </md-form-field>
+</div>
+<button (click)="add(itemName.value, itemDescription.value, itemOrder.value, false); itemName.value=''; itemDescription.value=''; itemOrder.value='';" md-raised-button color="primary" >Add</button>
 
-<ul class="items">
-    <li *ngFor="let item of shoppingList"
-      [class.selected]="item === selectedItem"
+<md-list>
+<h2 md-header>{{title}}</h2>
+<md-list-item *ngFor="let item of shoppingList" [class.selected]="item === selectedItem"
       (click)="onSelect(item)">
-      <span class="badge">{{item.order}}</span> {{item.name}}
-      <button class="delete" (click)="delete(item); $event.stopPropagation()">x</button>
-    </li>
-</ul>
-
+  <span >{{item.name}}</span>
+      <button class="delete" (click)="delete(item); $event.stopPropagation()" md-icon-button >x</button>
+</md-list-item>
+</md-list>
 <div *ngIf="selectedItem">
     <h2>
         {{selectedItem.name}}
     </h2>
-    <button (click)="gotoDetail()">View Details</button>
+    <button (click)="gotoDetail()" md-raised-button >View Details</button>
 </div>
 
