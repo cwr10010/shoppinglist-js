@@ -1,8 +1,44 @@
 import { NgModule } from '@angular/core';
-import { MdButtonModule, MdFormField } from '@angular/material';
+import {
+  MdGridListModule,
+  MdButtonModule,
+  MdFormFieldModule,
+  MdInputModule,
+  MdCardModule,
+  MdMenuModule,
+  MdIconModule,
+  MdChipsModule,
+  MdAutocompleteModule,
+  MdOptionModule,
+  MdListModule
+} from '@angular/material';
 
 @NgModule({
-  imports: [MdButtonModule, MdFormField],
-  exports: [MdButtonModule, MdFormField],
+  imports: [
+  MdGridListModule,
+  MdButtonModule,
+  MdFormFieldModule,
+  MdInputModule,
+  MdCardModule,
+  MdMenuModule,
+  MdIconModule,
+  MdChipsModule,
+  MdAutocompleteModule,
+  MdOptionModule,
+  MdListModule
+  ],
+  exports: [
+  MdGridListModule,
+  MdButtonModule,
+  MdFormFieldModule,
+  MdInputModule,
+  MdCardModule,
+  MdMenuModule,
+  MdIconModule,
+  MdChipsModule,
+  MdAutocompleteModule,
+  MdOptionModule,
+  MdListModule
+  ],
 })
 export class CustomMaterialModule { }

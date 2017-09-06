@@ -23,7 +23,7 @@ import { ShoppingListItemSearchComponent } from './item-search/item-search.compo
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { MdGridListModule, MdButtonModule, MdFormFieldModule, MdInputModule, MdCardModule, MdMenuModule, MdIconModule, MdChipsModule, MdAutocompleteModule, MdOptionModule, MdListModule } from '@angular/material';
+import { CustomMaterialModule } from './custom-material.module';
 
 @NgModule({
   imports: [
@@ -31,7 +31,7 @@ import { MdGridListModule, MdButtonModule, MdFormFieldModule, MdInputModule, MdC
     FormsModule,
     HttpModule,
     BrowserAnimationsModule,
-    MdGridListModule, MdButtonModule, MdFormFieldModule, MdInputModule, MdCardModule, MdMenuModule, MdIconModule, MdChipsModule, MdAutocompleteModule, MdOptionModule, MdListModule,
+    CustomMaterialModule,
     AppRoutingModule
   ],
   declarations: [

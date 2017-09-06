@@ -42,7 +42,7 @@ export class ShoppingListComponent implements OnInit {
       if (!name || !description) { return; }
       this.shoppingListService.create(name, description, order, read)
         .then(items => {
-          this.shoppingList.push(items[0]);
+          this.shoppingList = items;
           this.selectedItem = null;
           console.log(this.shoppingList);
         });

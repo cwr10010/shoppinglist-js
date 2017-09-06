@@ -15,7 +15,7 @@ export class ShoppingListItemSearchService {
         private localStorage: LocalStorageService) { }
 
     search(term: string): Observable<ShoppingListItem[]> {
-        return this.http.get(`${this.basePath()}?name=${term}`, true)
+        return this.http.get(`${this.basePath()}?term=${term}`, true)
             .map(response => response.json() as ShoppingListItem[]);
     }
 
