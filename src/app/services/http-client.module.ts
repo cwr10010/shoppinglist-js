@@ -6,7 +6,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 
 import { LoggingService } from './logging.service';
-import { LocalStorageService, TOKEN_KEY } from './local-storage.service';
+import { AuthorizationService } from './authorization.service';
 
 @Injectable()
 export class HttpClient {
@@ -15,53 +15,53 @@ export class HttpClient {
 
     constructor(
         private http: Http,
-        localStorage: LocalStorageService) { }
+        private authorizationService: AuthorizationService) { }
 
-    get(path: string, authorized: boolean): Observable<Response> {
+    get(path: string): Observable<Response> {
         return this.http.get(
-            this.remoteHost + path,
+            this.createPath(path),
             {
-                headers: this.createHeaders(authorized)
+                headers: this.createHeaders()
             });
     }
 
-    post(path: string, body: string, authorized: boolean): Observable<Response> {
+    post(path: string, body: string): Observable<Response> {
         return this.http.post(
-            this.remoteHost + path,
+            this.createPath(path),
             body,
             {
-                headers : this.createHeaders(authorized)
+                headers : this.createHeaders()
             });
     }
 
-    put(path: string, body: string, authorized: boolean): Observable<Response> {
+    put(path: string, body: string): Observable<Response> {
         return this.http.put(
-            this.remoteHost + path,
+            this.createPath(path),
             body,
             {
-                headers : this.createHeaders(authorized)
+                headers : this.createHeaders()
             });
     }
 
-    delete(path: string, authorized: boolean): Observable<Response> {
+    delete(path: string): Observable<Response> {
         return this.http.delete(
-            this.remoteHost + path,
+            this.createPath(path),
             {
-                headers : this.createHeaders(authorized)
+                headers : this.createHeaders()
             });
     }
 
-    createHeaders(authorized: boolean): Headers {
+    createPath(path: string): string {
+        return `${this.remoteHost}/users/${this.authorizationService.readUserId()}/${path}`;
+    }
+
+    createHeaders(): Headers {
         var headers = {};
-        const authValue: string = `Bearer ${localStorage.getItem(TOKEN_KEY)}`;
-        if (authorized) {
-            headers = {
-                'Content-Type': 'application/json',
-                'Authorization': authValue
-            };
-        } else {
-            headers = { 'Content-Type': 'application/json' };
-        }
+        const authValue: string = `Bearer ${this.authorizationService.getAuthToken()}`;
+        headers = {
+            'Content-Type': 'application/json',
+            'Authorization': authValue
+        };
         return new Headers(headers);
     }
 }

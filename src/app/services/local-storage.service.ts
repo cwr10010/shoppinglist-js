@@ -16,33 +16,6 @@ export class LocalStorageService {
         }
     }
 
-    storeToken(token: string) {
-        this.store(TOKEN_KEY, token);
-    }
-
-    readToken(): string {
-        return this.read(TOKEN_KEY);
-    }
-
-    resetToken() {
-        this.remove(TOKEN_KEY);
-    }
-
-    readUserId(): string {
-        const token = this.readToken();
-        this.log.debug("token: " + token );
-        if (token) {
-            const parts = token.split('.')
-            if (parts.length === 3) {
-                this.log.debug("token parts: " + parts );
-                const tokenContent = atob(parts[1]);
-                this.log.debug("token content: " + tokenContent );
-                return JSON.parse(tokenContent)['id']
-            }
-        }
-        return null;
-    }
-
     store(key: string, value: any): void {
         if (typeof value !== 'undefined' && value != null) {
             if (typeof value === 'object') {
@@ -90,5 +63,3 @@ export class LocalStorageService {
         }
     }
 }
-
-export const TOKEN_KEY = "X-SLS-AUTHTOKEN";
