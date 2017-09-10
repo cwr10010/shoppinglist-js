@@ -1,15 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { AuthorizationGuard } from './_guards/authorization.guard';
+import { LoggedInGuard } from './_guards/loggedin.guard';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ItemDetailsComponent } from './item-details/item-details.component';
-import { ShoppingListComponent } from './shoppinglist/shoppinglist.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
-    { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
-    { path: 'dashboard', component: DashboardComponent },
-    { path: 'details/:id', component: ItemDetailsComponent },
-    { path: 'shoppinglist', component: ShoppingListComponent }
+    { path: 'login', component: LoginComponent, canActivate: [LoggedInGuard] },
+    { path: '', component: DashboardComponent, canActivate: [AuthorizationGuard] },
+    { path: 'details/:id', component: ItemDetailsComponent, canActivate: [AuthorizationGuard] },
+
+    { path: '**', redirectTo: '/' }
 ]
 
 @NgModule({

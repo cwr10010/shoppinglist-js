@@ -3,18 +3,16 @@
     <md-card-title>Login</md-card-title>
     <p>
     <md-form-field>
-        <input #username mdInput placeholder="Username" />
+        <input mdInput [(ngModel)]="user.username" placeholder="Username" (keyup.enter)="doLogin()"/>
     </md-form-field>
     </p>
     <p>
     <md-form-field>
-        <input #password mdInput placeholder="Password" type="password" />
+        <input mdInput [(ngModel)]="user.password" placeholder="Password" type="password" (keyup.enter)="doLogin()"/>
     </md-form-field>
     </p>
     <p>
-        <button
-            (click)="doLogin(username.value, password.value)"
-            md-raised-button color="primary" >Login</button>
+        <button md-raised-button color="primary" (click)="doLogin()" >Login</button>
     </p>
 </md-card>
 </div>

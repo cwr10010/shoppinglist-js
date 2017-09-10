@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 
-import { LoggingService } from './logging.service';
+import { Logger } from '../_helpers/logging';
 
 @Injectable()
 export class LocalStorageService {
@@ -9,7 +9,7 @@ export class LocalStorageService {
     localStorageAvailable: boolean = false;
 
     constructor(
-        private log: LoggingService,
+        private log: Logger,
         private cookieService: CookieService) {
         if (localStorage) {
             this.localStorageAvailable = true;

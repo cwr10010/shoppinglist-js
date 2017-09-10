@@ -8,13 +8,13 @@ import { HttpModule } from '@angular/http';
 
 import { CookieService } from 'ngx-cookie-service';
 
-import { HttpClient } from './services/http-client.module';
+import { HttpClient } from './_helpers/http-client';
+import { Logger } from './_helpers/logging';
 
-import { ShoppingListService } from './services/shoppinglist.service';
-import { ShoppingListItemSearchService } from './services/item-search.service';
-import { LocalStorageService } from './services/local-storage.service';
-import { AuthorizationService } from './services/authorization.service';
-import { LoggingService } from './services/logging.service';
+import { ShoppingListService } from './_services/shoppinglist.service';
+import { ShoppingListItemSearchService } from './_services/item-search.service';
+import { LocalStorageService } from './_services/local-storage.service';
+import { AuthorizationService } from './_services/authorization.service';
 
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -48,7 +48,7 @@ describe('App', () => {
             CookieService,
             LocalStorageService,
             AuthorizationService,
-            LoggingService,
+            Logger,
             HttpClient,
             {provide: APP_BASE_HREF, useValue : '/' }
         ]

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { AuthorizationService } from './services/authorization.service';
+import { AuthorizationService } from './_services/authorization.service';
 
 import '../assets/css/styles.css';
 
@@ -22,9 +22,5 @@ export class AppComponent {
         } else {
             return false;
         }
-    }
-
-    doLogout() {
-        this.authorizationService.logout();
     }
 }

@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core'
 import { Headers, Http, Response } from '@angular/http';
 
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/toPromise';
 
+import { User } from '../_models/user';
 import { LocalStorageService } from './local-storage.service';
-import { LoggingService } from './logging.service';
+import { Logger } from '../_helpers/logging';
 
 @Injectable()
 export class AuthorizationService {
@@ -14,14 +16,12 @@ export class AuthorizationService {
     constructor(
         private http: Http,
         private storageService: LocalStorageService,
-        private log: LoggingService) {}
+        private log: Logger) {}
 
-    authorize(name: string, password: string): void {
-        this.http.post(
+    authorize(user: User): Promise<void> {
+        return this.http.post(
             this.authUrl,
-            JSON.stringify({
-                    username: name,
-                    password: password}),
+            JSON.stringify(user),
             {
                 headers: this.createHeaders(),
                 withCredentials: true
@@ -35,9 +35,9 @@ export class AuthorizationService {
             .catch(response => this.handleError(response));
     }
 
-    refresh() {
+    refresh(): Promise<any> {
         if (this.getAuthToken()) {
-            this.http.get(
+            return this.http.get(
                 this.authUrl,
                 {
                     headers: this.createHeaders(),
@@ -51,13 +51,16 @@ export class AuthorizationService {
                 })
                 .catch(response => this.handleError(response));
         }
+        else {
+            return Promise.all([]);
+        }
     }
 
-    logout() {
+    logout(): Promise<void> {
         var token = `Bearer ${this.getAuthToken()}`
         var userId = this.readUserId()
         this.log.info(`logout user ${userId}`)
-        this.http.get(
+        return this.http.get(
             this.logoutUrl,
             {
                 headers: new Headers({ 'Authorization': token }),

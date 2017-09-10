@@ -12,9 +12,9 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 
-import { ShoppingListItem } from '../model/shoppinglist';
-import { ShoppingListItemSearchService } from '../services/item-search.service';
-import { LoggingService } from '../services/logging.service';
+import { ShoppingListItem } from '../_models/shoppinglist';
+import { ShoppingListItemSearchService } from '../_services/item-search.service';
+import { Logger } from '../_helpers/logging';
 
 @Component({
     selector: 'item-search',
@@ -32,7 +32,7 @@ export class ShoppingListItemSearchComponent implements OnInit {
     constructor(
         private itemSearchService: ShoppingListItemSearchService,
         private router: Router,
-        private log: LoggingService) { }
+        private log: Logger) { }
 
     search(term: string): void {
         this.searchTerms.next(term);

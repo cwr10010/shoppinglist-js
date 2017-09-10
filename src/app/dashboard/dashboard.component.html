@@ -1,12 +1,33 @@
+<div>
+    <div>
+        <button md-icon-button [mdMenuTriggerFor]="menu"  class="menu-icon">
+            <md-icon>more_vert</md-icon>
+        </button>
+        <div>
+        <item-search></item-search>
+        </div>
+    </div>
 
-
-<div class="dashboard">
-    <h3>Top Shopping List Items</h3>
-
-    <md-chip-list>
-    <md-chip *ngFor="let item of shoppinglist">
-    <button md-button [routerLink]="['/details', item.id]">{{item.name}}</button>
-    </md-chip>
-    </md-chip-list>
-
+    <md-menu #menu="mdMenu">
+        <a md-menu-item routerLink="/" routerLinkActive="active">Dashboard</a>
+        <a (click)="doLogout()" md-menu-item >Logout</a>
+    </md-menu>
+</div>
+<div>
+<md-accordion class="shopping-list-accordion">
+<md-expansion-panel  *ngFor="let item of shoppingList" [expanded]="isExpanded(item)" (opened)="onSelect(item)" hideToggle="true">
+    <md-expansion-panel-header>
+      <md-panel-title>
+        {{item.name}}
+      </md-panel-title>
+    </md-expansion-panel-header>
+    <md-panel-description>
+    {{item.description}}
+    </md-panel-description>
+    <md-action-row>
+        <button (click)="gotoDetail()" md-raised-button>Edit</button>
+        <button class="delete" (click)="delete(item); $event.stopPropagation()" md-raised-button color="primary">delete</button>
+    </md-action-row>
+</md-expansion-panel>
+</md-accordion>
 </div>

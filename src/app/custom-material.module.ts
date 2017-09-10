@@ -10,7 +10,8 @@ import {
   MdChipsModule,
   MdAutocompleteModule,
   MdOptionModule,
-  MdListModule
+  MdListModule,
+  MdExpansionModule
 } from '@angular/material';
 
 @NgModule({
@@ -25,7 +26,8 @@ import {
   MdChipsModule,
   MdAutocompleteModule,
   MdOptionModule,
-  MdListModule
+  MdListModule,
+  MdExpansionModule
   ],
   exports: [
   MdGridListModule,
@@ -38,7 +40,8 @@ import {
   MdChipsModule,
   MdAutocompleteModule,
   MdOptionModule,
-  MdListModule
+  MdListModule,
+  MdExpansionModule
   ],
 })
 export class CustomMaterialModule { }

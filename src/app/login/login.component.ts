@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
-import { AuthorizationService } from '../services/authorization.service';
-import { LoggingService } from '../services/logging.service';
+import { User } from '../_models/user';
+import { AuthorizationService } from '../_services/authorization.service';
+import { Logger } from '../_helpers/logging';
 
 @Component({
     selector: 'login',
@@ -12,16 +14,28 @@ import { LoggingService } from '../services/logging.service';
 })
 export class LoginComponent implements OnInit {
 
+    returnUrl: string;
+
+    @Input() user: User;
+
     constructor(private authorizationService: AuthorizationService,
-        private log: LoggingService) {}
+        private router: Router,
+        private route: ActivatedRoute,
+        private log: Logger) {}
 
     ngOnInit(): void {
         this.authorizationService.refresh();
+        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+        this.user = new User('', '');
     }
 
-    doLogin(username: string, password: string): void {
-        this.log.debug(`doLogin(${username}, ${password})`);
-        this.authorizationService.authorize(username, password);
+    doLogin(): void {
+        this.log.info(JSON.stringify(this.user));
+        this.authorizationService.authorize(this.user)
+            .then(() =>this.navigateToReturnUrl() );
     }
 
+    navigateToReturnUrl() {
+        this.router.navigate([this.returnUrl]);
+    }
 }

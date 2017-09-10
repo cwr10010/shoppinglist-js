@@ -4,8 +4,8 @@ import { Location } from '@angular/common';
 
 import 'rxjs/add/operator/switchMap';
 
-import { ShoppingListService } from '../services/shoppinglist.service';
-import { ShoppingListItem } from '../model/shoppinglist';
+import { ShoppingListService } from '../_services/shoppinglist.service';
+import { ShoppingListItem } from '../_models/shoppinglist';
 
 @Component({
     selector: 'item-details',
