@@ -2,16 +2,24 @@
   <md-card *ngIf="item" class="item-details">
       <md-card-title>{{item.name}}</md-card-title>
       <div class="item-position"><label>Position: </label>{{item.order}}</div>
-      <div>
+      <form #detailsForm="ngForm">
+      <p>
         <md-form-field>
-        <input mdInput [(ngModel)]="item.name" placeholder="Name"/>
+        <input mdInput required [(ngModel)]="item.name" #name="ngModel" name="name" placeholder="Name"/>
+        <md-error *ngIf="name.errors && name.errors.required" >
+          Name is required!
+        </md-error>
         </md-form-field>
-      </div>
-      <div>
+      </p>
+      <p>
         <md-form-field>
-        <input mdInput [(ngModel)]="item.description" placeholder="Description" />
+        <textarea mdInput required [(ngModel)]="item.description" #description="ngModel" name="description" placeholder="Description" rows="5" ></textarea>
+        <md-error *ngIf="description.errors && description.errors.required" >
+          Description is required!
+        </md-error>
         </md-form-field>
-      </div>
+      </p>
       <button (click)="goBack()" md-raised-button >Back</button>
-      <button (click)="save()" md-raised-button color="primary">Save</button>
+      <button (click)="save()" md-raised-button color="primary" [disabled]="!detailsForm.form.valid">Save</button>
+      </form>
   </md-card>

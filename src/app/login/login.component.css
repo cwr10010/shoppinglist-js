@@ -7,3 +7,8 @@ div.login md-card {
     text-align: left;
     display: inline-block;
 }
+
+.ng-valid[required], .ng-valid.required  {
+  border-left: 5px solid #42A948; /* green */
+}
+
