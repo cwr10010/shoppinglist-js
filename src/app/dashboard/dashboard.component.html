@@ -15,7 +15,7 @@
 </div>
 <div>
 <md-accordion class="shopping-list-accordion">
-<md-expansion-panel  *ngFor="let item of shoppingList" [expanded]="isExpanded(item)" (opened)="onSelect(item)" hideToggle="true">
+<md-expansion-panel  *ngFor="let item of shoppingList" [expanded]="isExpanded(item)" (closed)="onClose(item)" (opened)="onOpen(item)" hideToggle="true">
     <md-expansion-panel-header>
       <md-panel-title>
         {{item.name}}

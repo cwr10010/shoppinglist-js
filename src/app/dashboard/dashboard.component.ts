@@ -18,13 +18,13 @@ export class DashboardComponent implements OnInit {
     shoppingList: ShoppingListItem[];
     selectedItem: ShoppingListItem;
 
-    step:number = 0;
+    step:number = -1;
 
     constructor(private shoppingListService: ShoppingListService,
       private authorizationService: AuthorizationService,
       private router: Router,
       private localStorage: LocalStorageService) {
-      this.step = this.localStorage.read("acrpos");
+      this.step = this.localStorage.read(ACRORDEON_POSITION);
     }
 
     ngOnInit(): void {
@@ -32,19 +32,29 @@ export class DashboardComponent implements OnInit {
     }
 
     isExpanded(item: ShoppingListItem): boolean {
-      this.step = this.localStorage.read("acrpos");
+      if (this.localStorage.read(ACRORDEON_POSITION)) {
+        this.step = this.localStorage.read(ACRORDEON_POSITION);
+      }
       var is_expanded = this.step == item.order;
       return is_expanded;
     }
 
     initShoppingList(): void {
-        this.shoppingListService.getItems().then(shoppingList => this.shoppingList = shoppingList);
+      this.shoppingListService.getItems().then(shoppingList => this.shoppingList = shoppingList);
     }
 
-    onSelect(item: ShoppingListItem): void {
-        this.step = item.order;
-        this.selectedItem = item;
-        this.localStorage.store("acrpos", this.step);
+    onOpen(item: ShoppingListItem): void {
+      this.step = item.order;
+      this.selectedItem = item;
+      this.localStorage.store(ACRORDEON_POSITION, this.step);
+    }
+
+    onClose(item: ShoppingListItem): void {
+      if (item.order == this.step) {
+        this.step = -1;
+        this.selectedItem = undefined;
+        this.localStorage.remove(ACRORDEON_POSITION);
+      }
     }
 
     gotoDetail(): void {
@@ -56,3 +66,5 @@ export class DashboardComponent implements OnInit {
           .then(() => this.router.navigate(['/login']));
     }
 }
+
+const ACRORDEON_POSITION: string = "X-SLS-ARCORDEONPOSITION"
