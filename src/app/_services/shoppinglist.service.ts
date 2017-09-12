@@ -51,10 +51,10 @@ export class ShoppingListService {
                     this.handleError(response));
     }
 
-    delete(id: string): Promise<void> {
+    delete(id: string): Promise<ShoppingListItem[]> {
         const url = `${this.basePath()}/${id}`;
         return this.http.delete(url)
-                .then(() => null)
+                .then(response => response.json() as ShoppingListItem[])
                 .catch(response =>
                     this.handleError(response));
     }

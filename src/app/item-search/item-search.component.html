@@ -1,5 +1,5 @@
 <div id="search-component">
-  <md-form-field>
+  <md-form-field class="search-form">
   <input mdInput placeholder="Search Item" #searchBox (keyup)="search(searchBox.value)" [mdAutocomplete]="searchItems"/>
   </md-form-field>
   <md-autocomplete #searchItems="mdAutocomplete">

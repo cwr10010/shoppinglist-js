@@ -6,6 +6,8 @@ import { ShoppingListService } from '../_services/shoppinglist.service';
 import { AuthorizationService } from '../_services/authorization.service';
 import { LocalStorageService } from '../_services/local-storage.service';
 
+import { Logger } from '../_helpers/logging';
+
 @Component({
   selector: 'my-dashboard',
   templateUrl: './dashboard.component.html',
@@ -23,7 +25,8 @@ export class DashboardComponent implements OnInit {
     constructor(private shoppingListService: ShoppingListService,
       private authorizationService: AuthorizationService,
       private router: Router,
-      private localStorage: LocalStorageService) {
+      private localStorage: LocalStorageService,
+      private log: Logger) {
       this.step = this.localStorage.read(ACRORDEON_POSITION);
     }
 
@@ -61,9 +64,28 @@ export class DashboardComponent implements OnInit {
       this.router.navigate(['/details', this.selectedItem.id]);
     }
 
-    doLogout(): Promise<boolean> {
-        return this.authorizationService.logout()
-          .then(() => this.router.navigate(['/login']));
+    itemIsChecked(item: ShoppingListItem): boolean {
+      this.log.info("Item is read: " + item.read);
+      return item.read;
+    }
+
+    itemChange(item: ShoppingListItem) {
+      this.shoppingListService.update(item);
+      this.log.info("Items read: " + item.read);
+    }
+
+    addItem(name: string) {
+      var max: number = 0;
+      this.shoppingListService.getItems().then(items =>
+        items.map(item => {
+        max = Math.max(item.order, max);
+      })).then(() =>
+      this.shoppingListService.create(name, "", max+1, false)
+        .then(items => this.shoppingList = items));
+    }
+
+    deleteItem(item: ShoppingListItem) {
+      this.shoppingListService.delete(item.id).then(items => this.shoppingList = items);
     }
 }
 

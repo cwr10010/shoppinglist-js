@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { AuthorizationService } from './_services/authorization.service';
 
@@ -14,7 +15,8 @@ import '../assets/css/styles.css';
 export class AppComponent {
     title = 'Shopping List App';
 
-    constructor(private authorizationService: AuthorizationService) {}
+    constructor(private authorizationService: AuthorizationService,
+      private router: Router) {}
 
     isLoggedin(): boolean {
         if (this.authorizationService.getAuthToken()) {
@@ -22,5 +24,10 @@ export class AppComponent {
         } else {
             return false;
         }
+    }
+
+    doLogout(): Promise<boolean> {
+        return this.authorizationService.logout()
+          .then(() => this.router.navigate(['/login']));
     }
 }

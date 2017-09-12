@@ -11,7 +11,10 @@ import {
   MdAutocompleteModule,
   MdOptionModule,
   MdListModule,
-  MdExpansionModule
+  MdExpansionModule,
+  MdToolbarModule,
+  MdSlideToggleModule,
+  MdCheckboxModule
 } from '@angular/material';
 
 @NgModule({
@@ -27,7 +30,10 @@ import {
   MdAutocompleteModule,
   MdOptionModule,
   MdListModule,
-  MdExpansionModule
+  MdExpansionModule,
+  MdToolbarModule,
+  MdSlideToggleModule,
+  MdCheckboxModule,
   ],
   exports: [
   MdGridListModule,
@@ -41,7 +47,10 @@ import {
   MdAutocompleteModule,
   MdOptionModule,
   MdListModule,
-  MdExpansionModule
+  MdExpansionModule,
+  MdToolbarModule,
+  MdSlideToggleModule,
+  MdCheckboxModule,
   ],
 })
 export class CustomMaterialModule { }

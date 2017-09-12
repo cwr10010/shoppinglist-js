@@ -13,13 +13,11 @@
       </p>
       <p>
         <md-form-field>
-        <textarea mdInput required [(ngModel)]="item.description" #description="ngModel" name="description" placeholder="Description" rows="5" ></textarea>
-        <md-error *ngIf="description.errors && description.errors.required" >
-          Description is required!
-        </md-error>
+        <textarea mdInput [(ngModel)]="item.description" #description="ngModel" name="description" placeholder="Description" rows="5" ></textarea>
         </md-form-field>
       </p>
       <button (click)="goBack()" md-raised-button >Back</button>
       <button (click)="save()" md-raised-button color="primary" [disabled]="!detailsForm.form.valid">Save</button>
       </form>
   </md-card>
+
