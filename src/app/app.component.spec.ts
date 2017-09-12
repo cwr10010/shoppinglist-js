@@ -19,7 +19,6 @@ import { AuthorizationService } from './_services/authorization.service';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ItemDetailsComponent } from './item-details/item-details.component';
-import { ShoppingListComponent } from './shoppinglist/shoppinglist.component';
 import { ShoppingListItemSearchComponent } from './item-search/item-search.component';
 
 import { AppComponent } from './app.component';
@@ -39,7 +38,6 @@ describe('App', () => {
             LoginComponent,
             DashboardComponent,
             ItemDetailsComponent,
-            ShoppingListComponent,
             ShoppingListItemSearchComponent
         ],
         providers: [

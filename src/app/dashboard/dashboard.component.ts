@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
+import * as _ from 'lodash';
+
 import { ShoppingListItem } from '../_models/shoppinglist';
 import { ShoppingListService } from '../_services/shoppinglist.service';
 import { AuthorizationService } from '../_services/authorization.service';
@@ -38,12 +40,12 @@ export class DashboardComponent implements OnInit {
       if (this.localStorage.read(ACRORDEON_POSITION)) {
         this.step = this.localStorage.read(ACRORDEON_POSITION);
       }
-      var is_expanded = this.step == item.order;
-      return is_expanded;
+      return this.step == item.order;
     }
 
     initShoppingList(): void {
-      this.shoppingListService.getItems().then(shoppingList => this.shoppingList = shoppingList);
+      this.shoppingListService.getItems()
+        .then(shoppingList => this.shoppingList = shoppingList);
     }
 
     onOpen(item: ShoppingListItem): void {
@@ -70,22 +72,20 @@ export class DashboardComponent implements OnInit {
     }
 
     itemChange(item: ShoppingListItem) {
-      this.shoppingListService.update(item);
-      this.log.info("Items read: " + item.read);
+      this.shoppingListService.update(item)
+        .then(() => this.log.info("Items read: " + item.read));
     }
 
     addItem(name: string) {
-      var max: number = 0;
-      this.shoppingListService.getItems().then(items =>
-        items.map(item => {
-        max = Math.max(item.order, max);
-      })).then(() =>
-      this.shoppingListService.create(name, "", max+1, false)
+      this.shoppingListService.getItems()
+        .then(items => _.maxBy(items, 'order'))
+        .then(max => this.shoppingListService.create(name, "", max.order+1, false)
         .then(items => this.shoppingList = items));
     }
 
     deleteItem(item: ShoppingListItem) {
-      this.shoppingListService.delete(item.id).then(items => this.shoppingList = items);
+      this.shoppingListService.delete(item.id)
+        .then(items => this.shoppingList = items);
     }
 }
 
