@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core'
 @Injectable()
 export class Logger {
 
-    loggLevel: number = INFO;
+    loggLevel: number = DEBUG;
 
     trace(message: string, arg: any = null) {
         if (this.loggLevel === 0) {

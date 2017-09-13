@@ -19,6 +19,7 @@ export class AuthorizationService {
         private log: Logger) {}
 
     authorize(user: User): Promise<void> {
+        this.log.debug(`Authorizing ${user}`.toString());
         return this.http.post(
             this.authUrl,
             JSON.stringify(user),
@@ -37,6 +38,7 @@ export class AuthorizationService {
 
     refresh(): Promise<any> {
         if (this.getAuthToken()) {
+            this.log.debug("Refresh existing token");
             return this.http.get(
                 this.authUrl,
                 {
@@ -52,6 +54,7 @@ export class AuthorizationService {
                 .catch(response => this.handleError(response));
         }
         else {
+            this.log.debug("No token exists, skip refreshing");
             return Promise.all([]);
         }
     }

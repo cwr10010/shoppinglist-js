@@ -1,7 +1,7 @@
+<md-card>
 <md-form-field class="add-form">
   <input mdInput placeholder="Add Item" #addBox (keyup.enter)="addItem(addBox.value);addBox.value=''" />
 </md-form-field>
-
 <md-accordion class="shopping-list-accordion">
 <md-expansion-panel  *ngFor="let item of shoppingList" [expanded]="isExpanded(item)" (closed)="onClose(item)" (opened)="onOpen(item)" hideToggle="true">
     <md-expansion-panel-header>
@@ -20,3 +20,32 @@
     </md-action-row>
 </md-expansion-panel>
 </md-accordion>
+</md-card>
+
+<md-expansion-panel>
+  <md-expansion-panel-header>
+    <md-panel-title>
+      Read items
+    </md-panel-title>
+  </md-expansion-panel-header>
+  <md-panel-description class="read-shopping-outer-description">
+    <md-accordion class="read-shopping-list-accordion">
+      <md-expansion-panel  *ngFor="let item of readShoppingList" [expanded]="isExpanded(item)" (closed)="onClose(item)" (opened)="onOpen(item)" hideToggle="true">
+          <md-expansion-panel-header>
+            <md-panel-title>
+              {{item.name}}
+            </md-panel-title>
+          </md-expansion-panel-header>
+          <md-panel-description>
+          <div>{{item.description}}</div>
+          <md-checkbox [(ngModel)]="item.read" (change)="itemChange(item)">Got it!</md-checkbox>
+          </md-panel-description>
+          <md-action-row>
+              <button (click)="gotoDetail()" md-raised-button color="primary">Edit</button>
+              <button class="delete" (click)="deleteItem(item); $event.stopPropagation()" md-raised-button color="warn">delete</button>
+          </md-action-row>
+      </md-expansion-panel>
+    </md-accordion>
+  </md-panel-description>
+</md-expansion-panel>
+

@@ -20,6 +20,7 @@ import { Logger } from '../_helpers/logging';
 export class DashboardComponent implements OnInit {
 
     shoppingList: ShoppingListItem[];
+    readShoppingList: ShoppingListItem[];
     selectedItem: ShoppingListItem;
 
     step:number = -1;
@@ -45,7 +46,19 @@ export class DashboardComponent implements OnInit {
 
     initShoppingList(): void {
       this.shoppingListService.getItems()
-        .then(shoppingList => this.shoppingList = shoppingList);
+        .then(shoppingList => this.partitionShoppingList(shoppingList));
+    }
+
+    partitionShoppingList(shoppingList: ShoppingListItem[]) {
+      this.shoppingList = [];
+      this.readShoppingList = [];
+      shoppingList.forEach(item => {
+        if (item.read) {
+          this.readShoppingList.push(item);
+        } else {
+          this.shoppingList.push(item);
+        }
+      });
     }
 
     onOpen(item: ShoppingListItem): void {
@@ -73,19 +86,20 @@ export class DashboardComponent implements OnInit {
 
     itemChange(item: ShoppingListItem) {
       this.shoppingListService.update(item)
-        .then(() => this.log.info("Items read: " + item.read));
+        .then(() => this.log.info("Items read: " + item.read))
+        .then(() => this.initShoppingList());
     }
 
     addItem(name: string) {
       this.shoppingListService.getItems()
         .then(items => _.maxBy(items, 'order'))
         .then(max => this.shoppingListService.create(name, "", max.order+1, false)
-        .then(items => this.shoppingList = items));
+        .then(items => this.partitionShoppingList(items)));
     }
 
     deleteItem(item: ShoppingListItem) {
       this.shoppingListService.delete(item.id)
-        .then(items => this.shoppingList = items);
+        .then(items => this.partitionShoppingList(items));
     }
 }
 

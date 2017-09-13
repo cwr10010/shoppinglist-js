@@ -1,12 +1,24 @@
 
-.shopping-list-accordion .mat-expansion-panel-header-title,
+.read-shopping-list-accordion .mat-expansion-panel-header-description,
 .shopping-list-accordion .mat-expansion-panel-header-description {
   flex-basis: 0;
 }
 
+.read-shopping-list-accordion {
+    padding: 0px;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.read-shopping-list-accordion .mat-expansion-panel-header-description,
 .shopping-list-accordion .mat-expansion-panel-header-description {
   justify-content: space-between;
   align-items: center;
+}
+
+.read-shopping-outer-description {
+    margin-right: 0px;
 }
 
 .delete {
