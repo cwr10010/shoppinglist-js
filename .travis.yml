@@ -21,3 +21,5 @@ jobs:
         - ./node_modules/.bin/istanbul-coveralls
       after_script:
         - sh -e /etc/init.d/xvfb stop
+    -stage: deploy
+      script: ./node_modules/.bin/ng build --prod --environment=prod
