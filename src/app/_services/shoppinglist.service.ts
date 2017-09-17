@@ -22,6 +22,18 @@ export class ShoppingListService {
                 .catch(response => this.handleError(response));
     }
 
+    partitionShoppingList(): Promise<ShoppingListItem[][]> {
+      let unreadshoppingList: ShoppingListItem[] = [];
+      let readShoppingList: ShoppingListItem[] = [];
+      return this.getItems().then(items => items.forEach(item => {
+        if (item.read) {
+          readShoppingList.push(item);
+        } else {
+          unreadshoppingList.push(item);
+        }
+      })).then(() => [readShoppingList, unreadshoppingList]);
+    }
+
     create(name: string, description: string, order: Number, read: boolean): Promise<ShoppingListItem[]> {
         return this.http.post(
                 this.basePath(),

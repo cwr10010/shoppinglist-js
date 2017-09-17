@@ -1,23 +1,10 @@
+<div class='mat-app-background'>
 <md-toolbar color="primary">
     <span class="app-title">{{title}}</span>
 </md-toolbar>
 <md-card>
-<div *ngIf="isLoggedin()">
-        <div>
-            <button md-icon-button [mdMenuTriggerFor]="menu"  class="menu-icon">
-                <md-icon>more_vert</md-icon>
-            </button>
-            <span>
-            <item-search></item-search>
-            </span>
-        </div>
-        <md-menu #menu="mdMenu">
-            <a md-menu-item routerLink="/" routerLinkActive="active">Dashboard</a>
-            <a (click)="doLogout()" md-menu-item >Logout</a>
-        </md-menu>
-</div>
-<div class="content">
-    <router-outlet></router-outlet>
-</div>
+    <div class="content">
+        <router-outlet></router-outlet>
+    </div>
 </md-card>
-
+</div>

@@ -21,8 +21,7 @@ import { Logger } from '../_helpers/logging';
     templateUrl: './item-search.component.html',
     styleUrls: [
         './item-search.component.css'
-    ],
-    providers: [ ShoppingListItemSearchService ]
+    ]
 })
 export class ShoppingListItemSearchComponent implements OnInit {
 

@@ -1,12 +1,9 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestBed, ComponentFixture, async } from '@angular/core/testing';
 import { DebugElement } from '@angular/core';
-import { Router } from '@angular/router';
 
-import { BrowserModule }  from '@angular/platform-browser';
+import { By, BrowserModule }  from '@angular/platform-browser';
 import { FormsModule }   from '@angular/forms';
-
-import { AppRoutingModule } from './app-routing.module';
-import { CustomMaterialModule } from './custom-material.module';
+import { Router } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -14,7 +11,13 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ItemDetailsComponent } from './item-details/item-details.component';
 import { ShoppingListItemSearchComponent } from './item-search/item-search.component';
 
+import { AppRoutingModule } from './app-routing.module';
+import { CustomMaterialModule } from './custom-material.module';
+
+import { ShoppingListItem } from './_models/shoppinglist';
 import { Logger } from './_helpers/logging';
+import { ShoppingListService } from './_services/shoppinglist.service';
+import { ShoppingListItemSearchService } from './_services/item-search.service';
 import { AuthorizationService } from './_services/authorization.service';
 
 class RouterMock {
@@ -22,44 +25,68 @@ class RouterMock {
 }
 
 class AuthorizationServiceMock {
-  getAuthToken() { return 'fake-auth-token'; }
+  getAuthToken(): string { return 'fake-token'; }
+  refresh() {}
 }
 
-describe('App', () => {
+class ShoppingListServiceMock {
+  getItems(): Promise<ShoppingListItem[]> {
+    return Promise.all([]);
+  }
+}
+
+class ShoppingListSearchServiceMock {
+  search(term: string): Promise<ShoppingListItem[]> {
+    return Promise.all([]);
+  }
+}
+
+describe('AppComponent', () => {
   let appComponent: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
   let debugElement: DebugElement;
+  let htmlElement: HTMLElement;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-        imports: [
-            BrowserModule,
-            FormsModule,
-            AppRoutingModule,
-            CustomMaterialModule
-        ],
-        declarations: [
-            LoginComponent,
-            DashboardComponent,
-            ShoppingListItemSearchComponent,
-            ItemDetailsComponent,
-            AppComponent
-        ],
-        providers: [
-            Logger,
-            { provide: AuthorizationService, useClass: AuthorizationServiceMock },
-            { provide: Router, useClass: RouterMock }
-        ]
+      declarations: [
+        LoginComponent,
+        DashboardComponent,
+        ItemDetailsComponent,
+        ShoppingListItemSearchComponent,
+        AppComponent
+      ],
+      imports: [
+        BrowserModule,
+        FormsModule,
+        AppRoutingModule,
+        CustomMaterialModule
+      ],
+      providers: [
+        Logger,
+        { provide: AuthorizationService, useClass: AuthorizationServiceMock },
+        { provide: Router, useClass: RouterMock }
+      ]
     }).compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AppComponent);
     appComponent = fixture.componentInstance;
-
+    debugElement = fixture.debugElement;
+    htmlElement = fixture.debugElement.nativeElement;
   });
 
-  it ('should work', () => {
-    expect(appComponent instanceof AppComponent).toBe(true, 'should create AppComponent');
-  });
-});
+  it('should create the app', async(() => {
+    expect(appComponent).toBeTruthy();
+  }));
+
+  it(`should have as title 'app'`, async(() => {
+    expect(appComponent.title).toEqual("Shopping List App");
+  }));
+
+  it('should render title in a h1 tag', async(() => {
+    fixture.detectChanges();
+    expect(debugElement.query(By.css('.app-title')).nativeElement.textContent).toContain('Shopping List App');
+  }));
+})

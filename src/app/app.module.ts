@@ -44,15 +44,15 @@ import { CustomMaterialModule } from './custom-material.module';
     ShoppingListItemSearchComponent
   ],
   providers: [
-      AuthorizationGuard,
-      LoggedInGuard,
-      ShoppingListService,
-      ShoppingListItemSearchService,
-      CookieService,
-      LocalStorageService,
-      AuthorizationService,
-      Logger,
-      HttpClient
+    AuthorizationGuard,
+    LoggedInGuard,
+    ShoppingListService,
+    ShoppingListItemSearchService,
+    CookieService,
+    LocalStorageService,
+    AuthorizationService,
+    Logger,
+    HttpClient
   ],
   bootstrap: [ AppComponent ]
 })

@@ -1,3 +1,17 @@
+<div class="app-menu">
+  <div>
+      <button md-icon-button [mdMenuTriggerFor]="menu"  class="menu-icon">
+          <md-icon>more_vert</md-icon>
+      </button>
+      <span>
+      <item-search></item-search>
+      </span>
+  </div>
+  <md-menu #menu="mdMenu">
+      <a md-menu-item routerLink="/" routerLinkActive="active">Dashboard</a>
+      <a (click)="doLogout()" md-menu-item >Logout</a>
+  </md-menu>
+</div>
 <md-card>
 <md-form-field class="add-form">
   <input mdInput placeholder="Add Item" #addBox (keyup.enter)="addItem(addBox.value);addBox.value=''" />

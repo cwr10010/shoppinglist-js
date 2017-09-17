@@ -24,3 +24,8 @@
 .delete {
     margin-left: 10px;
 }
+
+.menu-icon {
+    float: left;
+    padding-top:7px;
+}

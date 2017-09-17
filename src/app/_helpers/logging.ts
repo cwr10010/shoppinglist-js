@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core'
-
+import { environment } from '../../environments/environment';
 @Injectable()
 export class Logger {
 
-    loggLevel: number = DEBUG;
+    loggLevel: number = environment.loglevel;
 
     trace(message: string, arg: any = null) {
         if (this.loggLevel === 0) {
@@ -56,10 +56,4 @@ export class Logger {
     }
 }
 
-const TRACE: number = 0;
-const DEBUG: number = 1;
-const INFO: number = 2
-const WARN: number = 3;
-const ERROR: number = 4;
-const OFF: number = 99;
 

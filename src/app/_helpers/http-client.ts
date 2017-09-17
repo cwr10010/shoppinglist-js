@@ -7,11 +7,12 @@ import 'rxjs/add/operator/toPromise';
 
 import { Logger } from './logging';
 import { AuthorizationService } from '../_services/authorization.service';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class HttpClient {
 
-    remoteHost: string = 'http://localhost:8080/api';
+    remoteHost: string = environment.apiUrl;
 
     constructor(
         private http: Http,

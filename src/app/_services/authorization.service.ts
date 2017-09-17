@@ -8,10 +8,12 @@ import { User } from '../_models/user';
 import { LocalStorageService } from './local-storage.service';
 import { Logger } from '../_helpers/logging';
 
+import { environment } from '../../environments/environment';
+
 @Injectable()
 export class AuthorizationService {
-    private authUrl = "http://localhost:8080/api/auth";
-    private logoutUrl = "http://localhost:8080/api/auth/logout";
+    private authUrl = environment.apiUrl + "auth";
+    private logoutUrl = environment.apiUrl + "auth/logout";
 
     constructor(
         private http: Http,
@@ -54,7 +56,7 @@ export class AuthorizationService {
                 .catch(response => this.handleError(response));
         }
         else {
-            this.log.debug("No token exists, skip refreshing");
+            this.log.debug("No authtoken exists, skip refreshing");
             return Promise.all([]);
         }
     }
@@ -62,7 +64,7 @@ export class AuthorizationService {
     logout(): Promise<void> {
         var token = `Bearer ${this.getAuthToken()}`
         var userId = this.readUserId()
-        this.log.info(`logout user ${userId}`)
+        this.log.debug(`logout user ${userId}`)
         return this.http.get(
             this.logoutUrl,
             {
@@ -95,7 +97,7 @@ export class AuthorizationService {
         return null;
     }
 
-    createHeaders(): Headers {
+    private createHeaders(): Headers {
         return new Headers({ 'Content-Type': 'application/json' });
     }
 

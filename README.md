@@ -1,2 +1,1 @@
-# shoppinglist-js
-Angular4 Frontend to Shoppinglist Rest Service
+Angular CLI based Web Frontend for the ShoppingListRestService

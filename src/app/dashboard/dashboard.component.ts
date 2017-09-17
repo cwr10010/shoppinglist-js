@@ -45,20 +45,13 @@ export class DashboardComponent implements OnInit {
     }
 
     initShoppingList(): void {
-      this.shoppingListService.getItems()
-        .then(shoppingList => this.partitionShoppingList(shoppingList));
-    }
-
-    partitionShoppingList(shoppingList: ShoppingListItem[]) {
-      this.shoppingList = [];
-      this.readShoppingList = [];
-      shoppingList.forEach(item => {
-        if (item.read) {
-          this.readShoppingList.push(item);
-        } else {
-          this.shoppingList.push(item);
+      this.shoppingListService
+        .partitionShoppingList()
+        .then((itemTuple: ShoppingListItem[][]) => {
+          this.readShoppingList = itemTuple[0];
+          this.shoppingList = itemTuple[1];
         }
-      });
+      );
     }
 
     onOpen(item: ShoppingListItem): void {
@@ -94,12 +87,17 @@ export class DashboardComponent implements OnInit {
       this.shoppingListService.getItems()
         .then(items => _.maxBy(items, 'order'))
         .then(max => this.shoppingListService.create(name, "", max.order+1, false)
-        .then(items => this.partitionShoppingList(items)));
+        .then(items => this.initShoppingList()));
     }
 
     deleteItem(item: ShoppingListItem) {
       this.shoppingListService.delete(item.id)
-        .then(items => this.partitionShoppingList(items));
+        .then(items => this.initShoppingList());
+    }
+
+    doLogout(): Promise<boolean> {
+        return this.authorizationService.logout()
+          .then(() => this.router.navigate(['/login']));
     }
 }
 
