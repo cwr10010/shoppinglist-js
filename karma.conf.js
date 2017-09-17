@@ -15,6 +15,10 @@ module.exports = function (config) {
     client:{
       clearContext: false // leave Jasmine Spec Runner output visible in browser
     },
+    files: [
+      {pattern: './node_modules/hammerjs/hammer.js'},
+      {pattern: './node_modules/@angular/material/prebuilt-themes/indigo-pink.css'}
+    ],
     coverageIstanbulReporter: {
       reports: [ 'html', 'lcovonly' ],
       fixWebpackSourcePaths: true
