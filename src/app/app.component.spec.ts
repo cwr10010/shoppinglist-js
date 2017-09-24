@@ -1,21 +1,26 @@
 import { TestBed, ComponentFixture, async } from '@angular/core/testing';
 import { DebugElement } from '@angular/core';
 
-import { By, BrowserModule }  from '@angular/platform-browser';
-import { FormsModule }   from '@angular/forms';
+import { By, BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { AppComponent } from './app.component';
+import { AlertComponent } from './_directives/altert.component';
+
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ItemDetailsComponent } from './item-details/item-details.component';
 import { ShoppingListItemSearchComponent } from './item-search/item-search.component';
+import { RegistrationComponent } from './registration/registration.component';
+import { FinishRegistrationComponent } from './finish-registration/finish-registration.component';
 
+import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CustomMaterialModule } from './custom-material.module';
 
 import { ShoppingListItem } from './_models/shoppinglist';
 import { Logger } from './_helpers/logging';
+
 import { ShoppingListService } from './_services/shoppinglist.service';
 import { ShoppingListItemSearchService } from './_services/item-search.service';
 import { AuthorizationService } from './_services/authorization.service';
@@ -54,7 +59,10 @@ describe('AppComponent', () => {
         DashboardComponent,
         ItemDetailsComponent,
         ShoppingListItemSearchComponent,
-        AppComponent
+        AppComponent,
+        RegistrationComponent,
+        FinishRegistrationComponent,
+        AlertComponent
       ],
       imports: [
         BrowserModule,
@@ -82,11 +90,11 @@ describe('AppComponent', () => {
   }));
 
   it(`should have as title 'app'`, async(() => {
-    expect(appComponent.title).toEqual("Shopping List App");
+    expect(appComponent.title).toEqual('Shopping List App');
   }));
 
   it('should render title in a h1 tag', async(() => {
     fixture.detectChanges();
     expect(debugElement.query(By.css('.app-title')).nativeElement.textContent).toContain('Shopping List App');
   }));
-})
+});

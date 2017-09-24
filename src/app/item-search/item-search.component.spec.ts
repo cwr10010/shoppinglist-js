@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By, BrowserModule }  from '@angular/platform-browser';
-import { FormsModule }   from '@angular/forms';
+import { By, BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Router } from '@angular/router';
 
@@ -15,6 +15,9 @@ import { LoginComponent } from '../login/login.component';
 import { DashboardComponent } from '../dashboard/dashboard.component';
 import { ItemDetailsComponent } from '../item-details/item-details.component';
 import { ShoppingListItemSearchComponent } from '../item-search/item-search.component';
+import { RegistrationComponent } from '../registration/registration.component';
+import { FinishRegistrationComponent } from '../finish-registration/finish-registration.component';
+import { AlertComponent } from '../_directives/altert.component';
 
 import { ShoppingListItem } from '../_models/shoppinglist';
 import { Logger } from '../_helpers/logging';
@@ -40,7 +43,10 @@ describe('ItemSearchComponent', () => {
         LoginComponent,
         DashboardComponent,
         ItemDetailsComponent,
-        ShoppingListItemSearchComponent
+        ShoppingListItemSearchComponent,
+        RegistrationComponent,
+        FinishRegistrationComponent,
+        AlertComponent
       ],
       imports: [
         BrowserModule,

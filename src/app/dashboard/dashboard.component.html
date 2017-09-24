@@ -26,7 +26,7 @@
     </md-expansion-panel-header>
     <md-panel-description>
     <div>{{item.description}}</div>
-    <md-checkbox [(ngModel)]="item.read" (change)="itemChange(item)">Got it!</md-checkbox>
+    <md-checkbox [(ngModel)]="item.checked" (change)="itemChange(item)">Got it!</md-checkbox>
     </md-panel-description>
     <md-action-row>
         <button (click)="gotoDetail()" md-raised-button color="primary">Edit</button>
@@ -52,7 +52,7 @@
           </md-expansion-panel-header>
           <md-panel-description>
           <div>{{item.description}}</div>
-          <md-checkbox [(ngModel)]="item.read" (change)="itemChange(item)">Got it!</md-checkbox>
+          <md-checkbox [(ngModel)]="item.checked" (change)="itemChange(item)">Got it!</md-checkbox>
           </md-panel-description>
           <md-action-row>
               <button (click)="gotoDetail()" md-raised-button color="primary">Edit</button>

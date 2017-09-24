@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By, BrowserModule }  from '@angular/platform-browser';
-import { FormsModule }   from '@angular/forms';
+import { By, BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Router } from '@angular/router';
 
@@ -20,8 +20,10 @@ import { Logger } from '../_helpers/logging';
 import { ShoppingListService } from '../_services/shoppinglist.service';
 import { ShoppingListItemSearchService } from '../_services/item-search.service';
 import { AuthorizationService } from '../_services/authorization.service';
-
+import { RegistrationComponent } from '../registration/registration.component';
+import { FinishRegistrationComponent } from '../finish-registration/finish-registration.component';
 import { ItemDetailsComponent } from './item-details.component';
+import { AlertComponent } from '../_directives/altert.component';
 
 import { ShoppingListServiceMock } from '../_mocks/shoppinglist.mock';
 
@@ -42,7 +44,10 @@ describe('ItemDetailComponent', () => {
         LoginComponent,
         DashboardComponent,
         ItemDetailsComponent,
-        ShoppingListItemSearchComponent
+        ShoppingListItemSearchComponent,
+        RegistrationComponent,
+        FinishRegistrationComponent,
+        AlertComponent
       ],
       imports: [
         BrowserModule,

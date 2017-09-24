@@ -23,10 +23,10 @@ export class ShoppingListService {
     }
 
     partitionShoppingList(): Promise<ShoppingListItem[][]> {
-      let unreadshoppingList: ShoppingListItem[] = [];
-      let readShoppingList: ShoppingListItem[] = [];
+      const unreadshoppingList: ShoppingListItem[] = [];
+      const readShoppingList: ShoppingListItem[] = [];
       return this.getItems().then(items => items.forEach(item => {
-        if (item.read) {
+        if (item.checked) {
           readShoppingList.push(item);
         } else {
           unreadshoppingList.push(item);
@@ -34,14 +34,14 @@ export class ShoppingListService {
       })).then(() => [readShoppingList, unreadshoppingList]);
     }
 
-    create(name: string, description: string, order: Number, read: boolean): Promise<ShoppingListItem[]> {
+    create(name: string, description: string, order: Number, checked: boolean): Promise<ShoppingListItem[]> {
         return this.http.post(
                 this.basePath(),
                 JSON.stringify([{
                     name: name,
                     description: description,
                     order: order,
-                    read: read}]))
+                    checked: checked}]))
                 .then(response => response.json() as ShoppingListItem[])
                 .catch(response => this.handleError(response));
     }
@@ -54,7 +54,7 @@ export class ShoppingListService {
     }
 
     update(item: ShoppingListItem): Promise<ShoppingListItem> {
-        const url = `${this.basePath()}/${item.id}`
+        const url = `${this.basePath()}/${item.id}`;
         return this.http.post(
                 url,
                 JSON.stringify(item))
@@ -80,6 +80,8 @@ export class ShoppingListService {
             case 401:
             case 403:
                 this.log.debug('refresh token', error);
+                this.authorizationService.refresh();
+                break;
             default:
                 this.log.warn('An error occurred', error);
                 return Promise.reject(error);

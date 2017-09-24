@@ -12,3 +12,8 @@ div.login md-card {
   border-left: 5px solid #42A948; /* green */
 }
 
+#registration-link {
+  float: right;
+  margin-right: 50px;
+  font-size: 0.8em;
+}

@@ -11,7 +11,7 @@ import { LocalStorageService } from '../_services/local-storage.service';
 import { Logger } from '../_helpers/logging';
 
 @Component({
-  selector: 'my-dashboard',
+  selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: [
       './dashboard.component.css'
@@ -23,7 +23,7 @@ export class DashboardComponent implements OnInit {
     readShoppingList: ShoppingListItem[];
     selectedItem: ShoppingListItem;
 
-    step:number = -1;
+    step: number = -1;
 
     constructor(private shoppingListService: ShoppingListService,
       private authorizationService: AuthorizationService,
@@ -41,7 +41,7 @@ export class DashboardComponent implements OnInit {
       if (this.localStorage.read(ACRORDEON_POSITION)) {
         this.step = this.localStorage.read(ACRORDEON_POSITION);
       }
-      return this.step == item.order;
+      return this.step === item.order;
     }
 
     initShoppingList(): void {
@@ -61,7 +61,7 @@ export class DashboardComponent implements OnInit {
     }
 
     onClose(item: ShoppingListItem): void {
-      if (item.order == this.step) {
+      if (item.order === this.step) {
         this.step = -1;
         this.selectedItem = undefined;
         this.localStorage.remove(ACRORDEON_POSITION);
@@ -73,20 +73,20 @@ export class DashboardComponent implements OnInit {
     }
 
     itemIsChecked(item: ShoppingListItem): boolean {
-      this.log.info("Item is read: " + item.read);
-      return item.read;
+      this.log.info('Item is read: ' + item.checked);
+      return item.checked;
     }
 
     itemChange(item: ShoppingListItem) {
       this.shoppingListService.update(item)
-        .then(() => this.log.info("Items read: " + item.read))
+        .then(() => this.log.info('Items checked: ' + item.checked))
         .then(() => this.initShoppingList());
     }
 
     addItem(name: string) {
       this.shoppingListService.getItems()
-        .then(items => _.maxBy(items, 'order'))
-        .then(max => this.shoppingListService.create(name, "", max.order+1, false)
+        .then(items => _.maxBy(items, 'order') || {order: 0})
+        .then(max => this.shoppingListService.create(name, '', max.order + 1, false)
         .then(items => this.initShoppingList()));
     }
 
@@ -101,4 +101,4 @@ export class DashboardComponent implements OnInit {
     }
 }
 
-const ACRORDEON_POSITION: string = "X-SLS-ARCORDEONPOSITION"
+const ACRORDEON_POSITION = 'X-SLS-ARCORDEONPOSITION';

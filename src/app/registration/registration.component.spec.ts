@@ -2,16 +2,18 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By, BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { Router } from '@angular/router';
-
-import { DebugElement } from '@angular/core';
 import { APP_BASE_HREF } from '@angular/common';
 
 import { AppRoutingModule } from '../app-routing.module';
 import { CustomMaterialModule } from '../custom-material.module';
 
+import { RegistrationService } from '../_services/registration.service';
+import { RegistrationData } from '../_models/registration-data';
+
+import { AlertService } from '../_services/alert.service';
+
 import { AppComponent } from '../app.component';
-import { LoginComponent } from './login.component';
+import { LoginComponent } from '../login/login.component';
 import { DashboardComponent } from '../dashboard/dashboard.component';
 import { ItemDetailsComponent } from '../item-details/item-details.component';
 import { ShoppingListItemSearchComponent } from '../item-search/item-search.component';
@@ -19,22 +21,16 @@ import { RegistrationComponent } from '../registration/registration.component';
 import { FinishRegistrationComponent } from '../finish-registration/finish-registration.component';
 import { AlertComponent } from '../_directives/altert.component';
 
-import { ShoppingListItem } from '../_models/shoppinglist';
 import { Logger } from '../_helpers/logging';
-import { ShoppingListService } from '../_services/shoppinglist.service';
-import { ShoppingListItemSearchService } from '../_services/item-search.service';
-import { AuthorizationService } from '../_services/authorization.service';
 
-class AuthorizationServiceMock {
-  getAuthToken(): string { return 'fake-token'; }
-  refresh() {}
+class RegistrationServiceMock {
+  register(registrationData: RegistrationData) { }
+  finish() { return Promise.all([]); }
 }
 
-describe('LoginComponent', () => {
-  let component: LoginComponent;
-  let fixture: ComponentFixture<LoginComponent>;
-  let debugElement: DebugElement;
-  let htmlElement: HTMLElement;
+describe('RegistrationComponent', () => {
+  let component: RegistrationComponent;
+  let fixture: ComponentFixture<RegistrationComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -56,7 +52,8 @@ describe('LoginComponent', () => {
       ],
       providers: [
         Logger,
-        { provide: AuthorizationService, useClass: AuthorizationServiceMock },
+        AlertService,
+        { provide: RegistrationService, useClass: RegistrationServiceMock },
         { provide: APP_BASE_HREF, useValue : '/' }
       ]
     })
@@ -64,10 +61,8 @@ describe('LoginComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LoginComponent);
+    fixture = TestBed.createComponent(RegistrationComponent);
     component = fixture.componentInstance;
-    debugElement = fixture.debugElement;
-    htmlElement = fixture.debugElement.nativeElement;
     fixture.detectChanges();
   });
 

@@ -58,7 +58,7 @@ export class HttpClient {
     }
 
     createPath(path: string): string {
-        return `${this.remoteHost}/users/${this.authorizationService.readUserId()}/${path}`;
+        return `${this.remoteHost}/users/${this.authorizationService.readUserId()}${path}`;
     }
 
     createHeaders(): Promise<Headers> {

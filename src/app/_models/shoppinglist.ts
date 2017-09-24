@@ -3,5 +3,5 @@ export class ShoppingListItem {
     name: string;
     description: string;
     order: number;
-    read: boolean;
+    checked: boolean;
 }

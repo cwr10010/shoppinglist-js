@@ -6,7 +6,7 @@ import { Logger } from '../_helpers/logging';
 @Injectable()
 export class LocalStorageService {
 
-    localStorageAvailable: boolean = false;
+    localStorageAvailable = false;
 
     constructor(
         private log: Logger,
@@ -24,12 +24,10 @@ export class LocalStorageService {
 
             if (this.localStorageAvailable) {
                 localStorage.setItem(key, value);
-            }
-            else {
+            } else {
                 this.cookieService.set(key, value, 30, '/', '', true);
             }
-        }
-        else {
+        } else {
             if (this.localStorageAvailable) {
                 localStorage.removeItem(key);
             } else {
@@ -39,11 +37,10 @@ export class LocalStorageService {
     }
 
     read(key: string): any {
-        var data;
+        let data;
         if (this.localStorageAvailable) {
             data = localStorage.getItem(key);
-        }
-        else {
+        } else {
             data = this.cookieService.get(key);
             try {
                 data = JSON.parse(data);
@@ -57,8 +54,7 @@ export class LocalStorageService {
     remove(key: string): void {
         if (this.localStorageAvailable) {
             localStorage.removeItem(key);
-        }
-        else {
+        } else {
             this.cookieService.delete(key);
         }
     }

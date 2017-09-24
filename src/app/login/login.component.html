@@ -1,10 +1,15 @@
 <div class="login">
 <form #loginForm="ngForm">
 <md-card>
+      <md-card-actions>
+      <a [routerLink]="['/registration']" id="registration-link">Register</a>
+      </md-card-actions>
+
     <md-card-title>Login</md-card-title>
-    <p>
+
+    <md-card-content>
     <md-form-field>
-        <input mdInput required minlength="3" maxlength="200" [(ngModel)]="user.username" #username="ngModel" placeholder="Username" (keyup.enter)="doLogin()" name="username"/>
+        <input mdInput required minlength="3" maxlength="200" [(ngModel)]="user.username" #username="ngModel" placeholder="Username" (keyup.enter)="loginForm.form.valid && doLogin()" name="username"/>
         <md-error *ngIf="username.errors && username.errors.maxlength" >
           Username must be at most 200 characters long.
         </md-error>
@@ -15,10 +20,9 @@
           Username is required!
         </md-error>
     </md-form-field>
-    </p>
-    <p>
+
     <md-form-field>
-        <input mdInput required minlength="1" maxlength="200" [(ngModel)]="user.password" #password="ngModel" placeholder="Password" type="password" (keyup.enter)="doLogin()" name="password"/>
+        <input mdInput required minlength="8" maxlength="200" [(ngModel)]="user.password" #password="ngModel" placeholder="Password" type="password" (keyup.enter)="loginForm.form.valid && doLogin()" name="password"/>
         <md-error *ngIf="password.errors && password.errors.maxlength" >
           Password must be at most 200 characters long.
         </md-error>
@@ -26,10 +30,13 @@
           Password is required!
         </md-error>
     </md-form-field>
-    </p>
-    <p>
+    </md-card-content>
+
     <button md-raised-button color="primary" (click)="doLogin()" [disabled]="!loginForm.form.valid">Login</button>
-    </p>
+    <div>
+    <a [routerLink]="['/reset-password']">Reset Password</a>
+    </div>
+
 </md-card>
 </form>
 </div>

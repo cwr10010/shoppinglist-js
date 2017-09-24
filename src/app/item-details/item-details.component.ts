@@ -8,7 +8,7 @@ import { ShoppingListService } from '../_services/shoppinglist.service';
 import { ShoppingListItem } from '../_models/shoppinglist';
 
 @Component({
-    selector: 'item-details',
+    selector: 'app-item-details',
     templateUrl: './item-details.component.html',
     styleUrls: [
         './item-details.component.css'
@@ -26,7 +26,7 @@ export class ItemDetailsComponent implements OnInit {
     ngOnInit(): void {
         this.route.paramMap
             .switchMap((params: ParamMap) => this.shoppingListService.getItem(params.get('id')))
-            .subscribe(item => this.item = item)
+            .subscribe(item => this.item = item);
     }
 
     goBack(): void {

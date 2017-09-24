@@ -6,7 +6,7 @@ import { AuthorizationService } from '../_services/authorization.service';
 import { Logger } from '../_helpers/logging';
 
 @Component({
-    selector: 'login',
+    selector: 'app-login',
     templateUrl: './login.component.html',
     styleUrls: [
         './login.component.css'
@@ -30,9 +30,9 @@ export class LoginComponent implements OnInit {
     }
 
     doLogin(): void {
-        this.log.info(JSON.stringify(this.user));
+        this.log.debug(JSON.stringify(this.user));
         this.authorizationService.authorize(this.user)
-            .then(() =>this.navigateToReturnUrl() );
+            .then(() => this.navigateToReturnUrl() );
     }
 
     navigateToReturnUrl() {
