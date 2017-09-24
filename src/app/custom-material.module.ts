@@ -1,56 +1,50 @@
 import { NgModule } from '@angular/core';
 import {
-  MdGridListModule,
   MdButtonModule,
   MdFormFieldModule,
   MdInputModule,
   MdCardModule,
   MdMenuModule,
   MdIconModule,
-  MdChipsModule,
   MdAutocompleteModule,
   MdOptionModule,
   MdListModule,
   MdExpansionModule,
+  MdCheckboxModule,
   MdToolbarModule,
-  MdSlideToggleModule,
-  MdCheckboxModule
+  MdSlideToggleModule
 } from '@angular/material';
 
 @NgModule({
   imports: [
-  MdGridListModule,
   MdButtonModule,
   MdFormFieldModule,
   MdInputModule,
   MdCardModule,
   MdMenuModule,
   MdIconModule,
-  MdChipsModule,
   MdAutocompleteModule,
   MdOptionModule,
   MdListModule,
   MdExpansionModule,
-  MdToolbarModule,
-  MdSlideToggleModule,
   MdCheckboxModule,
+  MdToolbarModule,
+  MdSlideToggleModule
   ],
   exports: [
-  MdGridListModule,
   MdButtonModule,
   MdFormFieldModule,
   MdInputModule,
   MdCardModule,
   MdMenuModule,
   MdIconModule,
-  MdChipsModule,
   MdAutocompleteModule,
   MdOptionModule,
   MdListModule,
   MdExpansionModule,
-  MdToolbarModule,
-  MdSlideToggleModule,
   MdCheckboxModule,
+  MdToolbarModule,
+  MdSlideToggleModule
   ],
 })
 export class CustomMaterialModule { }

@@ -1,0 +1,59 @@
+server {
+    listen       80;
+    server_name  _;
+
+    charset utf-8;
+
+    sendfile on;
+
+    root /usr/share/nginx/html;
+
+    ##
+    # Gzip Settings
+    ##
+    gzip on;
+    gzip_http_version 1.1;
+    gzip_disable      "MSIE [1-6]\.";
+    gzip_min_length   1100;
+    gzip_vary         on;
+    gzip_proxied      expired no-cache no-store private auth;
+    gzip_types        text/plain text/css application/json application/javascript application/x-javascript text/xml application/xml application/xml+rss text/javascript;
+    gzip_comp_level   9;
+
+    location /api {
+        proxy_pass ${MY_API_URL}/api;
+    }
+
+    #Caches static assets
+    location ~ ^/(assets|scripts|styles|views) {
+      expires     31d;
+      add_header  Cache-Control public;
+    }
+
+    #Caches Bundles created by angular cli
+    location ~* \.(?:bundle.js|bundle.css)$ {
+      expires 1M;
+      access_log off;
+      add_header Cache-Control "public";
+    }
+
+    ##
+    # Main file index.html sending not found locations to the main
+    ##
+    location / {
+      expires -1;
+      add_header Pragma "no-cache";
+      add_header Cache-Control "no-store, no-cache, must-revalidate, post-check=0, pre-check=0";
+
+      try_files $uri $uri/ /index.html =404;
+    }
+
+    #error_page  404              /404.html;
+
+    # redirect server error pages to the static page /50x.html
+    #
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+      root /usr/share/nginx/html;
+    }
+}
