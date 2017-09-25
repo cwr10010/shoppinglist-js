@@ -24,18 +24,19 @@ jobs:
   - stage: deploy
     env:
       global:
-      - secure: dQEFkoFwEKbC+0exQVARsuvjBjMEEsrJCS9QpLyKjjftTeK/SFGt2haFSyhuUXGnN3IbeH9qdsuADMKOSj1wx9Jrv8O0x1vYG7hmZuxDqeMAy/+homEoMhJNjo+8ibkU//Zs8PhooSTlncULrub7KJbfmWzD8YRa2YoPGAs2Iy77MgjrPQnDpWd4knF0Zl+rfAkLrXcZ4Nqta2ToZzKVP2VOCONniprQLhNaMRJTYLlQLe0m8dHHKQYRbbp1Qzetozzuy4eK3zO8aC+sGmdvOYYXCuyp5PqFQ1wGD1MfUdxds9PyRcHMfzDKTRsWSmef57QA7ax70WZPBppFl7ZZsG2zYNuwn488KvMyknMk1Pdn+IYFrRE9UTyyTg5dchuj4/I3CIuozntYuyZpWswtMpbcC6ll0u4It/6a47GUIJdfFZm0b3dUQWiRHpANL/7JR7vT2GWD9h0E81ulISyKMZZUa4MH+qErr2BWuNSEQtIHadRzysyQ0pcNY0ADHpYxE0kO0EnrHPF7G2zK+5ie/XIXaMmQF/CAcJy2TNxOTKCIaLwqP8As+o044/AR3RzfQy2GXYMxyw0Zc08BoEpkARFJdL+DZ9Ptakj2QS7PEC6lusC52Rr4x93rTcA9HGeys/yCZmf5z5v26cjO7zAImKqlj6FkLbAkOU2wJIbuBys=
-      - secure: FsUDmB8ziC3nQgsXr4mXWIYmZXOrbvWbfcDxwHHchI1LjJTfRWaj5VnunOVg9DnkD2uyU0uQecqz5CcEE03cLDCTrIllMraBCF9FPWi31OQGAw9gW+V1DG3D0pD26sL1GUw5cIo9kbkFjeE6NjycEZHwndCrXMpoi1Mf0SXjAdwbW+gEiWQkx8RuMc+fwXM6OkG59fAfnsz12YXsRtjzn2HIpTB/VkEg5jc0fAfoAEP/iK2ihVuo+HZ48IC7m4NUE/VOVDnuDuynW+9dbo/vLXrFBD1RznkHHAOFNvpMP3JW1ffJ/Nl+s3NZlncY6FfVAF9XgpwjxPWXQg0hVGSpOk0kDdBPctDAmGCweHiCqN7o24K9mmtnIyhqLwNHPaGNoSJOZHHK4ygbp9k/7lKk+H/8db9/7CIgSkDSPE5HuGIpZg9HUGIVBXYRXSkQmQ1qKfrkhG7VNDK18x5NCaaOOIR5d20OvC4sYlyYd3bTupIKQV0/rFKbNoqvicbkxUcTdz7mZYqRpSaBC75L+0HAWc/Q+Oi2uRuCWVgtJWHQi0KfUZB23f6qclbceByawlvJw+u6AAYLRqaoNHw1Nh8BU2yVvQoL53VZ0t3jnEF1HLGhi9Ikch/RYQTMiVErhX4/yyQXwT60WWrIRmiwzyMmbjmAGx8VfvfX2JVdT/Ot4/o=
-      - secure: jrp4Tp5F6VpKnvWzqsXTieTUoceBWeL21YgxS7di1joSyrz+jGLHTJHDIUveMv1sPVvmY9iLpK1BRk9UkzEFZV4mngcOtIRPP0w9gwXibPw5nyDPelroA1JU4LaGHdK7LfqhvZ1vuPM4xlAgJQyv2fIba5ppHyAEYA8oMiOxJQLlZzELpGqxQ7yqpxsz4fpsiz08OIdF8S+RlW5hcdK6xXsnz13suw0SEOrFDGuOe/x0G9HWe8qx3eR1nTjqBW5lxOfq706ce+mKM0W/Pyper3kL57QkOr8kVvcjqh6OtfCbTF1r5lbYWRyRmKjyoAtgswz78H2Rzu3dS5rG3VaNkrUVR1kyPl7jbuYsvrUikKnafuwuyJyWm6MU6dDrrAHi1hDj5SVihiqd4hTaXWkQYwJ8xpOkWL4FtMj8GGwODev9XeP04EJzslnLOQN75om2gfxNopHMK7/7rZCBwc1ArKp40h2S7kIB64SMEkzXtM//GAH4BMQ+5n994/QeIeuIlTlnfHqFVjVbVS5H5WLSmw7lZZbtBSjXE+e2t9vPqRAE+fH4Q8BKnBEdhWHXImXTHhbnM9WBanQrw6M6XglAk3cfHV6hAmQdbvchur/LqZkS6ep5uX0bDVDRtg9yNc7QNyz+bfKxAWY+dLzjCI8LizftdDORXXstvDJt18VEPpo=
+      - secure: pucqxRGAlIJ6rvmqXIEBY+flSu7zgySzRVWh7T/64I50ucm2OKDermiLtvQD8/70b9l+0G3RNljnRrBVryOh1ms+soD8lIjdt5bZqipio/z0P6nJrDIf/DeJTtJ1D9mRoH79uvgFedGFT6pRAekjZ/DgUG6eJwz4muEA5wZ3wwXiBD0wCIehUBcXF2CggtY9CEGyJPRMM6Pp4HM7QJiR+LcLaocEUAIxYrlSod7YL6/F2C2IiX6LUBiI2K5SG1a9AC2mh5yNUxaqj9U6kTrDWBqUUuLil5NkICrCmBfIB/NkMxgI/ocFzBHHU2yyim6/hnNK/zvjNSNh6pN/2ZpWWntkrZfbvzEwaOlht4pzksjMvkoS9iA6Wd4Uct39J6VzMGVYd+RfhUVW2HQz/U5dzXsDTj56XOdREdIfrB+JVyxq4yzGxjsNFkZdzIF7ZIQn+DUpWEUqUZ/KWCLktiMmG1+nzfnVOTtOcOpqfxjiwuXfF4C/tg+CU171m5BrXQzk3KQ84dUA7YK6/Te2nrUGkCHVvxkrIKuqHGZUWhmpEa+hMr2PZxtbY847dhLC2evG49M0z4SLj9mNFhS7ol720H7uY0A0RmI/fWAoDAY3pHaxupfM9dDSLQQwCnf1pdrz0dAF38HVQFFgl17PK4ssbU0grA26RdqznEhnM4sYb4Y=
+      - secure: KzVvzUDzVG4qlJMZsG0EryK/617ySksqk6Kqirw197C3bGhs8GoeAc0MW123GUSaZmQckk6BjVpgVnmp0HDxUONYuwczlMYCBJDSjDL5ol0ZQpiAgV1MkofgQo5Io86sIaWqBQZnt80DeM9ebYyC7mTVo0uOYJjj04s4KT2Nf4zOLWgsR9tn6fft32eQZwfVLzcEIJVlE2uFjwgnykt0h0nbIm0i9KNviFuUwC+yUogQpQcWTFC/0wg1x0zlVhrM2phs6CC+9oWyHekqpnNTtb5t0QdlTJjr+mG4+5JbXvXuUaZb7TsjN6JPme777Azb0g9EW3HH9BoWunhtf1DbvOXWH0FbcylwsMfbLAF8FeOv+b1o2lcB0+4KxnsGYdAGBJamWDGYfG3KLseB0PeJ1B23mQKw1S4UctJ2ueV8FU+1hd+HX2IL8bhmxyrCmCKNEb1/nQyBSvkl0cg1Xi2tJ0q46/iy6aUGsqS2ynM2XgVJ42VLZHwdgtRES7WQdwTnzcErhc6NTVbsHsi7dY14ioBHedv0Il5EPICMx0SUs9HGVPhm5AmtWLAPwZdcQRaY3DV/hw81ooE5AEHCqaZr0lmjNKQ7TzzuImUkm3KgGyx+k4MjaPOcHs+BJ22dA6xwtOe4ji16xAe1srGlTkZYJPiudLL4WOHPjjfqZz8q1Ow=
+      - secure: O+xpNk2sflQ0nfylvTHUCCMfYGACE7YDPUUT8Rsu1lp88zU9FusMVKPxfrn4jRgeOroG0g5toNRKOUw9whtgYXqA7+Z9uJPGZytcd59lS8mLA2/dU8/ZaMqDYQlbztTq+8NLonCqaqFaWwcVGSAOqSJ8xJDxZp8CHb9DVxhp58V6Hhi/bMEvIcYtB++x+H1ATwEQJ7tZfV49yqW+Z2YtMpxFsl0cP33SdoGJvfjrNurAoc11vMm2S4EFgMtXFuUiEXWZodjG6S0180ODtBSVExmG0cP7+dsnw9vMxL3UUhJYK61gC9s73zO1RgZck+6UPgnjnCPXQB94Bt8Z/IjorMZqFGCfQWNkbiFJthYBpAaGYgFQJeuHYttE9u0Fz+9VRFTXWRSNyyspSD1CO+Ha1zaoZLuiGAxr96qqRYn9HCF14UxcwTDvfoOUbiRt+ji4S2PBWf2HUe1vK+DjsDP+PRaYmRAY5z0KjqUwz5Xs9v5dBqZi5WFtr1GKtyFs3lAMVbboSTYIKOCzr8scBVuE9D5m2gRrgXw6D0xJoucdM+bsR9x+T+ZCd8vifSjCPFut+m5X8Oh0U23ocIatg1Cv9x/mifghb/c6w3JjgDopdkgB1DLHL55Hn+l16Jrx6o14lvaVTuqkIZcvm+KXLtCsFrRLYBWhZhjQ1aZ+M2zZuqM=
       - COMMIT=${TRAVIS_COMMIT::8}
     services:
-      - docker
+    - docker
     script:
-      - ./node_modules/.bin/ng build --prod --environment=prod
-      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-      - export REPO=cwr10010docker/shoppinglist-js
-      - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
-      - docker build -f Dockerfile -t $REPO:$COMMIT .
-      - docker tag $REPO:$COMMIT $REPO:$TAG
-      - docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
-      - docker push $REPO
+    - ./node_modules/.bin/ng build --prod --environment=prod
+    - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+    - export REPO=cwr10010docker/shoppinglist-js
+    - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo
+      $TRAVIS_BRANCH ; fi`
+    - docker build -f Dockerfile -t $REPO:$COMMIT .
+    - docker tag $REPO:$COMMIT $REPO:$TAG
+    - docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
+    - docker push $REPO
