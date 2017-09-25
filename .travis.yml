@@ -26,6 +26,11 @@ jobs:
     script:
     - ./node_modules/.bin/ng test --watch=false --code-coverage
     - ./node_modules/.bin/istanbul-coveralls
+    after_script:
+    - sh -e /etc/init.d/xvfb stop
+  - stage: deploy
+    script:
+    - ./node_modules/.bin/ng build --prod --environment=prod
     - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
     - export REPO=cwr10010docker/shoppinglist-js
     - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
@@ -33,7 +38,3 @@ jobs:
     - docker tag $REPO:$COMMIT $REPO:$TAG
     - docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
     - docker push $REPO
-    after_script:
-    - sh -e /etc/init.d/xvfb stop
-  - stage: deploy
-    script: ./node_modules/.bin/ng build --prod --environment=prod
