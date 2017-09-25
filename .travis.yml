@@ -12,8 +12,6 @@ apt:
 jobs:
   include:
   - stage: test
-    services:
-      - docker
     before_install:
     - export CHROME_BIN=chromium-browser
     - export DISPLAY=:99.0
@@ -29,12 +27,15 @@ jobs:
       - secure: dQEFkoFwEKbC+0exQVARsuvjBjMEEsrJCS9QpLyKjjftTeK/SFGt2haFSyhuUXGnN3IbeH9qdsuADMKOSj1wx9Jrv8O0x1vYG7hmZuxDqeMAy/+homEoMhJNjo+8ibkU//Zs8PhooSTlncULrub7KJbfmWzD8YRa2YoPGAs2Iy77MgjrPQnDpWd4knF0Zl+rfAkLrXcZ4Nqta2ToZzKVP2VOCONniprQLhNaMRJTYLlQLe0m8dHHKQYRbbp1Qzetozzuy4eK3zO8aC+sGmdvOYYXCuyp5PqFQ1wGD1MfUdxds9PyRcHMfzDKTRsWSmef57QA7ax70WZPBppFl7ZZsG2zYNuwn488KvMyknMk1Pdn+IYFrRE9UTyyTg5dchuj4/I3CIuozntYuyZpWswtMpbcC6ll0u4It/6a47GUIJdfFZm0b3dUQWiRHpANL/7JR7vT2GWD9h0E81ulISyKMZZUa4MH+qErr2BWuNSEQtIHadRzysyQ0pcNY0ADHpYxE0kO0EnrHPF7G2zK+5ie/XIXaMmQF/CAcJy2TNxOTKCIaLwqP8As+o044/AR3RzfQy2GXYMxyw0Zc08BoEpkARFJdL+DZ9Ptakj2QS7PEC6lusC52Rr4x93rTcA9HGeys/yCZmf5z5v26cjO7zAImKqlj6FkLbAkOU2wJIbuBys=
       - secure: FsUDmB8ziC3nQgsXr4mXWIYmZXOrbvWbfcDxwHHchI1LjJTfRWaj5VnunOVg9DnkD2uyU0uQecqz5CcEE03cLDCTrIllMraBCF9FPWi31OQGAw9gW+V1DG3D0pD26sL1GUw5cIo9kbkFjeE6NjycEZHwndCrXMpoi1Mf0SXjAdwbW+gEiWQkx8RuMc+fwXM6OkG59fAfnsz12YXsRtjzn2HIpTB/VkEg5jc0fAfoAEP/iK2ihVuo+HZ48IC7m4NUE/VOVDnuDuynW+9dbo/vLXrFBD1RznkHHAOFNvpMP3JW1ffJ/Nl+s3NZlncY6FfVAF9XgpwjxPWXQg0hVGSpOk0kDdBPctDAmGCweHiCqN7o24K9mmtnIyhqLwNHPaGNoSJOZHHK4ygbp9k/7lKk+H/8db9/7CIgSkDSPE5HuGIpZg9HUGIVBXYRXSkQmQ1qKfrkhG7VNDK18x5NCaaOOIR5d20OvC4sYlyYd3bTupIKQV0/rFKbNoqvicbkxUcTdz7mZYqRpSaBC75L+0HAWc/Q+Oi2uRuCWVgtJWHQi0KfUZB23f6qclbceByawlvJw+u6AAYLRqaoNHw1Nh8BU2yVvQoL53VZ0t3jnEF1HLGhi9Ikch/RYQTMiVErhX4/yyQXwT60WWrIRmiwzyMmbjmAGx8VfvfX2JVdT/Ot4/o=
       - secure: jrp4Tp5F6VpKnvWzqsXTieTUoceBWeL21YgxS7di1joSyrz+jGLHTJHDIUveMv1sPVvmY9iLpK1BRk9UkzEFZV4mngcOtIRPP0w9gwXibPw5nyDPelroA1JU4LaGHdK7LfqhvZ1vuPM4xlAgJQyv2fIba5ppHyAEYA8oMiOxJQLlZzELpGqxQ7yqpxsz4fpsiz08OIdF8S+RlW5hcdK6xXsnz13suw0SEOrFDGuOe/x0G9HWe8qx3eR1nTjqBW5lxOfq706ce+mKM0W/Pyper3kL57QkOr8kVvcjqh6OtfCbTF1r5lbYWRyRmKjyoAtgswz78H2Rzu3dS5rG3VaNkrUVR1kyPl7jbuYsvrUikKnafuwuyJyWm6MU6dDrrAHi1hDj5SVihiqd4hTaXWkQYwJ8xpOkWL4FtMj8GGwODev9XeP04EJzslnLOQN75om2gfxNopHMK7/7rZCBwc1ArKp40h2S7kIB64SMEkzXtM//GAH4BMQ+5n994/QeIeuIlTlnfHqFVjVbVS5H5WLSmw7lZZbtBSjXE+e2t9vPqRAE+fH4Q8BKnBEdhWHXImXTHhbnM9WBanQrw6M6XglAk3cfHV6hAmQdbvchur/LqZkS6ep5uX0bDVDRtg9yNc7QNyz+bfKxAWY+dLzjCI8LizftdDORXXstvDJt18VEPpo=
+      - COMMIT=${TRAVIS_COMMIT::8}
+    services:
+      - docker
     script:
-    - ./node_modules/.bin/ng build --prod --environment=prod
-    - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-    - export REPO=cwr10010docker/shoppinglist-js
-    - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
-    - docker build -f Dockerfile -t $REPO:$COMMIT .
-    - docker tag $REPO:$COMMIT $REPO:$TAG
-    - docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
-    - docker push $REPO
+      - ./node_modules/.bin/ng build --prod --environment=prod
+      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+      - export REPO=cwr10010docker/shoppinglist-js
+      - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
+      - docker build -f Dockerfile -t $REPO:$COMMIT .
+      - docker tag $REPO:$COMMIT $REPO:$TAG
+      - docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
+      - docker push $REPO
