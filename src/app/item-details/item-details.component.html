@@ -17,7 +17,9 @@
         </md-form-field>
       </p>
       <p>
-      <md-checkbox [(ngModel)]="item.checked" >Got it!</md-checkbox>
+        <md-form-field>
+          <md-checkbox [(ngModel)]="item.checked" name="checked">Got it!</md-checkbox>
+        </md-form-field>
       </p>
       <button (click)="goBack()" md-raised-button >Back</button>
       <button (click)="save()" md-raised-button color="primary" [disabled]="!detailsForm.form.valid">Save</button>
