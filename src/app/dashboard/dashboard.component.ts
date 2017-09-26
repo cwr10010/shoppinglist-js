@@ -1,8 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { maxBy } from 'lodash/fp/maxBy';
-
 import { ShoppingListItem } from '../_models/shoppinglist';
 import { ShoppingListService } from '../_services/shoppinglist.service';
 import { AuthorizationService } from '../_services/authorization.service';
@@ -84,9 +82,12 @@ export class DashboardComponent implements OnInit {
     }
 
     addItem(name: string) {
-      this.shoppingListService.getItems()
-        .then(items => maxBy(items, 'order') || {order: 0})
-        .then(max => this.shoppingListService.create(name, '', max.order + 1, false)
+      let max = 0;
+      this.shoppingListService.getItems().then(items =>
+          items.map(item => {
+            max = Math.max(item.order, max);
+          }))
+        .then(() => this.shoppingListService.create(name, '', max + 1, false)
         .then(items => this.initShoppingList()));
     }
 

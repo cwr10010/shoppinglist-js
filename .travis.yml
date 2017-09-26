@@ -30,7 +30,7 @@ jobs:
     services:
     - docker
     script:
-    - ./node_modules/.bin/ng build --prod --environment=prod
+    - ./node_modules/.bin/ng build --prod --environment=prod --aot
     - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
     - export REPO=cwr10010docker/shoppinglist-js
     - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo
