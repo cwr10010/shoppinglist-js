@@ -16,6 +16,9 @@
         <textarea mdInput [(ngModel)]="item.description" #description="ngModel" name="description" placeholder="Description" rows="5" ></textarea>
         </md-form-field>
       </p>
+      <p>
+      <md-checkbox [(ngModel)]="item.checked" >Got it!</md-checkbox>
+      </p>
       <button (click)="goBack()" md-raised-button >Back</button>
       <button (click)="save()" md-raised-button color="primary" [disabled]="!detailsForm.form.valid">Save</button>
       </form>

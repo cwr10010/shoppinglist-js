@@ -21,7 +21,7 @@ jobs:
     - ./node_modules/.bin/istanbul-coveralls
     after_script:
     - sh -e /etc/init.d/xvfb stop
-  - stage: deploy
+  - stage: build
     env:
     - secure: pucqxRGAlIJ6rvmqXIEBY+flSu7zgySzRVWh7T/64I50ucm2OKDermiLtvQD8/70b9l+0G3RNljnRrBVryOh1ms+soD8lIjdt5bZqipio/z0P6nJrDIf/DeJTtJ1D9mRoH79uvgFedGFT6pRAekjZ/DgUG6eJwz4muEA5wZ3wwXiBD0wCIehUBcXF2CggtY9CEGyJPRMM6Pp4HM7QJiR+LcLaocEUAIxYrlSod7YL6/F2C2IiX6LUBiI2K5SG1a9AC2mh5yNUxaqj9U6kTrDWBqUUuLil5NkICrCmBfIB/NkMxgI/ocFzBHHU2yyim6/hnNK/zvjNSNh6pN/2ZpWWntkrZfbvzEwaOlht4pzksjMvkoS9iA6Wd4Uct39J6VzMGVYd+RfhUVW2HQz/U5dzXsDTj56XOdREdIfrB+JVyxq4yzGxjsNFkZdzIF7ZIQn+DUpWEUqUZ/KWCLktiMmG1+nzfnVOTtOcOpqfxjiwuXfF4C/tg+CU171m5BrXQzk3KQ84dUA7YK6/Te2nrUGkCHVvxkrIKuqHGZUWhmpEa+hMr2PZxtbY847dhLC2evG49M0z4SLj9mNFhS7ol720H7uY0A0RmI/fWAoDAY3pHaxupfM9dDSLQQwCnf1pdrz0dAF38HVQFFgl17PK4ssbU0grA26RdqznEhnM4sYb4Y=
     - secure: KzVvzUDzVG4qlJMZsG0EryK/617ySksqk6Kqirw197C3bGhs8GoeAc0MW123GUSaZmQckk6BjVpgVnmp0HDxUONYuwczlMYCBJDSjDL5ol0ZQpiAgV1MkofgQo5Io86sIaWqBQZnt80DeM9ebYyC7mTVo0uOYJjj04s4KT2Nf4zOLWgsR9tn6fft32eQZwfVLzcEIJVlE2uFjwgnykt0h0nbIm0i9KNviFuUwC+yUogQpQcWTFC/0wg1x0zlVhrM2phs6CC+9oWyHekqpnNTtb5t0QdlTJjr+mG4+5JbXvXuUaZb7TsjN6JPme777Azb0g9EW3HH9BoWunhtf1DbvOXWH0FbcylwsMfbLAF8FeOv+b1o2lcB0+4KxnsGYdAGBJamWDGYfG3KLseB0PeJ1B23mQKw1S4UctJ2ueV8FU+1hd+HX2IL8bhmxyrCmCKNEb1/nQyBSvkl0cg1Xi2tJ0q46/iy6aUGsqS2ynM2XgVJ42VLZHwdgtRES7WQdwTnzcErhc6NTVbsHsi7dY14ioBHedv0Il5EPICMx0SUs9HGVPhm5AmtWLAPwZdcQRaY3DV/hw81ooE5AEHCqaZr0lmjNKQ7TzzuImUkm3KgGyx+k4MjaPOcHs+BJ22dA6xwtOe4ji16xAe1srGlTkZYJPiudLL4WOHPjjfqZz8q1Ow=
@@ -39,3 +39,22 @@ jobs:
     - docker tag $REPO:$COMMIT $REPO:$TAG
     - docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
     - docker push $REPO
+  - stage: deploy test
+    addons:
+      ssh_known_hosts: cwrose.de
+    install: skip
+    script: skip
+    before_deploy:
+      - openssl aes-256-cbc -K $encrypted_2ff5d1c3c112_key -iv $encrypted_2ff5d1c3c112_iv -in $TRAVIS_BUILD_DIR/deploy/deploy_rsa.enc -out ~\/.ssh/deploy_rsa -d
+      - eval "$(ssh-agent -s)"
+      - chmod 600 ~\/.ssh/deploy_rsa
+      - ssh-add ~\/.ssh/deploy_rsa
+    deploy:
+      provider: script
+      skip_cleanup: true
+      script: sh $TRAVIS_BUILD_DIR/deploy/do_deploy.sh test
+      on:
+        branch: master
+    after_deploy:
+      - ssh-add -d
+      - rm  ~\/.ssh/deploy_rsa
