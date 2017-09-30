@@ -7,5 +7,5 @@ import * as loglevel from '../app/_helpers/loglevel';
 export const environment = {
   production: false,
   loglevel: loglevel.INFO,
-  apiUrl: 'http://localhost:8087/api'
+  apiUrl: 'http://localhost:8080/api'
 };

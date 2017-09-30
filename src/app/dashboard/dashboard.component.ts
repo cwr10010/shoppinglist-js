@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
+import { SortablejsOptions } from 'angular-sortablejs';
+
 import { ShoppingListItem } from '../_models/shoppinglist';
 import { ShoppingListService } from '../_services/shoppinglist.service';
 import { AuthorizationService } from '../_services/authorization.service';
@@ -23,12 +25,29 @@ export class DashboardComponent implements OnInit {
 
     step: number = -1;
 
+    options: SortablejsOptions;
+
     constructor(private shoppingListService: ShoppingListService,
       private authorizationService: AuthorizationService,
       private router: Router,
       private localStorage: LocalStorageService,
       private log: Logger) {
       this.step = this.localStorage.read(ACRORDEON_POSITION);
+      this.options = {
+        animation: 150,
+        forceFallback: false,
+        onSort: (evt: any) => {
+          const listToBeSent = this.shoppingList.concat(this.readShoppingList);
+          let position = 1;
+          listToBeSent.forEach (
+            item => {
+              item.order = position++;
+              this.shoppingListService.update(item);
+            }
+          );
+          console.log(listToBeSent);
+        }
+      };
     }
 
     ngOnInit(): void {
