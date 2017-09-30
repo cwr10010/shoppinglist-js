@@ -11,6 +11,8 @@ import { RegistrationService } from '../_services/registration.service';
 import { RegistrationData } from '../_models/registration-data';
 import { FinishRegistrationComponent } from './finish-registration.component';
 
+import { SortablejsModule } from 'angular-sortablejs';
+
 import { LoginComponent } from '../login/login.component';
 import { RegistrationComponent } from '../registration/registration.component';
 import { DashboardComponent } from '../dashboard/dashboard.component';
@@ -41,6 +43,7 @@ describe('FinishRegistrationComponent', () => {
       imports: [
         BrowserModule,
         BrowserAnimationsModule,
+        SortablejsModule,
         AppRoutingModule,
         FormsModule,
         CustomMaterialModule

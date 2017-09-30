@@ -27,6 +27,8 @@ import { AlertComponent } from '../_directives/altert.component';
 
 import { ShoppingListServiceMock } from '../_mocks/shoppinglist.mock';
 
+import { SortablejsModule } from 'angular-sortablejs';
+
 class AuthorizationServiceMock {
   getAuthToken(): string { return 'fake-token'; }
   refresh() {}
@@ -53,6 +55,7 @@ describe('ItemDetailComponent', () => {
         BrowserModule,
         BrowserAnimationsModule,
         FormsModule,
+        SortablejsModule,
         AppRoutingModule,
         CustomMaterialModule
       ],

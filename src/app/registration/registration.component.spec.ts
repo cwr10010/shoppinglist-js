@@ -7,6 +7,8 @@ import { APP_BASE_HREF } from '@angular/common';
 import { AppRoutingModule } from '../app-routing.module';
 import { CustomMaterialModule } from '../custom-material.module';
 
+import { SortablejsModule } from 'angular-sortablejs';
+
 import { RegistrationService } from '../_services/registration.service';
 import { RegistrationData } from '../_models/registration-data';
 
@@ -47,6 +49,7 @@ describe('RegistrationComponent', () => {
         BrowserModule,
         BrowserAnimationsModule,
         FormsModule,
+        SortablejsModule,
         AppRoutingModule,
         CustomMaterialModule
       ],

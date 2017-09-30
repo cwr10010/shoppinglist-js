@@ -5,6 +5,8 @@ import { By, BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
+import { SortablejsModule } from 'angular-sortablejs';
+
 import { AlertComponent } from './_directives/altert.component';
 
 import { LoginComponent } from './login/login.component';
@@ -68,6 +70,7 @@ describe('AppComponent', () => {
         BrowserModule,
         FormsModule,
         AppRoutingModule,
+        SortablejsModule,
         CustomMaterialModule
       ],
       providers: [
