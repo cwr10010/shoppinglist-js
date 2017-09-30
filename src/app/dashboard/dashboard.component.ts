@@ -35,7 +35,7 @@ export class DashboardComponent implements OnInit {
       this.step = this.localStorage.read(ACRORDEON_POSITION);
       this.options = {
         animation: 150,
-        forceFallback: false,
+        forceFallback: true,
         onSort: (evt: any) => {
           const listToBeSent = this.shoppingList.concat(this.readShoppingList);
           let position = 1;
@@ -45,7 +45,7 @@ export class DashboardComponent implements OnInit {
               this.shoppingListService.update(item);
             }
           );
-          console.log(listToBeSent);
+          this.log.debug(`updated shopping list: ${listToBeSent}`);
         }
       };
     }
