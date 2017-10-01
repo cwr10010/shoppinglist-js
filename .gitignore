@@ -43,6 +43,6 @@ Thumbs.db
 
 # vscode
 .vscode
-
+/deploy
 /mysqldata
 /logs

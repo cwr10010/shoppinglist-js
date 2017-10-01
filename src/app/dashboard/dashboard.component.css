@@ -25,7 +25,18 @@
     margin-left: 10px;
 }
 
-.menu-icon {
-    float: left;
-    padding-top:7px;
+.app-menu {
+  margin: 0px 10px 0px;
+}
+
+.add-form {
+  margin-left: 20px;
+}
+
+.item-draw-handle {
+  color:#aaa;
+}
+
+.show-read-items button {
+  margin:10px 10px 5px;
 }

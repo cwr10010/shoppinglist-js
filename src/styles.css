@@ -24,9 +24,23 @@
 }
 
 body {
-  background-color: #ade3d1;
+margin: 0;
+height: 100vh;
+border: 0;
+padding: 0;
+height: 100%;
+width: 100%;
+
 }
 
-body {
-  color: #673ab7;
+
+.align-last-right {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.align-last-right span:last-child {
+  flex-flow: row;
+  margin-left: auto;
 }

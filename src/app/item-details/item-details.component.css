@@ -3,5 +3,25 @@
 }
 
 .item-details h2 {
-    height: 30px;
+    height: 20px;
+}
+
+div.item-details {
+  text-align: center;
+}
+
+div.item-details md-form-field {
+  width:100%;
+}
+div.item-details md-card {
+  width: 250px;
+  text-align: left;
+  display: inline-block;
+}
+
+.item-details-button-row {
+  padding-top: 20px;
+  border-top-width: 1px;
+  border-top-style: solid;
+  border-color: rgba(0, 0, 0, .06);
 }

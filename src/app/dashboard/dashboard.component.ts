@@ -25,6 +25,8 @@ export class DashboardComponent implements OnInit {
 
     step: number = -1;
 
+    readItemsVisible = false;
+
     options: SortablejsOptions;
 
     constructor(private shoppingListService: ShoppingListService,
@@ -36,6 +38,7 @@ export class DashboardComponent implements OnInit {
       this.options = {
         animation: 150,
         forceFallback: true,
+        handle: '.item-draw-handle',
         onSort: (evt: any) => {
           const listToBeSent = this.shoppingList.concat(this.readShoppingList);
           let position = 1;
@@ -59,6 +62,10 @@ export class DashboardComponent implements OnInit {
         this.step = this.localStorage.read(ACRORDEON_POSITION);
       }
       return this.step === item.order;
+    }
+
+    toggleReadItems() {
+      this.readItemsVisible = !this.readItemsVisible;
     }
 
     initShoppingList(): void {

@@ -3,3 +3,11 @@
     padding-top:7px;
 }
 
+md-toolbar {
+  position: fixed;
+  z-index: 6;
+}
+
+.content {
+  padding-top:70px;
+}

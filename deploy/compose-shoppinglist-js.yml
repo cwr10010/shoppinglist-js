@@ -7,7 +7,7 @@ services:
     image: mariadb
     networks:
       - srs_net
-    env_file: ./mysql/dev.env
+    env_file: ../../shoppinglist-config/mysql/dev.env
     volumes:
       - "./mysqldata:/var/lib/mysql"
     ports:
@@ -19,7 +19,7 @@ services:
     environment:
       SPRING_PROFILES_ACTIVE: dev
     volumes:
-      - "./config:/app/config"
+      - "../../shoppinglist-config/config:/app/config"
       - "./logs/application:/app/logs"
     depends_on:
       - srs_db
