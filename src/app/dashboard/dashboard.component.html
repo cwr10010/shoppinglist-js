@@ -28,7 +28,7 @@
     <md-checkbox [(ngModel)]="item.checked" (change)="itemChange(item)">Got it!</md-checkbox>
     </md-panel-description>
     <md-action-row>
-        <button (click)="gotoDetail()" md-raised-button color="primary">Edit</button>
+        <button (click)="gotoDetail(item)" md-raised-button color="primary">Edit</button>
         <button class="delete" (click)="deleteItem(item); $event.stopPropagation()" md-raised-button color="warn">delete</button>
     </md-action-row>
 </md-expansion-panel>

@@ -21,7 +21,6 @@ export class DashboardComponent implements OnInit {
 
     shoppingList: ShoppingListItem[];
     readShoppingList: ShoppingListItem[];
-    selectedItem: ShoppingListItem;
 
     step: number = -1;
 
@@ -80,20 +79,18 @@ export class DashboardComponent implements OnInit {
 
     onOpen(item: ShoppingListItem): void {
       this.step = item.order;
-      this.selectedItem = item;
       this.localStorage.store(ACRORDEON_POSITION, this.step);
     }
 
     onClose(item: ShoppingListItem): void {
       if (item.order === this.step) {
         this.step = -1;
-        this.selectedItem = undefined;
         this.localStorage.remove(ACRORDEON_POSITION);
       }
     }
 
-    gotoDetail(): void {
-      this.router.navigate(['/details', this.selectedItem.id]);
+    gotoDetail(item: ShoppingListItem): void {
+      this.router.navigate(['/details', item.id]);
     }
 
     itemIsChecked(item: ShoppingListItem): boolean {
