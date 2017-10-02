@@ -1,47 +1,28 @@
-<div class="app-menu">
-  <div class="align-last-right">
-      <button md-icon-button [mdMenuTriggerFor]="menu">
-          <md-icon>menu</md-icon>
-      </button>
-      <span>
-      <item-search></item-search>
-      </span>
+<md-sidenav-container>
+  <md-sidenav #sidenav mode="push" align="start">
+    <md-nav-list>
+    <a md-list-item routerLink="/" routerLinkActive="active">Dashboard</a>
+    <a md-list-item (click)="doLogout()" >Logout</a>
+    </md-nav-list>
+  </md-sidenav>
+  <div class="app-menu">
+    <div class="align-last-right">
+        <button md-icon-button (click)="sidenav.toggle()">
+            <md-icon>menu</md-icon>
+        </button>
+        <span>
+        <item-search></item-search>
+        </span>
+    </div>
   </div>
-  <md-menu #menu="mdMenu">
-      <a md-menu-item routerLink="/" routerLinkActive="active">Dashboard</a>
-      <a (click)="doLogout()" md-menu-item >Logout</a>
-  </md-menu>
-</div>
-<md-form-field class="add-form">
-  <input mdInput placeholder="Add Item" #addBox (keyup.enter)="addItem(addBox.value);addBox.value=''" />
-</md-form-field>
-<md-accordion class="shopping-list-accordion" [sortablejs]="shoppingList" [sortablejsOptions]="options">
-<md-expansion-panel  *ngFor="let item of shoppingList" [expanded]="isExpanded(item)" (closed)="onClose(item)" (opened)="onOpen(item)" hideToggle="true">
-    <md-expansion-panel-header>
-      <md-panel-title>
-        <div class="align-last-right">{{item.name}}<span class="item-draw-handle"><md-icon>drag_handle</md-icon></span></div>
-      </md-panel-title>
-
-    </md-expansion-panel-header>
-    <md-panel-description>
-    <div>{{item.description}}</div>
-    <md-checkbox [(ngModel)]="item.checked" (change)="itemChange(item)">Got it!</md-checkbox>
-    </md-panel-description>
-    <md-action-row>
-        <button (click)="gotoDetail(item)" md-raised-button color="primary">Edit</button>
-        <button class="delete" (click)="deleteItem(item); $event.stopPropagation()" md-raised-button color="warn">delete</button>
-    </md-action-row>
-</md-expansion-panel>
-</md-accordion>
-<div class="align-last-right show-read-items">
-  <div>&nbsp;</div>
-  <button md-button color="primary" (click)="toggleReadItems()">show read items</button>
-</div>
-<md-accordion class="read-shopping-list-accordion" *ngIf="readItemsVisible">
-  <md-expansion-panel  *ngFor="let item of readShoppingList" [expanded]="isExpanded(item)" (closed)="onClose(item)" (opened)="onOpen(item)" hideToggle="true">
+  <md-form-field class="add-form">
+    <input mdInput placeholder="Add Item" #addBox (keyup.enter)="addItem(addBox.value);addBox.value=''" />
+  </md-form-field>
+  <md-accordion class="shopping-list-accordion" [dragula]='"shoppinglist-bag"' [dragulaModel]='shoppingList'>
+  <md-expansion-panel  *ngFor="let item of shoppingList" [expanded]="isExpanded(item)" (closed)="onClose(item)" (opened)="onOpen(item)" hideToggle="true">
       <md-expansion-panel-header>
         <md-panel-title>
-          {{item.name}}
+          <div class="align-last-right">{{item.name}}<span><md-icon class="item-drag-handle">drag_handle</md-icon></span></div>
         </md-panel-title>
       </md-expansion-panel-header>
       <md-panel-description>
@@ -49,9 +30,31 @@
       <md-checkbox [(ngModel)]="item.checked" (change)="itemChange(item)">Got it!</md-checkbox>
       </md-panel-description>
       <md-action-row>
-          <button (click)="gotoDetail()" md-raised-button color="primary">Edit</button>
+          <button (click)="gotoDetail(item)" md-raised-button color="primary">Edit</button>
           <button class="delete" (click)="deleteItem(item); $event.stopPropagation()" md-raised-button color="warn">delete</button>
       </md-action-row>
   </md-expansion-panel>
-</md-accordion>
+  </md-accordion>
+  <div class="align-last-right show-read-items">
+    <div>&nbsp;</div>
+    <button md-button color="primary" (click)="toggleReadItems()">show read items</button>
+  </div>
+  <md-accordion class="read-shopping-list-accordion" *ngIf="readItemsVisible">
+    <md-expansion-panel  *ngFor="let item of readShoppingList" [expanded]="isExpanded(item)" (closed)="onClose(item)" (opened)="onOpen(item)" hideToggle="true">
+        <md-expansion-panel-header>
+          <md-panel-title>
+            {{item.name}}
+          </md-panel-title>
+        </md-expansion-panel-header>
+        <md-panel-description>
+        <div>{{item.description}}</div>
+        <md-checkbox [(ngModel)]="item.checked" (change)="itemChange(item)">Got it!</md-checkbox>
+        </md-panel-description>
+        <md-action-row>
+            <button (click)="gotoDetail()" md-raised-button color="primary">Edit</button>
+            <button class="delete" (click)="deleteItem(item); $event.stopPropagation()" md-raised-button color="warn">delete</button>
+        </md-action-row>
+    </md-expansion-panel>
+  </md-accordion>
 
+</md-sidenav-container>

@@ -11,7 +11,7 @@ import { RegistrationService } from '../_services/registration.service';
 import { RegistrationData } from '../_models/registration-data';
 import { FinishRegistrationComponent } from './finish-registration.component';
 
-import { SortablejsModule } from 'angular-sortablejs';
+import { DragulaModule } from 'ng2-dragula';
 
 import { LoginComponent } from '../login/login.component';
 import { RegistrationComponent } from '../registration/registration.component';
@@ -43,7 +43,7 @@ describe('FinishRegistrationComponent', () => {
       imports: [
         BrowserModule,
         BrowserAnimationsModule,
-        SortablejsModule,
+        DragulaModule,
         AppRoutingModule,
         FormsModule,
         CustomMaterialModule

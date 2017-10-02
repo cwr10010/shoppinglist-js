@@ -12,6 +12,7 @@ import {
   MdExpansionModule,
   MdCheckboxModule,
   MdToolbarModule,
+  MdSidenavModule,
   MdSlideToggleModule
 } from '@angular/material';
 
@@ -29,6 +30,7 @@ import {
   MdExpansionModule,
   MdCheckboxModule,
   MdToolbarModule,
+  MdSidenavModule,
   MdSlideToggleModule
   ],
   exports: [
@@ -44,6 +46,7 @@ import {
   MdExpansionModule,
   MdCheckboxModule,
   MdToolbarModule,
+  MdSidenavModule,
   MdSlideToggleModule
   ],
 })

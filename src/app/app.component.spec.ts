@@ -5,7 +5,7 @@ import { By, BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { SortablejsModule } from 'angular-sortablejs';
+import { DragulaModule } from 'ng2-dragula';
 
 import { AlertComponent } from './_directives/altert.component';
 
@@ -70,7 +70,7 @@ describe('AppComponent', () => {
         BrowserModule,
         FormsModule,
         AppRoutingModule,
-        SortablejsModule,
+        DragulaModule,
         CustomMaterialModule
       ],
       providers: [

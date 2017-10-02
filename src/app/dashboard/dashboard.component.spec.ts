@@ -17,7 +17,7 @@ import { ShoppingListItemSearchService } from '../_services/item-search.service'
 import { AuthorizationService } from '../_services/authorization.service';
 import { LocalStorageService } from '../_services/local-storage.service';
 
-import { SortablejsModule } from 'angular-sortablejs';
+import { DragulaModule } from 'ng2-dragula';
 import { CustomMaterialModule } from '../custom-material.module';
 
 import { ShoppingListServiceMock, ShoppingListSearchServiceMock } from '../_mocks/shoppinglist.mock';
@@ -44,7 +44,7 @@ describe('DashboardComponent', () => {
       imports: [
         FormsModule,
         BrowserAnimationsModule,
-        SortablejsModule,
+        DragulaModule,
         CustomMaterialModule
       ],
       providers: [

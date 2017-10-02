@@ -10,7 +10,7 @@ import { APP_BASE_HREF } from '@angular/common';
 import { AppRoutingModule } from '../app-routing.module';
 import { CustomMaterialModule } from '../custom-material.module';
 
-import { SortablejsModule } from 'angular-sortablejs';
+import { DragulaModule } from 'ng2-dragula';
 
 import { AppComponent } from '../app.component';
 import { LoginComponent } from '../login/login.component';
@@ -54,7 +54,7 @@ describe('ItemSearchComponent', () => {
         BrowserModule,
         BrowserAnimationsModule,
         FormsModule,
-        SortablejsModule,
+        DragulaModule,
         AppRoutingModule,
         CustomMaterialModule
       ],

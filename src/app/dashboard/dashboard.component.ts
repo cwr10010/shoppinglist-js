@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { SortablejsOptions } from 'angular-sortablejs';
+import { DragulaService, DragulaDirective } from 'ng2-dragula';
 
 import { ShoppingListItem } from '../_models/shoppinglist';
 import { ShoppingListService } from '../_services/shoppinglist.service';
@@ -22,40 +22,40 @@ export class DashboardComponent implements OnInit {
     shoppingList: ShoppingListItem[];
     readShoppingList: ShoppingListItem[];
 
-    step: number = -1;
+    step = -1;
 
     readItemsVisible = false;
-
-    options: SortablejsOptions;
 
     constructor(private shoppingListService: ShoppingListService,
       private authorizationService: AuthorizationService,
       private router: Router,
       private localStorage: LocalStorageService,
+      private dragulaService: DragulaService,
       private log: Logger) {
       this.step = this.localStorage.read(ACRORDEON_POSITION);
-      this.options = {
-        animation: 150,
-        forceFallback: true,
-        handle: '.item-draw-handle',
-        onSort: (evt: any) => {
-          const listToBeSent = this.shoppingList.concat(this.readShoppingList);
-          let position = 1;
-          listToBeSent.forEach (
-            item => {
-              item.order = position++;
-              this.shoppingListService.update(item);
-            }
-          );
-          this.log.debug(`updated shopping list: ${listToBeSent}`);
-        }
-      };
     }
 
     ngOnInit(): void {
-      this.initShoppingList();
+      this.initShoppingList().then(() => {});
+      this.dragulaService.setOptions('shoppinglist-bag', {
+        moves: function (el, container, handle) {
+          return handle.className.includes('item-drag-handle');
+        }
+      });
+      this.dragulaService.dropModel.subscribe( () => this.onDrop() );
     }
 
+    onDrop() {
+        const listToBeSent = this.shoppingList.concat(this.readShoppingList);
+        let position = 1;
+        listToBeSent.forEach (
+          item => {
+            item.order = position++;
+            this.shoppingListService.update(item);
+          }
+        );
+        this.log.info(`updated shopping list: ${listToBeSent}`);
+    }
     isExpanded(item: ShoppingListItem): boolean {
       if (this.localStorage.read(ACRORDEON_POSITION)) {
         this.step = this.localStorage.read(ACRORDEON_POSITION);
@@ -67,8 +67,8 @@ export class DashboardComponent implements OnInit {
       this.readItemsVisible = !this.readItemsVisible;
     }
 
-    initShoppingList(): void {
-      this.shoppingListService
+    initShoppingList(): Promise<any> {
+      return this.shoppingListService
         .partitionShoppingList()
         .then((itemTuple: ShoppingListItem[][]) => {
           this.readShoppingList = itemTuple[0];

@@ -7,7 +7,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import { CookieService } from 'ngx-cookie-service';
 
-import { SortablejsModule } from 'angular-sortablejs';
+import { DragulaModule } from 'ng2-dragula';
 
 import { AuthorizationGuard } from './_guards/authorization.guard';
 import { LoggedInGuard } from './_guards/loggedin.guard';
@@ -40,7 +40,7 @@ import { CustomMaterialModule } from './custom-material.module';
     BrowserModule,
     FormsModule,
     HttpModule,
-    SortablejsModule,
+    DragulaModule,
     BrowserAnimationsModule,
     CustomMaterialModule,
     AppRoutingModule

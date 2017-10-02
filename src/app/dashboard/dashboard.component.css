@@ -40,3 +40,12 @@
 .show-read-items button {
   margin:10px 10px 5px;
 }
+
+md-sidenav-container {
+  padding-top:20px;
+  height: 100vh;
+}
+
+md-sidenav {
+  width: 200px;
+}
