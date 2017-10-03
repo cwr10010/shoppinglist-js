@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { DragulaService, DragulaDirective } from 'ng2-dragula';
@@ -17,7 +17,7 @@ import { Logger } from '../_helpers/logging';
       './dashboard.component.css'
   ]
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
 
     shoppingList: ShoppingListItem[];
     readShoppingList: ShoppingListItem[];
@@ -32,17 +32,21 @@ export class DashboardComponent implements OnInit {
       private localStorage: LocalStorageService,
       private dragulaService: DragulaService,
       private log: Logger) {
-      this.step = this.localStorage.read(ACRORDEON_POSITION);
     }
 
     ngOnInit(): void {
-      this.initShoppingList().then(() => {});
+      this.initShoppingList();
+      this.step = this.localStorage.read(ACRORDEON_POSITION);
       this.dragulaService.setOptions('shoppinglist-bag', {
         moves: function (el, container, handle) {
           return handle.className.includes('item-drag-handle');
         }
       });
       this.dragulaService.dropModel.subscribe( () => this.onDrop() );
+    }
+
+    ngOnDestroy(): void {
+      this.dragulaService.destroy('shoppinglist-bag');
     }
 
     onSwipe(event: any): void {
@@ -124,8 +128,8 @@ export class DashboardComponent implements OnInit {
     }
 
     doLogout(): Promise<boolean> {
-        return this.authorizationService.logout()
-          .then(() => this.router.navigate(['/login']));
+      return this.authorizationService.logout()
+        .then(() => this.router.navigate(['/login']));
     }
 }
 
