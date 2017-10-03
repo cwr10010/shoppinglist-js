@@ -45,8 +45,8 @@ export class DashboardComponent implements OnInit {
       this.dragulaService.dropModel.subscribe( () => this.onDrop() );
     }
 
-    onSwipe(event: Event): void {
-      event.preventDefault();
+    onSwipe(event: any): void {
+      event.gesture.stopPropagation();
     }
 
     onDrop() {
