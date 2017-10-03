@@ -22,7 +22,7 @@
   <md-expansion-panel  *ngFor="let item of shoppingList" [expanded]="isExpanded(item)" (closed)="onClose(item)" (opened)="onOpen(item)" hideToggle="true">
       <md-expansion-panel-header>
         <md-panel-title>
-          <div class="align-last-right">{{item.name}}<span><md-icon class="item-drag-handle">drag_handle</md-icon></span></div>
+          <div class="align-last-right">{{item.name}}<span><md-icon class="item-drag-handle" (swipe)="onSwipe($event)">drag_handle</md-icon></span></div>
         </md-panel-title>
       </md-expansion-panel-header>
       <md-panel-description>

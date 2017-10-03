@@ -45,6 +45,10 @@ export class DashboardComponent implements OnInit {
       this.dragulaService.dropModel.subscribe( () => this.onDrop() );
     }
 
+    onSwipe(event: Event): void {
+      event.preventDefault();
+    }
+
     onDrop() {
         const listToBeSent = this.shoppingList.concat(this.readShoppingList);
         let position = 1;
