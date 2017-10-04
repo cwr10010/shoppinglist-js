@@ -14,6 +14,7 @@ const routes: Routes = [
     { path: 'registration', component: RegistrationComponent, canActivate: [LoggedInGuard] },
     { path: 'register/finish/:token', component: FinishRegistrationComponent, canActivate: [LoggedInGuard] },
     { path: '', component: DashboardComponent, canActivate: [AuthorizationGuard] },
+    { path: ':shopping_list_id', component: DashboardComponent, canActivate: [AuthorizationGuard] },
     { path: 'details/:id', component: ItemDetailsComponent, canActivate: [AuthorizationGuard] },
 
     { path: '**', redirectTo: '/' }

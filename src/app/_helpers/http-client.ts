@@ -62,8 +62,8 @@ export class HttpClient {
     }
 
     createHeaders(): Promise<Headers> {
-        var headers = {};
-        var authValue = '';
+        let headers = {};
+        let authValue = '';
         return this.authorizationService.refresh().then(() => {
             authValue = `Bearer ${this.authorizationService.getAuthToken()}`;
             headers = {
@@ -74,4 +74,3 @@ export class HttpClient {
         });
     }
 }
-

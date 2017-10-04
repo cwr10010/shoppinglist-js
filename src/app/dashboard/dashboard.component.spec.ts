@@ -1,14 +1,23 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-import { Router } from '@angular/router';
+import { AppRoutingModule } from '../app-routing.module';
+import { APP_BASE_HREF } from '@angular/common';
 import { CookieService } from 'ngx-cookie-service';
+import { DragulaModule } from 'ng2-dragula';
+import { CustomMaterialModule } from '../custom-material.module';
 
 import { Logger } from '../_helpers/logging';
 
+import { RegistrationComponent } from '../registration/registration.component';
+import { FinishRegistrationComponent } from '../finish-registration/finish-registration.component';
+
 import { DashboardComponent } from './dashboard.component';
+import { LoginComponent } from '../login/login.component';
 import { ShoppingListItemSearchComponent } from '../item-search/item-search.component';
+import { ItemDetailsComponent } from '../item-details/item-details.component';
+
+import { AlertComponent } from '../_directives/altert.component';
 
 import { ShoppingListItem } from '../_models/shoppinglist';
 
@@ -17,19 +26,10 @@ import { ShoppingListItemSearchService } from '../_services/item-search.service'
 import { AuthorizationService } from '../_services/authorization.service';
 import { LocalStorageService } from '../_services/local-storage.service';
 
-import { DragulaModule } from 'ng2-dragula';
-import { CustomMaterialModule } from '../custom-material.module';
+import { AuthorizationGuard } from '../_guards/authorization.guard';
 
 import { ShoppingListServiceMock, ShoppingListSearchServiceMock } from '../_mocks/shoppinglist.mock';
-
-class RouterMock {
-  navigate(url: string[]) { return url; }
-}
-
-class AuthorizationServiceMock {
-  getAuthToken(): string { return 'fake-token'; }
-  refresh() {}
-}
+import { AuthorizationServiceMock } from '../_mocks/authorization.mock';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
@@ -38,23 +38,30 @@ describe('DashboardComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
+        AlertComponent,
         DashboardComponent,
+        LoginComponent,
+        RegistrationComponent,
+        FinishRegistrationComponent,
         ShoppingListItemSearchComponent,
+        ItemDetailsComponent
       ],
       imports: [
         FormsModule,
         BrowserAnimationsModule,
         DragulaModule,
+        AppRoutingModule,
         CustomMaterialModule
       ],
       providers: [
         Logger,
         LocalStorageService,
         CookieService,
-        { provide: Router, useClass: RouterMock },
+        AuthorizationGuard,
         { provide: ShoppingListService, useClass: ShoppingListServiceMock },
         { provide: AuthorizationService, useClass: AuthorizationServiceMock },
-        { provide: ShoppingListItemSearchService, useClass: ShoppingListSearchServiceMock }
+        { provide: ShoppingListItemSearchService, useClass: ShoppingListSearchServiceMock },
+        { provide: APP_BASE_HREF, useValue : '/' }
       ]
     })
     .compileComponents();

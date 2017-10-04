@@ -19,6 +19,8 @@ import { ShoppingListItem } from '../_models/shoppinglist';
 import { Logger } from '../_helpers/logging';
 import { ShoppingListService } from '../_services/shoppinglist.service';
 import { ShoppingListItemSearchService } from '../_services/item-search.service';
+import { LocalStorageService } from '../_services/local-storage.service';
+import { CookieService } from 'ngx-cookie-service';
 import { AuthorizationService } from '../_services/authorization.service';
 import { RegistrationComponent } from '../registration/registration.component';
 import { FinishRegistrationComponent } from '../finish-registration/finish-registration.component';
@@ -61,6 +63,8 @@ describe('ItemDetailComponent', () => {
       ],
       providers: [
         Logger,
+        LocalStorageService,
+        CookieService,
         { provide: AuthorizationService, useClass: AuthorizationServiceMock },
         { provide: ShoppingListService, useClass: ShoppingListServiceMock },
         { provide: APP_BASE_HREF, useValue : '/' }

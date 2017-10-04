@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router }            from '@angular/router';
+import { Router } from '@angular/router';
 
-import { Observable }        from 'rxjs/Observable';
-import { Subject }           from 'rxjs/Subject';
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
 
 // Observable class extensions
 import 'rxjs/add/observable/of';
@@ -38,18 +38,18 @@ export class ShoppingListItemSearchComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this .shoppinglist = this.searchTerms
+        this.shoppinglist = this.searchTerms
             .debounceTime(300)
             .distinctUntilChanged()
             .switchMap(term => term ? this.itemSearchService.search(term) : Observable.of<ShoppingListItem[]>([]))
             .catch(error => {
                 this.log.warn(error);
                 return Observable.of<ShoppingListItem[]>([]);
-            })
+            });
     }
 
     gotoDetails(item: ShoppingListItem): void {
-        let link = ['/details', item.id];
+        const link = ['/details', item.id];
         this.router.navigate(link);
     }
 }

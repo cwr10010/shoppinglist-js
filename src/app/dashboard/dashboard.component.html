@@ -1,7 +1,7 @@
 <md-sidenav-container>
   <md-sidenav #sidenav mode="push" align="start">
     <md-nav-list>
-    <a md-list-item routerLink="/" routerLinkActive="active">Dashboard</a>
+    <a *ngFor="let entry of shoppingLists" md-list-item routerLink="/{{entry.shopping_list_id}}" routerLinkActive="active">{{entry.shopping_list_name}}</a>
     <a md-list-item (click)="doLogout()" >Logout</a>
     </md-nav-list>
   </md-sidenav>

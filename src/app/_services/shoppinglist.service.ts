@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/toPromise';
 
-import { ShoppingListItem } from '../_models/shoppinglist';
+import { ShoppingList, ShoppingListItem } from '../_models/shoppinglist';
 import { Logger } from '../_helpers/logging';
 import { AuthorizationService } from './authorization.service';
 import { HttpClient } from '../_helpers/http-client';
@@ -16,16 +16,22 @@ export class ShoppingListService {
         private authorizationService: AuthorizationService,
         private log: Logger) { }
 
-    getItems(): Promise<ShoppingListItem[]> {
-        return this.http.get(this.basePath())
-                .then(response => response.json() as ShoppingListItem[])
-                .catch(response => this.handleError(response));
+    getShoppingLists(): Promise<ShoppingList[]> {
+      return this.http.get('/shopping-list')
+        .then(response => response.json() as ShoppingList[])
+        .catch(response => this.handleError(response));
     }
 
-    partitionShoppingList(): Promise<ShoppingListItem[][]> {
+    getItems(shoppinglistId: string): Promise<ShoppingListItem[]> {
+      return this.http.get(this.basePath(shoppinglistId))
+        .then(response => response.json() as ShoppingListItem[])
+        .catch(response => this.handleError(response));
+    }
+
+    partitionShoppingList(shoppinglistId: string): Promise<ShoppingListItem[][]> {
       const unreadshoppingList: ShoppingListItem[] = [];
       const readShoppingList: ShoppingListItem[] = [];
-      return this.getItems().then(items => items.forEach(item => {
+      return this.getItems(shoppinglistId).then(items => items.forEach(item => {
         if (item.checked) {
           readShoppingList.push(item);
         } else {
@@ -34,9 +40,9 @@ export class ShoppingListService {
       })).then(() => [readShoppingList, unreadshoppingList]);
     }
 
-    create(name: string, description: string, order: Number, checked: boolean): Promise<ShoppingListItem[]> {
+    create(shoppinglistId: string, name: string, description: string, order: Number, checked: boolean): Promise<ShoppingListItem[]> {
         return this.http.post(
-                this.basePath(),
+                this.basePath(shoppinglistId),
                 JSON.stringify([{
                     name: name,
                     description: description,
@@ -46,15 +52,15 @@ export class ShoppingListService {
                 .catch(response => this.handleError(response));
     }
 
-    getItem(id: string): Promise<ShoppingListItem> {
-        const url = `${this.basePath()}/${id}`;
+    getItem(shoppinglistId: string, id: string): Promise<ShoppingListItem> {
+        const url = `${this.basePath(shoppinglistId)}/${id}`;
         return this.http.get(url)
                 .then(response => response.json() as ShoppingListItem)
                 .catch(response => this.handleError(response));
     }
 
-    update(item: ShoppingListItem): Promise<ShoppingListItem> {
-        const url = `${this.basePath()}/${item.id}`;
+    update(shoppinglistId: string, item: ShoppingListItem): Promise<ShoppingListItem> {
+        const url = `${this.basePath(shoppinglistId)}/${item.id}`;
         return this.http.post(
                 url,
                 JSON.stringify(item))
@@ -63,16 +69,16 @@ export class ShoppingListService {
                     this.handleError(response));
     }
 
-    delete(id: string): Promise<ShoppingListItem[]> {
-        const url = `${this.basePath()}/${id}`;
+    delete(shoppinglistId: string, id: string): Promise<ShoppingListItem[]> {
+        const url = `${this.basePath(shoppinglistId)}/${id}`;
         return this.http.delete(url)
                 .then(response => response.json() as ShoppingListItem[])
                 .catch(response =>
                     this.handleError(response));
     }
 
-    private basePath(): string {
-        return '/shopping-list';
+    private basePath(id: string): string {
+        return `/shopping-list/${id}/entries`;
     }
 
     private handleError(error: any) {

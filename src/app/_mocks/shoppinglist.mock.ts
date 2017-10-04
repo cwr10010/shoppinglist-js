@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core'
-import { ShoppingListItem } from '../_models/shoppinglist'
+import { Injectable } from '@angular/core';
+import { ShoppingListItem, ShoppingList } from '../_models/shoppinglist';
 
 @Injectable()
 export class ShoppingListServiceMock {
@@ -13,6 +13,10 @@ export class ShoppingListServiceMock {
 
   getItem(id: string): Promise<ShoppingListItem> {
     return Promise.resolve(new ShoppingListItem());
+  }
+
+  getShoppingLists(): Promise<ShoppingList[]> {
+    return Promise.all([new ShoppingList('1', '2', 'id', '4')]);
   }
 }
 

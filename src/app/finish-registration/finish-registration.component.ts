@@ -19,9 +19,9 @@ export class FinishRegistrationComponent implements OnInit {
     user: User = new User('', '');
 
   ngOnInit() {
-    this.route.paramMap
-    .switchMap((params: ParamMap) => this.registrationService.finish(params.get('token')))
-    .subscribe(user => this.user = user);
+    this.route.paramMap.switchMap((params: ParamMap) =>
+      this.registrationService.finish(params.get('token'))
+    ).subscribe(user => this.user = user);
   }
 
   goToLogin() {
