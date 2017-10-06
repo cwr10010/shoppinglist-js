@@ -8,6 +8,8 @@ import { ShoppingListService } from '../_services/shoppinglist.service';
 import { LocalStorageService } from '../_services/local-storage.service';
 import { ShoppingListItem } from '../_models/shoppinglist';
 
+const CURRENT_SHOPPING_LIST_ID = 'X-SLS-SHOPPINGLIST';
+
 @Component({
     selector: 'app-item-details',
     templateUrl: './item-details.component.html',
@@ -48,4 +50,3 @@ export class ItemDetailsComponent implements OnInit {
     }
 
   }
-  const CURRENT_SHOPPING_LIST_ID = 'X-SLS-SHOPPINGLIST';

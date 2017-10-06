@@ -6,11 +6,15 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "package": "ng build --prod --environment=prod --aot",
-    "test": "ng test",
-    "lint": "ng lint",
+    "publish": "ng build --prod --environment=prod --aot",
+    "test": "ng test --watch=false --code-coverage",
+    "lint": "ng lint --type-check",
     "e2e": "ng e2e",
-    "bundle-report": "webpack-bundle-analyzer dist/stats.json"
+    "bundle-report": "webpack-bundle-analyzer dist/stats.json",
+    "prepare": "npm run publish",
+    "prepublish": "npm run test",
+    "pretest": "npm run lint",
+    "posttest": "istanbul-coveralls"
   },
   "private": true,
   "dependencies": {

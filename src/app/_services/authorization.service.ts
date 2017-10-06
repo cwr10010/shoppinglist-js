@@ -10,6 +10,9 @@ import { Logger } from '../_helpers/logging';
 
 import { environment } from '../../environments/environment';
 
+export const AUTH_TOKEN_KEY = 'X-SLS-AUTHTOKEN';
+export const ID_TOKEN_KEY = 'X-SLS-IDTOKEN';
+
 @Injectable()
 export class AuthorizationService {
     private authUrl = environment.apiUrl + '/auth';
@@ -119,6 +122,3 @@ class Token {
     id_token: string;
     expires: Number;
 }
-
-export const AUTH_TOKEN_KEY = 'X-SLS-AUTHTOKEN';
-export const ID_TOKEN_KEY = 'X-SLS-IDTOKEN';

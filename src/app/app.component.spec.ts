@@ -3,50 +3,13 @@ import { DebugElement } from '@angular/core';
 
 import { By, BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
 
-import { DragulaModule } from 'ng2-dragula';
-
-import { AlertComponent } from './_directives/altert.component';
-
-import { LoginComponent } from './login/login.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { ItemDetailsComponent } from './item-details/item-details.component';
-import { ShoppingListItemSearchComponent } from './item-search/item-search.component';
-import { RegistrationComponent } from './registration/registration.component';
-import { FinishRegistrationComponent } from './finish-registration/finish-registration.component';
-
-import { AppComponent } from './app.component';
-import { AppRoutingModule } from './app-routing.module';
+import { AppComponent, APP_NAME } from './app.component';
 import { CustomMaterialModule } from './custom-material.module';
 
-import { ShoppingListItem } from './_models/shoppinglist';
 import { Logger } from './_helpers/logging';
 
-import { ShoppingListService } from './_services/shoppinglist.service';
-import { ShoppingListItemSearchService } from './_services/item-search.service';
-import { AuthorizationService } from './_services/authorization.service';
-
-class RouterMock {
-  navigate(url: string[]) { return url; }
-}
-
-class AuthorizationServiceMock {
-  getAuthToken(): string { return 'fake-token'; }
-  refresh() {}
-}
-
-class ShoppingListServiceMock {
-  getItems(): Promise<ShoppingListItem[]> {
-    return Promise.all([]);
-  }
-}
-
-class ShoppingListSearchServiceMock {
-  search(term: string): Promise<ShoppingListItem[]> {
-    return Promise.all([]);
-  }
-}
+import { RouterOutletStubComponent } from './_mocks/routing.mock';
 
 describe('AppComponent', () => {
   let appComponent: AppComponent;
@@ -57,26 +20,15 @@ describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        LoginComponent,
-        DashboardComponent,
-        ItemDetailsComponent,
-        ShoppingListItemSearchComponent,
         AppComponent,
-        RegistrationComponent,
-        FinishRegistrationComponent,
-        AlertComponent
+        RouterOutletStubComponent
       ],
       imports: [
         BrowserModule,
-        FormsModule,
-        AppRoutingModule,
-        DragulaModule,
         CustomMaterialModule
       ],
       providers: [
-        Logger,
-        { provide: AuthorizationService, useClass: AuthorizationServiceMock },
-        { provide: Router, useClass: RouterMock }
+        Logger
       ]
     }).compileComponents();
   }));
@@ -92,12 +44,16 @@ describe('AppComponent', () => {
     expect(appComponent).toBeTruthy();
   }));
 
-  it(`should have as title 'app'`, async(() => {
-    expect(appComponent.title).toEqual('Shopping List App');
+  it(`should have as title '${APP_NAME}'`, async(() => {
+    expect(appComponent.title).toEqual(APP_NAME);
   }));
 
-  it('should render title in a h1 tag', async(() => {
+  it('should render title in the h1 tag with class app-title', async(() => {
     fixture.detectChanges();
-    expect(debugElement.query(By.css('.app-title')).nativeElement.textContent).toContain('Shopping List App');
+    expect(debugElement.query(By.css('.app-title')).nativeElement.textContent).toContain(APP_NAME);
+  }));
+
+  it('should contain <router-outlet/> in content div', async(() => {
+    expect(debugElement.query(By.css('.content')).children).toBeDefined('<router-outlet></router-outlet>');
   }));
 });

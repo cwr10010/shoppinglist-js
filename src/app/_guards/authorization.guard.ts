@@ -15,7 +15,7 @@ export class AuthorizationGuard implements CanActivate {
         if (this.authorizationService.getAuthToken()) {
             return true;
         }
-        this.log.warn("User not authenticated. Redirect to login page");
+        this.log.warn('User not authenticated. Redirect to login page');
         this.router.navigate(['/login'], { queryParams: { returnUrl: state.url }});
         return false;
     }

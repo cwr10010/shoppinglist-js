@@ -1,4 +1,4 @@
-import { Directive, HostListener, Input } from '@angular/core';
+import { Component, Directive, HostListener, Input } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
 export class RouterMock {
@@ -20,7 +20,7 @@ export class ActivatedRouteMock {
 }
 
 @Directive({
-  selector: '[routerLink]'
+  selector: '[routerLink]' // tslint:disable-line
 })
 export class RouterLinkStubDirective {
 
@@ -29,8 +29,14 @@ export class RouterLinkStubDirective {
 
   navigatedTo: any = null;
 
-  @HostListener('mouseenter')
+  @HostListener('click')
   onClick() {
     this.navigatedTo = this.routerLink;
   }
 }
+
+@Component({
+  selector: 'router-outlet',  // tslint:disable-line
+  template: ''
+})
+export class RouterOutletStubComponent { }

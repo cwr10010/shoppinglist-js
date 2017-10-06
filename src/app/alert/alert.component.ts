@@ -8,7 +8,6 @@ import { AlertService } from '../_services/alert.service';
     selector: 'app-alert',
     templateUrl: 'alert.component.html'
 })
-
 export class AlertComponent implements OnInit {
     alerts: Alert[] = [];
 

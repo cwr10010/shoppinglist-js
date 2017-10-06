@@ -17,7 +17,7 @@ export class LoggedInGuard implements CanActivate {
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         if (this.authorizationService.getAuthToken()) {
             this.router.navigate(['']);
-            this.log.info("User is authenticated. Redirect to Dashboard.");
+            this.log.info('User is authenticated. Redirect to Dashboard.');
             return false;
         }
 

@@ -17,7 +17,7 @@ import { ShoppingListItemSearchService } from '../_services/item-search.service'
 import { Logger } from '../_helpers/logging';
 
 @Component({
-    selector: 'item-search',
+    selector: 'app-item-search',
     templateUrl: './item-search.component.html',
     styleUrls: [
         './item-search.component.css'
@@ -27,6 +27,7 @@ export class ShoppingListItemSearchComponent implements OnInit {
 
     shoppinglist: Observable<ShoppingListItem[]>;
     private searchTerms = new Subject<string>();
+    searchItems: Object;
 
     constructor(
         private itemSearchService: ShoppingListItemSearchService,

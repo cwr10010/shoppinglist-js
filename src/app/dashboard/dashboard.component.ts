@@ -10,6 +10,9 @@ import { LocalStorageService } from '../_services/local-storage.service';
 
 import { Logger } from '../_helpers/logging';
 
+const ACRORDEON_POSITION = 'X-SLS-ARCORDEONPOSITION';
+const CURRENT_SHOPPING_LIST_ID = 'X-SLS-SHOPPINGLIST';
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -167,6 +170,3 @@ export class DashboardComponent implements OnInit, OnDestroy {
         .then(() => this.router.navigate(['/login']));
     }
 }
-
-const ACRORDEON_POSITION = 'X-SLS-ARCORDEONPOSITION';
-const CURRENT_SHOPPING_LIST_ID = 'X-SLS-SHOPPINGLIST';

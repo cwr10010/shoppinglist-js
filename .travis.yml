@@ -17,8 +17,7 @@ jobs:
     - export DISPLAY=:99.0
     - sh -e /etc/init.d/xvfb start
     script:
-    - ./node_modules/.bin/ng test --watch=false --code-coverage
-    - ./node_modules/.bin/istanbul-coveralls
+    - npm test
     after_script:
     - sh -e /etc/init.d/xvfb stop
   - stage: build, package and push to dockerhub

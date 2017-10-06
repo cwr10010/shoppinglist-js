@@ -1,24 +1,18 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By, BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { APP_BASE_HREF } from '@angular/common';
 
-import { AppRoutingModule } from '../app-routing.module';
+import { By, BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
 import { CustomMaterialModule } from '../custom-material.module';
+import { APP_BASE_HREF } from '@angular/common';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { RegistrationService } from '../_services/registration.service';
 import { RegistrationData } from '../_models/registration-data';
 import { FinishRegistrationComponent } from './finish-registration.component';
 
-import { DragulaModule } from 'ng2-dragula';
-
-import { LoginComponent } from '../login/login.component';
-import { RegistrationComponent } from '../registration/registration.component';
-import { DashboardComponent } from '../dashboard/dashboard.component';
-import { ItemDetailsComponent } from '../item-details/item-details.component';
-import { ShoppingListItemSearchComponent } from '../item-search/item-search.component';
-import { AlertComponent } from '../_directives/altert.component';
+import { LoginMockComponent } from '../_mocks/components.mock';
+import { RouterMock, ActivatedRouteMock } from '../_mocks/routing.mock';
 
 class RegistrationServiceMock {
   register(registrationData: RegistrationData) { }
@@ -33,23 +27,18 @@ describe('FinishRegistrationComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         FinishRegistrationComponent,
-        LoginComponent,
-        RegistrationComponent,
-        DashboardComponent,
-        ItemDetailsComponent,
-        ShoppingListItemSearchComponent,
-        AlertComponent
+        LoginMockComponent
       ],
       imports: [
         BrowserModule,
         BrowserAnimationsModule,
-        DragulaModule,
-        AppRoutingModule,
         FormsModule,
         CustomMaterialModule
       ],
       providers: [
+        { provide: ActivatedRoute, useClass: ActivatedRouteMock },
         { provide: RegistrationService, useClass: RegistrationServiceMock },
+        { provide: Router, useClass: RouterMock },
         { provide: APP_BASE_HREF, useValue : '/' }
       ]
     })

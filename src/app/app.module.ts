@@ -22,7 +22,7 @@ import { LocalStorageService } from './_services/local-storage.service';
 import { AuthorizationService } from './_services/authorization.service';
 import { RegistrationService } from './_services/registration.service';
 
-import { AlertComponent } from './_directives/altert.component';
+import { AlertComponent } from './alert/alert.component';
 
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';

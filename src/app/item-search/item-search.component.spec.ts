@@ -7,26 +7,16 @@ import { Router } from '@angular/router';
 import { DebugElement } from '@angular/core';
 import { APP_BASE_HREF } from '@angular/common';
 
-import { AppRoutingModule } from '../app-routing.module';
 import { CustomMaterialModule } from '../custom-material.module';
 
-import { DragulaModule } from 'ng2-dragula';
-
-import { AppComponent } from '../app.component';
-import { LoginComponent } from '../login/login.component';
-import { DashboardComponent } from '../dashboard/dashboard.component';
-import { ItemDetailsComponent } from '../item-details/item-details.component';
 import { ShoppingListItemSearchComponent } from '../item-search/item-search.component';
-import { RegistrationComponent } from '../registration/registration.component';
-import { FinishRegistrationComponent } from '../finish-registration/finish-registration.component';
-import { AlertComponent } from '../_directives/altert.component';
 
 import { ShoppingListItem } from '../_models/shoppinglist';
 import { Logger } from '../_helpers/logging';
-import { ShoppingListService } from '../_services/shoppinglist.service';
 import { ShoppingListItemSearchService } from '../_services/item-search.service';
-import { AuthorizationService } from '../_services/authorization.service';
-import { ShoppingListServiceMock, ShoppingListSearchServiceMock } from '../_mocks/shoppinglist.mock';
+
+import { ShoppingListSearchServiceMock } from '../_mocks/shoppinglist.mock';
+import { RouterMock } from '../_mocks/routing.mock';
 
 class AuthorizationServiceMock {
   getAuthToken(): string { return 'fake-token'; }
@@ -42,25 +32,17 @@ describe('ItemSearchComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        LoginComponent,
-        DashboardComponent,
-        ItemDetailsComponent,
         ShoppingListItemSearchComponent,
-        RegistrationComponent,
-        FinishRegistrationComponent,
-        AlertComponent
       ],
       imports: [
         BrowserModule,
         BrowserAnimationsModule,
         FormsModule,
-        DragulaModule,
-        AppRoutingModule,
         CustomMaterialModule
       ],
       providers: [
         Logger,
-        { provide: AuthorizationService, useClass: AuthorizationServiceMock },
+        { provide: Router, useClass: RouterMock },
         { provide: ShoppingListItemSearchService, useClass: ShoppingListSearchServiceMock },
         { provide: APP_BASE_HREF, useValue : '/' }
       ]

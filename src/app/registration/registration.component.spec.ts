@@ -3,25 +3,20 @@ import { By, BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { APP_BASE_HREF } from '@angular/common';
+import { Router } from '@angular/router';
 
-import { AppRoutingModule } from '../app-routing.module';
 import { CustomMaterialModule } from '../custom-material.module';
-
-import { DragulaModule } from 'ng2-dragula';
 
 import { RegistrationService } from '../_services/registration.service';
 import { RegistrationData } from '../_models/registration-data';
 
 import { AlertService } from '../_services/alert.service';
 
-import { AppComponent } from '../app.component';
-import { LoginComponent } from '../login/login.component';
-import { DashboardComponent } from '../dashboard/dashboard.component';
-import { ItemDetailsComponent } from '../item-details/item-details.component';
-import { ShoppingListItemSearchComponent } from '../item-search/item-search.component';
 import { RegistrationComponent } from '../registration/registration.component';
-import { FinishRegistrationComponent } from '../finish-registration/finish-registration.component';
-import { AlertComponent } from '../_directives/altert.component';
+import { AlertComponent } from '../alert/alert.component';
+
+import { RouterMock } from '../_mocks/routing.mock';
+import { AlertServiceMock } from '../_mocks/alert.mock';
 
 import { Logger } from '../_helpers/logging';
 
@@ -37,25 +32,19 @@ describe('RegistrationComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        LoginComponent,
-        DashboardComponent,
-        ItemDetailsComponent,
-        ShoppingListItemSearchComponent,
         RegistrationComponent,
-        FinishRegistrationComponent,
         AlertComponent
       ],
       imports: [
         BrowserModule,
         BrowserAnimationsModule,
         FormsModule,
-        DragulaModule,
-        AppRoutingModule,
         CustomMaterialModule
       ],
       providers: [
         Logger,
-        AlertService,
+        { provide: AlertService, useClass: AlertServiceMock },
+        { provide: Router, useClass: RouterMock },
         { provide: RegistrationService, useClass: RegistrationServiceMock },
         { provide: APP_BASE_HREF, useValue : '/' }
       ]

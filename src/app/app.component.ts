@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+export const APP_NAME = 'Shopping List App';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -8,5 +10,5 @@ import { Component } from '@angular/core';
   ]
 })
 export class AppComponent {
-  title = 'Shopping List App';
+  title = APP_NAME;
 }
