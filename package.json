@@ -11,8 +11,6 @@
     "lint": "ng lint --type-check",
     "e2e": "ng e2e",
     "bundle-report": "webpack-bundle-analyzer dist/stats.json",
-    "prepare": "npm run publish",
-    "prepublish": "npm run test",
     "pretest": "npm run lint",
     "posttest": "istanbul-coveralls"
   },
