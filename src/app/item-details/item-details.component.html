@@ -1,21 +1,21 @@
 <div  class="item-details">
-  <md-card *ngIf="item">
-      <md-card-title>{{item.name}}</md-card-title>
+  <mat-card *ngIf="item">
+      <mat-card-title>{{item.name}}</mat-card-title>
       <form #detailsForm="ngForm">
-        <md-form-field>
-        <input mdInput required [(ngModel)]="item.name" #name="ngModel" name="name" placeholder="Name"/>
-        <md-error *ngIf="name.errors && name.errors.required" >
+        <mat-form-field>
+        <input matInput required [(ngModel)]="item.name" #name="ngModel" name="name" placeholder="Name"/>
+        <mat-error *ngIf="name.errors && name.errors.required" >
           Name is required!
-        </md-error>
-        </md-form-field>
-        <md-form-field>
-        <textarea mdInput [(ngModel)]="item.description" #description="ngModel" name="description" placeholder="Description" rows="5" ></textarea>
-        </md-form-field>
-        <md-checkbox [(ngModel)]="item.checked" name="checked">Got it!</md-checkbox>
+        </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+        <textarea matInput [(ngModel)]="item.description" #description="ngModel" name="description" placeholder="Description" rows="5" ></textarea>
+        </mat-form-field>
+        <mat-checkbox [(ngModel)]="item.checked" name="checked">Got it!</mat-checkbox>
       <p class="align-last-right item-details-button-row">
-        <button (click)="goBack()" md-raised-button >Back</button>
-        <button (click)="save()" md-raised-button color="primary" [disabled]="!detailsForm.form.valid">Save</button>
+        <button (click)="goBack()" mat-raised-button >Back</button>
+        <button (click)="save()" mat-raised-button color="primary" [disabled]="!detailsForm.form.valid">Save</button>
       </p>
       </form>
-  </md-card>
+  </mat-card>
 </div>

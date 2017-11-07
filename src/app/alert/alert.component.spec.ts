@@ -11,8 +11,7 @@ import { Logger } from '../_helpers/logging';
 
 import { AlertService } from '../_services/alert.service';
 
-import { RouterMock } from '../_mocks/routing.mock';
-import { AlertServiceMock } from '../_mocks/alert.mock';
+import { RouterMock, AlertServiceMock } from '../_mocks';
 
 describe('AlertComponent', () => {
   let component: AlertComponent;

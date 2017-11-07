@@ -1,12 +1,12 @@
 <div id="search-component">
-  <md-form-field class="search-form">
-  <input mdInput placeholder="Search Item" #searchBox (keyup)="search(searchBox.value)" [mdAutocomplete]="searchItems"/>
-  </md-form-field>
-  <md-autocomplete #searchItems="mdAutocomplete">
-    <md-option *ngFor="let item of shoppinglist | async"
+  <mat-form-field class="search-form">
+  <input matInput placeholder="Search Item" #searchBox (keyup)="search(searchBox.value)" [matAutocomplete]="searchItems"/>
+  </mat-form-field>
+  <mat-autocomplete #searchItems="matAutocomplete">
+    <mat-option *ngFor="let item of shoppinglist | async"
          (click)="gotoDetails(item)" [value]="item.name">
       {{item.name}}
-    </md-option>
-  </md-autocomplete>
-  <md-icon>search</md-icon>
+    </mat-option>
+  </mat-autocomplete>
+  <mat-icon>search</mat-icon>
 </div>

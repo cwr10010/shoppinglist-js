@@ -41,11 +41,11 @@
   margin:10px 10px 5px;
 }
 
-md-sidenav-container {
+mat-sidenav-container {
   padding-top:20px;
   height: 100vh;
 }
 
-md-sidenav {
+mat-sidenav {
   width: 200px;
 }

@@ -1,76 +1,76 @@
 <div class="registration">
 <form #registrationForm="ngForm" (submit)="registrationForm.form.valid && doRegister(registrationForm)">
-<md-card>
-    <md-card-title>Register</md-card-title>
+<mat-card>
+    <mat-card-title>Register</mat-card-title>
 
-    <md-card-content>
-      <md-form-field>
-          <input mdInput minlength="3" maxlength="200"
+    <mat-card-content>
+      <mat-form-field>
+          <input matInput minlength="3" maxlength="200"
             [(ngModel)]="registrationData.username"
             #username="ngModel"
             placeholder="Username"
             name="username"/>
-          <md-error *ngIf="username.errors && username.errors.minlength" >
+          <mat-error *ngIf="username.errors && username.errors.minlength" >
               Username must be at least 5 characters long.
-          </md-error>
-          <md-error *ngIf="username.errors && username.errors.maxlength" >
+          </mat-error>
+          <mat-error *ngIf="username.errors && username.errors.maxlength" >
             Username must be at most 200 characters long.
-          </md-error>
-          <md-error *ngIf="username.errors && username.errors.required" >
+          </mat-error>
+          <mat-error *ngIf="username.errors && username.errors.required" >
             Username is required!
-          </md-error>
-      </md-form-field>
+          </mat-error>
+      </mat-form-field>
 
-      <md-form-field>
-          <input mdInput minlength="8" maxlength="200"
+      <mat-form-field>
+          <input matInput minlength="8" maxlength="200"
             [(ngModel)]="registrationData.password"
             #password="ngModel"
             placeholder="Password"
             type="password"
             name="password"/>
-            <md-error *ngIf="password.errors && password.errors.minlength" >
+            <mat-error *ngIf="password.errors && password.errors.minlength" >
               Password must be at least 8 characters long.
-            </md-error>
-            <md-error *ngIf="password.errors && password.errors.maxlength" >
+            </mat-error>
+            <mat-error *ngIf="password.errors && password.errors.maxlength" >
               Password must be at most 200 characters long.
-          </md-error>
-      </md-form-field>
+          </mat-error>
+      </mat-form-field>
 
-      <md-form-field>
-          <input mdInput minlength="8" maxlength="200"
+      <mat-form-field>
+          <input matInput minlength="8" maxlength="200"
             [(ngModel)]="registrationData.password_repeated"
             #passwordRepeat="ngModel"
             placeholder="Password (repeated)"
             type="password"
             name="passwordRepeat"/>
-          <md-error *ngIf="passwordRepeat.errors && passwordRepeat.errors.minlength" >
+          <mat-error *ngIf="passwordRepeat.errors && passwordRepeat.errors.minlength" >
             Password must be at least 8 characters long.
-          </md-error>
-          <md-error *ngIf="passwordRepeat.errors && passwordRepeat.errors.maxlength" >
+          </mat-error>
+          <mat-error *ngIf="passwordRepeat.errors && passwordRepeat.errors.maxlength" >
             Password must be at most 200 characters long.
-          </md-error>
-      </md-form-field>
+          </mat-error>
+      </mat-form-field>
 
-      <md-form-field>
-        <input mdInput minlength="1" maxlength="200" email
+      <mat-form-field>
+        <input matInput minlength="1" maxlength="200" email
           [(ngModel)]="registrationData.email_address"
           #emailAddress="ngModel"
           placeholder="Email Address"
           name="emailAddress"/>
-        <md-error *ngIf="emailAddress.errors && emailAddress.errors.maxlength" >
+        <mat-error *ngIf="emailAddress.errors && emailAddress.errors.maxlength" >
           Email Address must be at most 200 characters long.
-        </md-error>
-        <md-error *ngIf="emailAddress.errors && emailAddress.errors.email" >
+        </mat-error>
+        <mat-error *ngIf="emailAddress.errors && emailAddress.errors.email" >
           Email Address as to be a valid address!
-        </md-error>
-      </md-form-field>
+        </mat-error>
+      </mat-form-field>
 
       <app-alert></app-alert>
 
-    </md-card-content>
+    </mat-card-content>
 
-    <button md-raised-button color="primary" type="submit" [disabled]="!registrationForm.form.valid">Register</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="!registrationForm.form.valid">Register</button>
 
-</md-card>
+</mat-card>
 </form>
 </div>

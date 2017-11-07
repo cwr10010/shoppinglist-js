@@ -2,7 +2,7 @@ div.login {
     text-align: center;
 }
 
-div.login md-card {
+div.login mat-card {
     width: 250px;
     text-align: left;
     display: inline-block;

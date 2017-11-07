@@ -10,10 +10,10 @@ div.item-details {
   text-align: center;
 }
 
-div.item-details md-form-field {
+div.item-details mat-form-field {
   width:100%;
 }
-div.item-details md-card {
+div.item-details mat-card {
   width: 250px;
   text-align: left;
   display: inline-block;

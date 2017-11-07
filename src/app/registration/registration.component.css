@@ -2,7 +2,7 @@ div.registration {
     text-align: center;
 }
 
-div.registration md-card {
+div.registration mat-card {
     width: 250px;
     text-align: left;
     display: inline-block;

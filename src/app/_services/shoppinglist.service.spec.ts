@@ -1,6 +1,6 @@
 import { TestBed, async, inject } from '@angular/core/testing';
 import { Headers, Http, ResponseOptions, Response } from '@angular/http';
-
+import { Inject } from '@angular/core';
 import { HttpClient } from '../_helpers/http-client';
 import { Logger } from '../_helpers/logging';
 
@@ -15,6 +15,7 @@ const shoppingListMockResponse = [
 ];
 
 class HttpClientMock {
+// constructor(@Inject('response') private response: any) { }
   get(): Promise<Response> {
     return Promise.resolve(
       new Response(

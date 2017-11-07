@@ -6,6 +6,12 @@ import { ItemSearchMockComponent, LoginMockComponent, RegistrationMockComponent 
 import { ActivatedRouteMock, RouterLinkStubDirective, RouterMock, RouterOutletStubComponent } from './routing.mock';
 import { ShoppingListSearchServiceMock, ShoppingListServiceMock } from './shoppinglist.mock';
 
+export { AlertServiceMock } from './alert.mock';
+export { AuthorizationGuardMock, AuthorizationServiceMock } from './authorization.mock';
+export { ItemSearchMockComponent, LoginMockComponent, RegistrationMockComponent } from './components.mock';
+export { ActivatedRouteMock, RouterLinkStubDirective, RouterMock, RouterOutletStubComponent } from './routing.mock';
+export { ShoppingListSearchServiceMock, ShoppingListServiceMock } from './shoppinglist.mock';
+
 @NgModule({
   declarations: [
     RouterLinkStubDirective, RouterOutletStubComponent,
