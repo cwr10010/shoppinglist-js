@@ -56,7 +56,10 @@ export class AuthorizationService {
                     this.storageService.store(AUTH_TOKEN_KEY, token.auth_token);
                     this.storageService.store(ID_TOKEN_KEY, token.id_token);
                 })
-                .catch(() => this.logout());
+                .catch((error) => {
+                  this.storageService.remove(AUTH_TOKEN_KEY);
+                  return Promise.reject(error);
+                });
         } else {
             this.log.debug('No authtoken exists, skip refreshing');
             return Promise.all([]);
