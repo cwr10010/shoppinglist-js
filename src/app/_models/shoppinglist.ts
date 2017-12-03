@@ -14,8 +14,9 @@ export class ShoppingList {
     this.owners_id = ownerId;
     this.owners_name = ownerName;
   }
-   shopping_list_id: string;
-   shopping_list_name: string;
-   owners_id: string;
-   owners_name: string;
+
+  shopping_list_id: string;
+  shopping_list_name: string;
+  owners_id: string;
+  owners_name: string;
 }

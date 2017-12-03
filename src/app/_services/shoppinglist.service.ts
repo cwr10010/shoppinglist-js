@@ -82,15 +82,7 @@ export class ShoppingListService {
     }
 
     private handleError(error: any) {
-        switch (error.status) {
-            case 401:
-            case 403:
-                this.log.debug('refresh token', error);
-                this.authorizationService.refresh();
-                break;
-            default:
-                this.log.warn('An error occurred', error);
-                return Promise.reject(error);
-        }
+        this.log.warn('An error occurred', error);
+        return Promise.reject(error);
     }
 }

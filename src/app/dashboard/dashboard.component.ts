@@ -59,9 +59,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
           .then(lists => this.shoppingLists = lists)
           .then(lists => lists.find(list => list.owners_id === this.authorizationService.readUserId()))
           .then(list => {
-            if (!this.localStorage.read(CURRENT_SHOPPING_LIST_ID)) {
-              this.localStorage.store(CURRENT_SHOPPING_LIST_ID, list.shopping_list_id);
-            }
+            this.localStorage.store(CURRENT_SHOPPING_LIST_ID, list.shopping_list_id);
             return this.localStorage.read(CURRENT_SHOPPING_LIST_ID);
           })
           .then((id) => this.router.navigate([id]));
