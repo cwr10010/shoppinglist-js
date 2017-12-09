@@ -2,6 +2,8 @@ import { Headers, Http, ResponseOptions, Response } from '@angular/http';
 
 export class HttpClientMock {
   get() {}
+  post() {}
+  delete() {}
 }
 
 export function createResponse(object: any, status: number = 200): Promise<any> {

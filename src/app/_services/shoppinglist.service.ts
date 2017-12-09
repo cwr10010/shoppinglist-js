@@ -64,7 +64,7 @@ export class ShoppingListService {
         return this.http.post(
                 url,
                 JSON.stringify(item))
-                .then(() => item)
+                .then(response => response.json() as ShoppingListItem)
                 .catch(response =>
                     this.handleError(response));
     }

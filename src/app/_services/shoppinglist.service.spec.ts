@@ -43,7 +43,9 @@ describe('ShoppingListService', () => {
     it('should throw an error if http request fails',
       inject([ShoppingListService], (shoppingListService) => {
         spyOn(shoppingListService.http, 'get').and.returnValue(Promise.reject('failed request'));
-        shoppingListService.getShoppingLists().catch((result) => {
+        shoppingListService.getShoppingLists().then((it) => {
+          expect(it).toBeUndefined();
+        }).catch((result) => {
           expect(result).toBe('failed request');
         });
       })
@@ -72,12 +74,102 @@ describe('ShoppingListService', () => {
     it('should throw an error if http request fails',
       inject([ShoppingListService], (shoppingListService) => {
         spyOn(shoppingListService.http, 'get').and.returnValue(Promise.reject('failed request'));
-        shoppingListService.getItems().catch((result) => {
+        shoppingListService.getItems().then((it) => {
+          expect(it).toBeUndefined();
+        }).catch((result) => {
           expect(result).toBe('failed request');
         });
       })
     );
 
+  });
+
+  describe('getItem()', () => {
+
+    it('should return requested item',
+      inject([ShoppingListService], (shoppingListService) => {
+        spyOn(shoppingListService.http, 'get').and.returnValues(
+          createResponse({id: 'id', name: 'name', description: 'a description', order: 1, checked: false})
+        );
+        shoppingListService.getItem('sl_id', 'id').then((items) => {
+          expect(items.id).toBe('id');
+          expect(items.name).toBe('name');
+          expect(items.description).toBe('a description');
+          expect(items.order).toBe(1);
+          expect(items.checked).toBe(false);
+        });
+      })
+    );
+
+    it('should throw an error if http request fails',
+      inject([ShoppingListService], (shoppingListService) => {
+        spyOn(shoppingListService.http, 'get').and.returnValue(Promise.reject('failed request'));
+        shoppingListService.getItem('sl_id', 'id').then((it) => {
+          expect(it).toBeUndefined();
+        }).catch((result) => {
+          expect(result).toBe('failed request');
+        });
+      })
+    );
+  });
+
+  describe('update()', () => {
+
+    it('should update requested item',
+      inject([ShoppingListService], (shoppingListService) => {
+        spyOn(shoppingListService.http, 'post').and.returnValues(
+          createResponse({id: 'id', name: 'name', description: 'a description', order: 1, checked: false})
+        );
+        shoppingListService.update('sl_id', {id: 'id'}).then((items) => {
+          expect(items.id).toBe('id');
+          expect(items.name).toBe('name');
+          expect(items.description).toBe('a description');
+          expect(items.order).toBe(1);
+          expect(items.checked).toBe(false);
+        });
+      })
+    );
+
+    it('should throw an error if http request fails',
+      inject([ShoppingListService], (shoppingListService) => {
+        spyOn(shoppingListService.http, 'post').and.returnValue(Promise.reject('failed request'));
+        shoppingListService.update('sl_id', {id: 'id'}).then((it) => {
+          expect(it).toBeUndefined();
+        }).catch((result) => {
+          expect(result).toBe('failed request');
+        });
+      })
+    );
+  });
+
+  describe('delete()', () => {
+
+    it('should update requested item',
+      inject([ShoppingListService], (shoppingListService) => {
+        spyOn(shoppingListService.http, 'delete').and.returnValues(
+          createResponse([{id: 'id', name: 'name', description: 'a description', order: 1, checked: false}])
+        );
+        shoppingListService.delete('sl_id', 'id').then((items) => {
+          expect(items.length).toBe(1);
+          expect(items[0].id).toBe('id');
+          expect(items[0].name).toBe('name');
+          expect(items[0].description).toBe('a description');
+          expect(items[0].order).toBe(1);
+          expect(items[0].checked).toBe(false);
+        });
+      })
+    );
+
+    it('should throw an error if http request fails',
+      inject([ShoppingListService], (shoppingListService) => {
+        spyOn(shoppingListService.http, 'delete').and.returnValue(Promise.reject('failed request'));
+        shoppingListService.delete('sl_id', 'id').then((it) => {
+          expect(it).toBeUndefined();
+        }).catch((result) => {
+          expect(result).toBe('failed request');
+        });
+      })
+    );
   });
 
 });
