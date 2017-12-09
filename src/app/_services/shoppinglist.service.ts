@@ -81,7 +81,7 @@ export class ShoppingListService {
         return `/shopping-list/${id}/entries`;
     }
 
-    private handleError(error: any) {
+    handleError(error: any) {
         this.log.warn('An error occurred', error);
         return Promise.reject(error);
     }

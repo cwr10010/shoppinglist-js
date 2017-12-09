@@ -42,10 +42,10 @@ describe('ShoppingListService', () => {
 
     it('should throw an error if http request fails',
       inject([ShoppingListService], (shoppingListService) => {
-        spyOn(shoppingListService.http, 'get').and.throwError('failed request');
-        expect(() => {
-          shoppingListService.getShoppingLists();
-        }).toThrowError('failed request');
+        spyOn(shoppingListService.http, 'get').and.returnValue(Promise.reject('failed request'));
+        shoppingListService.getShoppingLists().catch((result) => {
+          expect(result).toBe('failed request');
+        });
       })
     );
 
@@ -71,10 +71,10 @@ describe('ShoppingListService', () => {
 
     it('should throw an error if http request fails',
       inject([ShoppingListService], (shoppingListService) => {
-        spyOn(shoppingListService.http, 'get').and.throwError('failed request');
-        expect(() => {
-          shoppingListService.getItems();
-        }).toThrowError('failed request');
+        spyOn(shoppingListService.http, 'get').and.returnValue(Promise.reject('failed request'));
+        shoppingListService.getItems().catch((result) => {
+          expect(result).toBe('failed request');
+        });
       })
     );
 
