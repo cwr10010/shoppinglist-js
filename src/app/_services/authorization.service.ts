@@ -63,7 +63,7 @@ export class AuthorizationService {
                 });
         } else {
             this.log.debug('No authtoken exists, skip refreshing');
-            return Promise.all([]);
+            return Promise.resolve(undefined);
         }
     }
 
