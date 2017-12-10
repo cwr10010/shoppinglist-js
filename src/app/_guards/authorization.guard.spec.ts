@@ -11,7 +11,7 @@ import { AuthorizationService } from '../_services/authorization.service';
 import { AuthorizationServiceMock } from '../_mocks/authorization.mock';
 import { RouterMock } from '../_mocks/routing.mock';
 
-describe('authorization guard', () => {
+describe('AuthorizationGuard', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({

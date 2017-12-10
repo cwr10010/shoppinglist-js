@@ -9,7 +9,7 @@ import { AuthorizationService } from '../_services/authorization.service';
 import { AuthorizationServiceMock } from '../_mocks/authorization.mock';
 import { RouterMock } from '../_mocks/routing.mock';
 
-describe('loggedin guard', () => {
+describe('LoggedInGuard', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
