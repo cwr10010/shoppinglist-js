@@ -15,8 +15,8 @@ import { ShoppingListService } from '../_services/shoppinglist.service';
 import { AuthorizationService } from '../_services/authorization.service';
 import { LocalStorageService } from '../_services/local-storage.service';
 
-import { ShoppingListServiceMock } from '../_mocks/shoppinglist.mock';
-import { AuthorizationServiceMock } from '../_mocks/authorization.mock';
+import { ShoppingListServiceStub } from '../_mocks/shoppinglist.mock';
+import { AuthorizationServiceStub } from '../_mocks/authorization.mock';
 import { RouterLinkStubDirective, RouterMock, ActivatedRouteMock } from '../_mocks/routing.mock';
 import { ItemSearchMockComponent, LoginMockComponent } from '../_mocks/components.mock';
 
@@ -45,8 +45,8 @@ describe('DashboardComponent', () => {
         CookieService,
         { provide: Router, useClass: RouterMock },
         { provide: ActivatedRoute, useClass: ActivatedRouteMock },
-        { provide: ShoppingListService, useClass: ShoppingListServiceMock },
-        { provide: AuthorizationService, useClass: AuthorizationServiceMock },
+        { provide: ShoppingListService, useClass: ShoppingListServiceStub },
+        { provide: AuthorizationService, useClass: AuthorizationServiceStub },
         { provide: APP_BASE_HREF, useValue : '/' }
       ]
     })

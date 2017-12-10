@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 
 import { AlertServiceMock } from './alert.mock';
-import { AuthorizationGuardMock, AuthorizationServiceMock } from './authorization.mock';
+import { AuthorizationGuardMock, AuthorizationServiceStub } from './authorization.mock';
 import { ItemSearchMockComponent, LoginMockComponent, RegistrationMockComponent } from './components.mock';
 import { ActivatedRouteMock, RouterLinkStubDirective, RouterMock, RouterOutletStubComponent } from './routing.mock';
-import { ShoppingListSearchServiceMock, ShoppingListServiceMock } from './shoppinglist.mock';
+import { ShoppingListSearchServiceStub, ShoppingListServiceStub } from './shoppinglist.mock';
 
 export { AlertServiceMock } from './alert.mock';
-export { AuthorizationGuardMock, AuthorizationServiceMock } from './authorization.mock';
+export { AuthorizationGuardMock, AuthorizationServiceStub } from './authorization.mock';
 export { ItemSearchMockComponent, LoginMockComponent, RegistrationMockComponent } from './components.mock';
 export { ActivatedRouteMock, RouterLinkStubDirective, RouterMock, RouterOutletStubComponent } from './routing.mock';
-export { ShoppingListSearchServiceMock, ShoppingListServiceMock } from './shoppinglist.mock';
+export { ShoppingListSearchServiceStub, ShoppingListServiceStub } from './shoppinglist.mock';
 
 @NgModule({
   declarations: [
@@ -20,8 +20,8 @@ export { ShoppingListSearchServiceMock, ShoppingListServiceMock } from './shoppi
   providers: [
     AuthorizationGuardMock,
     AlertServiceMock,
-    AuthorizationServiceMock,
-    ShoppingListSearchServiceMock, ShoppingListServiceMock
+    AuthorizationServiceStub,
+    ShoppingListSearchServiceStub, ShoppingListServiceStub
   ]
 })
 export class MockModule {}

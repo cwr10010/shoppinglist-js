@@ -9,8 +9,8 @@ import { User } from '../_models/user';
 import { RegistrationService } from './registration.service';
 import { AuthorizationService } from './authorization.service';
 
-import { AuthorizationServiceMock } from '../_mocks/authorization.mock';
-import { HttpClientMock, createResponse } from '../_mocks/http.mock';
+import { AuthorizationServiceStub } from '../_mocks/authorization.mock';
+import { HttpClientStub, createResponse } from '../_mocks/http.mock';
 
 describe('RegistrationService', () => {
 
@@ -20,7 +20,7 @@ describe('RegistrationService', () => {
       providers: [
         RegistrationService,
         Logger,
-        { provide: Http, useClass: HttpClientMock },
+        { provide: Http, useClass: HttpClientStub },
       ]
     });
   });

@@ -1,6 +1,6 @@
 import { Headers, Http, ResponseOptions, Response } from '@angular/http';
 
-export class HttpClientMock {
+export class HttpClientStub {
   get() {}
   post() {}
   delete() {}

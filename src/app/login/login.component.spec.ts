@@ -15,7 +15,7 @@ import { Logger } from '../_helpers/logging';
 import { AuthorizationService } from '../_services/authorization.service';
 
 import { RegistrationMockComponent } from '../_mocks/components.mock';
-import { AuthorizationServiceMock } from '../_mocks/authorization.mock';
+import { AuthorizationServiceStub } from '../_mocks/authorization.mock';
 import { RouterLinkStubDirective, RouterMock, ActivatedRouteMock } from '../_mocks/routing.mock';
 
 
@@ -42,7 +42,7 @@ describe('LoginComponent', () => {
         Logger,
         { provide: Router, useClass: RouterMock },
         { provide: ActivatedRoute, useClass: ActivatedRouteMock },
-        { provide: AuthorizationService, useClass: AuthorizationServiceMock },
+        { provide: AuthorizationService, useClass: AuthorizationServiceStub },
         { provide: APP_BASE_HREF, useValue : '/' }
       ]
     })

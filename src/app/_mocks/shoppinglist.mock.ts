@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ShoppingListItem, ShoppingList } from '../_models/shoppinglist';
 
 @Injectable()
-export class ShoppingListServiceMock {
+export class ShoppingListServiceStub {
   getItems(): Promise<ShoppingListItem[]> {
     return Promise.all([]);
   }
@@ -21,7 +21,7 @@ export class ShoppingListServiceMock {
 }
 
 @Injectable()
-export class ShoppingListSearchServiceMock {
+export class ShoppingListSearchServiceStub {
   search(term: string): Promise<ShoppingListItem[]> {
     return Promise.all([]);
   }

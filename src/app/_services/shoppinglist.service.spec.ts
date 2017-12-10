@@ -6,8 +6,8 @@ import { Logger } from '../_helpers/logging';
 import { ShoppingListService } from './shoppinglist.service';
 import { AuthorizationService } from './authorization.service';
 
-import { AuthorizationServiceMock } from '../_mocks/authorization.mock';
-import { HttpClientMock, createResponse } from '../_mocks/http.mock';
+import { AuthorizationServiceStub } from '../_mocks/authorization.mock';
+import { HttpClientStub, createResponse } from '../_mocks/http.mock';
 
 describe('ShoppingListService', () => {
 
@@ -17,8 +17,8 @@ describe('ShoppingListService', () => {
       providers: [
         ShoppingListService,
         Logger,
-        { provide: AuthorizationService, useClass: AuthorizationServiceMock },
-        { provide: HttpClient, useClass: HttpClientMock },
+        { provide: AuthorizationService, useClass: AuthorizationServiceStub },
+        { provide: HttpClient, useClass: HttpClientStub },
       ]
     });
   });

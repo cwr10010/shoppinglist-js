@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { LoggedInGuard } from './loggedin.guard';
 import { AuthorizationService } from '../_services/authorization.service';
 
-import { AuthorizationServiceMock } from '../_mocks/authorization.mock';
+import { AuthorizationServiceStub } from '../_mocks/authorization.mock';
 import { RouterMock } from '../_mocks/routing.mock';
 
 describe('LoggedInGuard', () => {
@@ -16,7 +16,7 @@ describe('LoggedInGuard', () => {
       providers: [
         LoggedInGuard,
         Logger,
-        { provide: AuthorizationService, useClass: AuthorizationServiceMock },
+        { provide: AuthorizationService, useClass: AuthorizationServiceStub },
         { provide: Router, useClass: RouterMock },
       ]
     });

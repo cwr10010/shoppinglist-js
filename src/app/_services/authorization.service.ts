@@ -58,6 +58,7 @@ export class AuthorizationService {
                 })
                 .catch((error) => {
                   this.storageService.remove(AUTH_TOKEN_KEY);
+                  this.storageService.remove(ID_TOKEN_KEY);
                   return Promise.reject(error);
                 });
         } else {
@@ -115,6 +116,7 @@ export class AuthorizationService {
             default:
                 this.log.warn('An error occurred', error);
                 this.storageService.remove(AUTH_TOKEN_KEY);
+                this.storageService.remove(ID_TOKEN_KEY);
                 return Promise.reject(error);
         }
     }

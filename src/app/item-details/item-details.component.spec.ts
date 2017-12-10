@@ -21,7 +21,7 @@ import { CookieService } from 'ngx-cookie-service';
 
 import { ItemDetailsComponent } from './item-details.component';
 
-import { ShoppingListServiceMock } from '../_mocks/shoppinglist.mock';
+import { ShoppingListServiceStub } from '../_mocks/shoppinglist.mock';
 import { LoginMockComponent } from '../_mocks/components.mock';
 import { RouterMock, ActivatedRouteMock } from '../_mocks/routing.mock';
 
@@ -58,7 +58,7 @@ describe('ItemDetailComponent', () => {
         CookieService,
         { provide: Location, useClass: LocationMock },
         { provide: ActivatedRoute, useClass: ActivatedRouteMock },
-        { provide: ShoppingListService, useClass: ShoppingListServiceMock },
+        { provide: ShoppingListService, useClass: ShoppingListServiceStub },
         { provide: APP_BASE_HREF, useValue : '/' }
       ]
     })

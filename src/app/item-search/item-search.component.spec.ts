@@ -15,7 +15,7 @@ import { ShoppingListItem } from '../_models/shoppinglist';
 import { Logger } from '../_helpers/logging';
 import { ShoppingListItemSearchService } from '../_services/item-search.service';
 
-import { ShoppingListSearchServiceMock } from '../_mocks/shoppinglist.mock';
+import { ShoppingListSearchServiceStub } from '../_mocks/shoppinglist.mock';
 import { RouterMock } from '../_mocks/routing.mock';
 
 class AuthorizationServiceMock {
@@ -43,7 +43,7 @@ describe('ItemSearchComponent', () => {
       providers: [
         Logger,
         { provide: Router, useClass: RouterMock },
-        { provide: ShoppingListItemSearchService, useClass: ShoppingListSearchServiceMock },
+        { provide: ShoppingListItemSearchService, useClass: ShoppingListSearchServiceStub },
         { provide: APP_BASE_HREF, useValue : '/' }
       ]
     })

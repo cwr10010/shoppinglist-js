@@ -8,7 +8,7 @@ import { HttpClient } from '../_helpers/http-client';
 import { ShoppingListItemSearchService } from './item-search.service';
 import { LocalStorageService } from './local-storage.service';
 
-import { HttpClientMock, createResponse } from '../_mocks/http.mock';
+import { HttpClientStub, createResponse } from '../_mocks/http.mock';
 
 class LocalStorageServiceStub {
   read() {}
@@ -22,7 +22,7 @@ describe('ShoppingListItemSearchService', () => {
         ShoppingListItemSearchService,
         Logger,
         { provide: LocalStorageService, useClass: LocalStorageServiceStub },
-        { provide: HttpClient, useClass: HttpClientMock },
+        { provide: HttpClient, useClass: HttpClientStub },
       ]
     });
   });
