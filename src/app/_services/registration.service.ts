@@ -29,7 +29,7 @@ export class RegistrationService {
       .catch(response => this.handleError(response));
   }
 
-  finish(token: string) {
+  finish(token: string): Promise<User> {
     return this.http.get(
       this.registerUrl + `?token=${token}`
     ).toPromise()
