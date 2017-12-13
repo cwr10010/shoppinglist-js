@@ -81,6 +81,10 @@ export class AuthorizationService {
             .then(() => {
                 this.storageService.remove(AUTH_TOKEN_KEY);
                 this.storageService.remove(ID_TOKEN_KEY);
+            })
+            .catch((error) => {
+              this.storageService.remove(AUTH_TOKEN_KEY);
+              this.storageService.remove(ID_TOKEN_KEY);
             });
     }
 
