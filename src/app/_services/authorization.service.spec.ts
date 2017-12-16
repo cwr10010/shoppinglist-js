@@ -128,4 +128,42 @@ describe('AuthorizationService', () => {
     );
 
   });
+
+  describe('logout()', () => {
+
+    it('should successfully logout a user locally and to the backend',
+      inject([AuthorizationService], (authorizationService) => {
+        spyOn(authorizationService.http, 'get').and.returnValue(Observable.of(
+          new Response(
+            new ResponseOptions({
+              status: 200
+            }))));
+        spyOn(authorizationService.storageService, 'remove');
+        authorizationService.logout().then(() => {
+          expect(authorizationService.http.get).toHaveBeenCalledTimes(1);
+          expect(authorizationService.storageService.remove).toHaveBeenCalledTimes(2);
+          expect(authorizationService.storageService.remove).toHaveBeenCalledWith('X-SLS-AUTHTOKEN');
+          expect(authorizationService.storageService.remove).toHaveBeenCalledWith('X-SLS-IDTOKEN');
+        });
+      })
+    );
+
+    it('should successfully also logout a user locally when request fails',
+    inject([AuthorizationService], (authorizationService) => {
+      spyOn(authorizationService.http, 'get').and.returnValue(ErrorObservable.create( new Response(
+        new ResponseOptions({
+          body: JSON.stringify('failed request'),
+          status: 500
+        }))));
+      spyOn(authorizationService.storageService, 'remove');
+      authorizationService.logout().then(() => {
+        expect(authorizationService.http.get).toHaveBeenCalledTimes(1);
+        expect(authorizationService.storageService.remove).toHaveBeenCalledTimes(2);
+        expect(authorizationService.storageService.remove).toHaveBeenCalledWith('X-SLS-AUTHTOKEN');
+        expect(authorizationService.storageService.remove).toHaveBeenCalledWith('X-SLS-IDTOKEN');
+      });
+    })
+  );
+
+  });
 });
