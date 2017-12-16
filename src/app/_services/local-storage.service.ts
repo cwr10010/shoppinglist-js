@@ -28,11 +28,7 @@ export class LocalStorageService {
                 this.cookieService.set(key, value, 30, '/', '', true);
             }
         } else {
-            if (this.localStorageAvailable) {
-                localStorage.removeItem(key);
-            } else {
-                this.cookieService.delete(key, '/');
-            }
+          this.remove(key);
         }
     }
 
@@ -55,7 +51,7 @@ export class LocalStorageService {
         if (this.localStorageAvailable) {
             localStorage.removeItem(key);
         } else {
-            this.cookieService.delete(key);
+            this.cookieService.delete(key, '/');
         }
     }
 }

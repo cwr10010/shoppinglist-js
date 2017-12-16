@@ -203,7 +203,7 @@ describe('AuthorizationService', () => {
       })
     );
 
-    it('should return null if the token has no three parts',
+    it('should return null if the token content is not parsable as json',
       inject([AuthorizationService], (authorizationService) => {
         spyOn(authorizationService.storageService, 'read').and.returnValue('A.bs.D');
         expect(authorizationService.readUserId()).toBe(null);
