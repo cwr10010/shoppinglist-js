@@ -101,7 +101,11 @@ export class AuthorizationService {
                 this.log.debug('token parts: ' + parts );
                 const tokenContent = atob(parts[1]);
                 this.log.debug('token content: ' + tokenContent );
-                return JSON.parse(tokenContent)['id'];
+                try {
+                  return JSON.parse(tokenContent)['id'];
+                } catch (e) {
+                  return null;
+                }
             }
         }
         return null;
