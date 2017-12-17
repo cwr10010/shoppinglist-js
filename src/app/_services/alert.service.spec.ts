@@ -43,6 +43,9 @@ describe('AlertService', () => {
       expect(alertService.subject.next).toHaveBeenCalledWith({ type: AlertType.Success, message: 'success message'});
       expect(alertService.keepAfterRouteChange).toBe(true);
     });
+  });
+
+  describe('error()', () => {
 
     it('should add a new error alert and should not be kept after route change', () => {
       spyOn(alertService.subject, 'next');
@@ -57,6 +60,9 @@ describe('AlertService', () => {
       expect(alertService.subject.next).toHaveBeenCalledWith({ type: AlertType.Error, message: 'error message'});
       expect(alertService.keepAfterRouteChange).toBe(true);
     });
+  });
+
+  describe('info()', () => {
 
     it('should add a new info alert and should not be kept after route change', () => {
       spyOn(alertService.subject, 'next');
@@ -71,6 +77,9 @@ describe('AlertService', () => {
       expect(alertService.subject.next).toHaveBeenCalledWith({ type: AlertType.Info, message: 'info message'});
       expect(alertService.keepAfterRouteChange).toBe(true);
     });
+  });
+
+  describe('warn()', () => {
 
     it('should add a new warn alert and should not be kept after route change', () => {
       spyOn(alertService.subject, 'next');
