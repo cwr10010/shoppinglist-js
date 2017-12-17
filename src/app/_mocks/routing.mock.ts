@@ -2,6 +2,8 @@ import { Component, Directive, HostListener, Input } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
 export class RouterMock {
+  events = Observable.of({ });
+
   navigate(url: string[]) { return url; }
 }
 
@@ -17,6 +19,7 @@ export class ActivatedRouteMock {
       'returnUrl': 'returnUrl'
     }
   };
+
 }
 
 @Directive({

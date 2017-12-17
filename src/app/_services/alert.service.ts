@@ -7,7 +7,7 @@ import { Alert, AlertType } from '../_models/alert';
 
 @Injectable()
 export class AlertService {
-    private subject = new Subject<Alert>();
+    subject = new Subject<Alert>();
     private keepAfterRouteChange = false;
 
     constructor(private router: Router) {
