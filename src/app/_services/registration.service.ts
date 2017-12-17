@@ -42,13 +42,7 @@ export class RegistrationService {
   }
 
   private handleError(error: Response): Promise<any> {
-    switch (error.status) {
-        case 403:
-            this.log.debug('reset token', error);
-            return Promise.all([]);
-        default:
-            this.log.warn('An error occurred', error);
-            return Promise.reject(error);
-    }
+    this.log.warn('An error occurred', error);
+    return Promise.reject(error);
   }
 }

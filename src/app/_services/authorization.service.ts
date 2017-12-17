@@ -116,17 +116,10 @@ export class AuthorizationService {
     }
 
     private handleError(error: Response): Promise<any> {
-        switch (error.status) {
-            case 403:
-                this.log.debug('reset token', error);
-                this.refresh();
-                return Promise.all([]);
-            default:
-                this.log.warn('An error occurred', error);
-                this.storageService.remove(AUTH_TOKEN_KEY);
-                this.storageService.remove(ID_TOKEN_KEY);
-                return Promise.reject(error);
-        }
+      this.log.warn('An error occurred', error);
+      this.storageService.remove(AUTH_TOKEN_KEY);
+      this.storageService.remove(ID_TOKEN_KEY);
+      return Promise.reject(error);
     }
 }
 
