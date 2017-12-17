@@ -1,7 +1,7 @@
-import * as loglevel from '../app/_helpers/loglevel';
+import * as logging from '../app/_helpers/logging';
 
 export const environment = {
   production: true,
-  loglevel: loglevel.WARN,
+  loglevel: logging.WARN,
   apiUrl: '/api'
 };
