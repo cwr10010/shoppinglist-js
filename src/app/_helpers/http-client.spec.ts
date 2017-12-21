@@ -18,7 +18,7 @@ class HttpStub {
   delete() {}
 }
 
-describe('Logger', () => {
+describe('HttpClient', () => {
 
   let httpClient: HttpClient;
   let http: Http;
@@ -41,8 +41,6 @@ describe('Logger', () => {
       authorizationService = _authService;
     })
   );
-
-  describe('get()', () => {
 
     it('should make a GET request with proper headers', () => {
       spyOn(http, 'get').and.returnValue(Observable.of(
@@ -137,7 +135,5 @@ describe('Logger', () => {
       });
 
     });
-
-  });
 
 });
