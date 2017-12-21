@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
 
 import { By, BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -10,9 +10,12 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { RegistrationService } from '../_services/registration.service';
 import { RegistrationData } from '../_models/registration-data';
 import { FinishRegistrationComponent } from './finish-registration.component';
+import { User } from '../_models/user';
 
 import { LoginMockComponent } from '../_mocks/components.mock';
 import { RouterMock, ActivatedRouteMock } from '../_mocks/routing.mock';
+
+import { Observable } from 'rxjs/Observable';
 
 class RegistrationServiceMock {
   register(registrationData: RegistrationData) { }
@@ -22,6 +25,9 @@ class RegistrationServiceMock {
 describe('FinishRegistrationComponent', () => {
   let component: FinishRegistrationComponent;
   let fixture: ComponentFixture<FinishRegistrationComponent>;
+
+  let registrationService: RegistrationService;
+  let router: Router;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -45,13 +51,37 @@ describe('FinishRegistrationComponent', () => {
     .compileComponents();
   }));
 
-  beforeEach(() => {
+  beforeEach(
+    inject([RegistrationService, Router], (_registrationService: RegistrationService, _router: Router) => {
+      registrationService = _registrationService;
+      spyOn(registrationService, 'finish').and.callThrough();
+      router = _router;
+    })
+  );
+
+  beforeEach(async(() => {
     fixture = TestBed.createComponent(FinishRegistrationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
+  }));
 
-  it('should create', () => {
+  it('should create', async(() => {
     expect(component).toBeTruthy();
-  });
+    expect(registrationService.finish).toHaveBeenCalledTimes(1);
+    expect(registrationService.finish).toHaveBeenCalledWith('token');
+  }));
+
+  it('should show username on successful registration', async(() => {
+    component.user = {username: 'username', password: 'password'} as User;
+    fixture.detectChanges();
+    const messageNode = fixture.debugElement.query(By.css('mat-card-content'));
+    expect(messageNode.nativeElement.innerHTML).toContain(component.user.username);
+  }));
+
+  it('should navigate to login page on button click', async(() => {
+    const button = fixture.debugElement.query(By.css('button'));
+    spyOn(router, 'navigate');
+    button.triggerEventHandler('click', {});
+    expect(router.navigate).toHaveBeenCalledWith(['/login']);
+  }));
 });

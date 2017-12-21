@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule, By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -15,9 +15,13 @@ import { AlertService } from '../_services/alert.service';
 
 import { RouterMock, AlertServiceMock } from '../_mocks';
 
+import { Observable } from 'rxjs/Observable';
+
 describe('AlertComponent', () => {
   let component: AlertComponent;
   let fixture: ComponentFixture<AlertComponent>;
+
+  let alertService: AlertService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -39,15 +43,21 @@ describe('AlertComponent', () => {
     .compileComponents();
   }));
 
-  beforeEach(() => {
+  beforeEach(
+    inject([AlertService], (_alertService) => {
+      alertService = _alertService;
+    })
+  );
+
+  beforeEach(async(() => {
     fixture = TestBed.createComponent(AlertComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
+  }));
 
-  it('should create', () => {
+  it('should create', async(() => {
     expect(component).toBeTruthy();
-  });
+  }));
 
   it('should show success alert', async(() => {
     component.alerts = [
