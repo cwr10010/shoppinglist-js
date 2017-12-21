@@ -18,7 +18,7 @@ class HttpStub {
   delete() {}
 }
 
-fdescribe('Logger', () => {
+describe('Logger', () => {
 
   let httpClient: HttpClient;
   let http: Http;
