@@ -15,7 +15,7 @@ import { AlertService } from '../_services/alert.service';
 
 import { RouterMock, AlertServiceMock } from '../_mocks';
 
-fdescribe('AlertComponent', () => {
+describe('AlertComponent', () => {
   let component: AlertComponent;
   let fixture: ComponentFixture<AlertComponent>;
 
