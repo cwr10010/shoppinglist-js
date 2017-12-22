@@ -41,7 +41,7 @@ export class AuthorizationService {
             .catch(response => this.handleError(response));
     }
 
-    refresh(): Promise<any> {
+    refresh(): Promise<void> {
         if (this.getAuthToken()) {
             this.log.debug('Refresh existing token');
             return this.http.get(

@@ -16,7 +16,7 @@ export class AlertComponent implements OnInit {
     ngOnInit() {
         this.alertService.getAlert().subscribe(alert => {
             if (!alert) {
-                // clear alerts when an empty alert is received
+                    // clear alerts when an empty alert is received
                 this.alerts = [];
                 return;
             }

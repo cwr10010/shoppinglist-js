@@ -1,7 +1,7 @@
-import * as logging from '../app/_helpers/logging';
+import { TRACE, DEBUG, INFO, WARN, ERROR } from '../app/_models/loglevel';
 
 export const environment = {
   production: true,
-  loglevel: logging.WARN,
+  loglevel: WARN,
   apiUrl: '/api'
 };

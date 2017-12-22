@@ -1,12 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-
-export const TRACE = 0;
-export const DEBUG = 1;
-export const INFO = 2;
-export const WARN = 3;
-export const ERROR = 4;
-export const OFF = 99;
+import { TRACE, DEBUG, INFO, WARN, ERROR } from '../_models/loglevel';
 
 @Injectable()
 export class Logger {

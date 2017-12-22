@@ -46,6 +46,8 @@ describe('AlertComponent', () => {
   beforeEach(
     inject([AlertService], (_alertService) => {
       alertService = _alertService;
+    spyOn(alertService, 'getAlert').and.returnValue(Observable.of(
+      { type: AlertType.Success, message: 'a message' }));
     })
   );
 
@@ -60,9 +62,6 @@ describe('AlertComponent', () => {
   }));
 
   it('should show success alert', async(() => {
-    component.alerts = [
-      { type: AlertType.Success, message: 'a message' }
-    ];
     fixture.detectChanges();
     const allAlerts = fixture.debugElement.queryAll(By.css('.alert'));
     expect(allAlerts.length).toBe(1);

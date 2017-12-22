@@ -2,8 +2,8 @@
 import { TestBed, async, inject } from '@angular/core/testing';
 import { Observable } from 'rxjs/Observable';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
-
-import { Logger, TRACE, DEBUG, INFO, WARN, ERROR, OFF } from './logging';
+import { Logger } from './logging';
+import { TRACE, DEBUG, INFO, WARN, ERROR, OFF } from '../_models/loglevel';
 
 
 describe('Logger', () => {
