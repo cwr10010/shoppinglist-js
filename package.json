@@ -5,7 +5,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --prod --environment=prod --aot",
+    "build": "ng build --prod --configuration=production --aot",
     "test": "ng test --watch=false --code-coverage",
     "lint": "ng lint --type-check --force shoppinglist-ng shoppinglist-ng-e2e",
     "e2e": "ng e2e",
