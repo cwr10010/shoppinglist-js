@@ -4,7 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Router, ActivatedRoute } from '@angular/router';
 import { APP_BASE_HREF } from '@angular/common';
 import { CookieService } from 'ngx-cookie-service';
-import { DragulaModule } from 'ng2-dragula';
+import { DragulaModule, DragulaService } from 'ng2-dragula';
 import { CustomMaterialModule } from '../custom-material.module';
 
 import { DashboardComponent } from './dashboard.component';
@@ -43,6 +43,7 @@ describe('DashboardComponent', () => {
         Logger,
         LocalStorageService,
         CookieService,
+        DragulaService,
         { provide: Router, useClass: RouterMock },
         { provide: ActivatedRoute, useClass: ActivatedRouteMock },
         { provide: ShoppingListService, useClass: ShoppingListServiceStub },

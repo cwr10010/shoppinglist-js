@@ -27,7 +27,7 @@ export class ActivatedRouteMock {
 })
 export class RouterLinkStubDirective {
 
-  @Input('routerLink')
+  @Input()
   routerLink: string;
 
   navigatedTo: any = null;

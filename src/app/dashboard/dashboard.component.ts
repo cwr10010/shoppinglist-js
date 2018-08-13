@@ -8,6 +8,8 @@ import { ShoppingListService } from '../_services/shoppinglist.service';
 import { AuthorizationService } from '../_services/authorization.service';
 import { LocalStorageService } from '../_services/local-storage.service';
 
+import { switchMap } from 'rxjs/operators';
+
 import { Logger } from '../_helpers/logging';
 
 const ACRORDEON_POSITION = 'X-SLS-ARCORDEONPOSITION';
@@ -42,15 +44,15 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
       this.route.paramMap
-        .switchMap((params: ParamMap) => this.openShoppingList(params.get('shopping_list_id')))
+        .pipe(switchMap((params: ParamMap) => this.openShoppingList(params.get('shopping_list_id'))))
         .subscribe(() => this.initShoppingList());
       this.step = this.localStorage.read(ACRORDEON_POSITION);
-      this.dragulaService.setOptions('shoppinglist-bag', {
+      this.dragulaService.createGroup('shoppinglist-bag', {
         moves: function (el, container, handle) {
           return handle.className.includes('item-drag-handle');
         }
       });
-      this.dragulaService.dropModel.subscribe( () => this.onDrop() );
+      this.dragulaService.dropModel('shoppinglist-bag').subscribe( () => this.onDrop() );
     }
 
     openShoppingList(shoppingListId: string): Promise<any> {
