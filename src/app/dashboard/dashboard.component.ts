@@ -52,7 +52,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
           return handle.className.includes('item-drag-handle');
         }
       });
-      this.dragulaService.dropModel('shoppinglist-bag').subscribe( () => this.onDrop() );
+      this.dragulaService.dropModel('shoppinglist-bag').subscribe( (model) => this.onDrop(model) );
     }
 
     openShoppingList(shoppingListId: string): Promise<any> {
@@ -96,16 +96,16 @@ export class DashboardComponent implements OnInit, OnDestroy {
       event.gesture.stopPropagation();
     }
 
-    onDrop() {
-        const listToBeSent = this.shoppingList.concat(this.readShoppingList);
-        let position = 1;
-        listToBeSent.forEach (
-          item => {
-            item.order = position++;
-            this.shoppingListService.update(this.currentShoppingListId(), item);
-          }
-        );
-        this.log.info(`updated shopping list: ${listToBeSent}`);
+    onDrop(model: any) {
+      const listToBeSent = model.targetModel.concat(this.readShoppingList);
+      let position = 1;
+      listToBeSent.forEach (
+        item => {
+          item.order = position++;
+          this.shoppingListService.update(this.currentShoppingListId(), item);
+        }
+      );
+      this.log.info(`updated shopping list: `, listToBeSent);
     }
 
     isExpanded(item: ShoppingListItem): boolean {

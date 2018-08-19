@@ -1,3 +1,10 @@
+
+@import '~material-design-icons/iconfont/material-icons.css';
+
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+@import '~dragula/dist/dragula.css';
+
 @font-face {
   font-family: 'EBGaramond12Regular';
   src:  url('./assets/fonts/ebgaramond12-regular-webfont.woff2') format('woff2'),
@@ -13,12 +20,6 @@
   font-weight: 600;
   font-style: normal;
 }
-
-@import '~material-design-icons/iconfont/material-icons.css';
-
-@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
-
-@import '~dragula/dist/dragula.css';
 
 /* everywhere else */
 * {

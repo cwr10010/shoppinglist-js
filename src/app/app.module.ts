@@ -7,7 +7,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import { CookieService } from 'ngx-cookie-service';
 
-import { DragulaModule } from 'ng2-dragula';
+import { DragulaModule, DragulaService } from 'ng2-dragula';
 
 import { AuthorizationGuard } from './_guards/authorization.guard';
 import { LoggedInGuard } from './_guards/loggedin.guard';
@@ -66,7 +66,8 @@ import { CustomMaterialModule } from './custom-material.module';
     RegistrationService,
     AlertService,
     Logger,
-    HttpClient
+    HttpClient,
+    DragulaService
   ],
   bootstrap: [ AppComponent ]
 })
