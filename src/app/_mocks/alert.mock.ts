@@ -1,5 +1,5 @@
-import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs';
 
 export class AlertServiceMock {
-  getAlert() { return Observable.of({}); }
+  getAlert() { return of({}); }
 }

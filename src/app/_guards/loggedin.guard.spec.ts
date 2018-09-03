@@ -24,18 +24,18 @@ describe('LoggedInGuard', () => {
 
   it('should be redirected to dashboard if token is present',
     inject([LoggedInGuard], (loggedInGuard) => {
-      spyOn(loggedInGuard.router, 'navigate');
+      const routerNavigateSpy = spyOn(loggedInGuard.router, 'navigate');
       expect(loggedInGuard.canActivate({}, {})).toBeFalsy();
-      expect(loggedInGuard.router.navigate).toHaveBeenCalledWith(['']);
+      expect(routerNavigateSpy).toHaveBeenCalledWith(['']);
     })
   );
 
   it('should load login component if no token present',
     inject([LoggedInGuard], (loggedInGuard) => {
       spyOn(loggedInGuard.authorizationService, 'getAuthToken').and.returnValue(null);
-      spyOn(loggedInGuard.router, 'navigate');
+      const routerNavigateSpy = spyOn(loggedInGuard.router, 'navigate');
       expect(loggedInGuard.canActivate()).toBeTruthy();
-      expect(loggedInGuard.router.navigate).toHaveBeenCalledTimes(0);
+      expect(routerNavigateSpy).toHaveBeenCalledTimes(0);
     })
   );
 });

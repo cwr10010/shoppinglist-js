@@ -26,18 +26,18 @@ describe('AuthorizationGuard', () => {
 
   it('should allow showing component if a valid token is present',
     inject([AuthorizationGuard], (authorizationGuard) => {
-      spyOn(authorizationGuard.router, 'navigate');
+      const routerNavigateSpy = spyOn(authorizationGuard.router, 'navigate');
       expect(authorizationGuard.canActivate()).toBeTruthy();
-      expect(authorizationGuard.router.navigate).toHaveBeenCalledTimes(0);
+      expect(routerNavigateSpy).toHaveBeenCalledTimes(0);
     })
   );
 
   it('should deny showing component if no auth token is present',
     inject([AuthorizationGuard], (authorizationGuard) => {
       spyOn(authorizationGuard.authorizationService, 'getAuthToken').and.returnValue(null);
-      spyOn(authorizationGuard.router, 'navigate');
+      const routerNavigateSpy = spyOn(authorizationGuard.router, 'navigate');
       expect(authorizationGuard.canActivate({}, { url: 'test' })).toBeFalsy();
-      expect(authorizationGuard.router.navigate).toHaveBeenCalledWith(['/login'], { queryParams: { returnUrl: 'test' }});
+      expect(routerNavigateSpy).toHaveBeenCalledWith(['/login'], { queryParams: { returnUrl: 'test' }});
     })
   );
 });

@@ -1,14 +1,14 @@
 import { Component, Directive, HostListener, Input } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs';
 
 export class RouterMock {
-  events = Observable.of({ });
+  events = of({ });
 
   navigate(url: string[]) { return url; }
 }
 
 export class ActivatedRouteMock {
-  paramMap = Observable.of({
+  paramMap = of({
     get( arg: string) {
       return 'token';
     }

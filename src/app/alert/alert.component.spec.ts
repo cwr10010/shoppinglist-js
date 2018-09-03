@@ -1,13 +1,13 @@
 import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import { BrowserModule, By } from '@angular/platform-browser';
+import { By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Router } from '@angular/router';
 import { APP_BASE_HREF } from '@angular/common';
 import { CustomMaterialModule } from '../custom-material.module';
 
 import { AlertComponent } from './alert.component';
-import { Alert, AlertType } from '../_models/alert';
+import { AlertType } from '../_models/alert';
 
 import { Logger } from '../_helpers/logging';
 
@@ -15,7 +15,7 @@ import { AlertService } from '../_services/alert.service';
 
 import { RouterMock, AlertServiceMock } from '../_mocks';
 
-import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs';
 
 describe('AlertComponent', () => {
   let component: AlertComponent;
@@ -46,7 +46,7 @@ describe('AlertComponent', () => {
   beforeEach(
     inject([AlertService], (_alertService) => {
       alertService = _alertService;
-    spyOn(alertService, 'getAlert').and.returnValue(Observable.of(
+    spyOn(alertService, 'getAlert').and.returnValue(of(
       { type: AlertType.Success, message: 'a message' }));
     })
   );
