@@ -1,7 +1,4 @@
-import { TestBed, async, inject } from '@angular/core/testing';
-import { Headers, Http, Response, ResponseOptions } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
-import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
+import { TestBed, inject } from '@angular/core/testing';
 
 import { CookieService } from 'ngx-cookie-service';
 

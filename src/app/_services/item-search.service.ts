@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
 
-import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
 import { ShoppingListItem } from '../_models/shoppinglist';
 import { LocalStorageService } from './local-storage.service';
-import { AuthorizationService } from './authorization.service';
 import { HttpClient } from '../_helpers/http-client';
 import { Logger } from '../_helpers/logging';
 

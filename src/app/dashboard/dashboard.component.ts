@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
-import { DragulaService, DragulaDirective } from 'ng2-dragula';
+import { DragulaService } from 'ng2-dragula';
 
 import { ShoppingList, ShoppingListItem } from '../_models/shoppinglist';
 import { ShoppingListService } from '../_services/shoppinglist.service';

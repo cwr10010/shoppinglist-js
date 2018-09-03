@@ -1,7 +1,4 @@
-import { TestBed, async, inject } from '@angular/core/testing';
-import { Headers, Http, ResponseOptions, Response } from '@angular/http';
-import { Inject } from '@angular/core';
-import { HttpClient } from '../_helpers/http-client';
+import { TestBed, inject } from '@angular/core/testing';
 import { Logger } from '../_helpers/logging';
 import { Router } from '@angular/router';
 

@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http, Response } from '@angular/http';
 
-import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 
-import { Logger } from './logging';
 import { AuthorizationService } from '../_services/authorization.service';
 import { environment } from '../../environments/environment';
 
@@ -62,11 +60,9 @@ export class HttpClient {
     }
 
     createHeaders(): Promise<Headers> {
-        let headers = {};
-        let authValue = '';
         return this.authorizationService.refresh().then(() => {
-            authValue = `Bearer ${this.authorizationService.getAuthToken()}`;
-            headers = {
+            const authValue = `Bearer ${this.authorizationService.getAuthToken()}`;
+            const headers = {
                 'Content-Type': 'application/json',
                 'Authorization': authValue
             };

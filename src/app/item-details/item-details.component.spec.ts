@@ -10,12 +10,8 @@ import { APP_BASE_HREF } from '@angular/common';
 
 import { CustomMaterialModule } from '../custom-material.module';
 
-import { LoginComponent } from '../login/login.component';
-
-import { ShoppingListItem } from '../_models/shoppinglist';
 import { Logger } from '../_helpers/logging';
 import { ShoppingListService } from '../_services/shoppinglist.service';
-import { ShoppingListItemSearchService } from '../_services/item-search.service';
 import { LocalStorageService } from '../_services/local-storage.service';
 import { CookieService } from 'ngx-cookie-service';
 

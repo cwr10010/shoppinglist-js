@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 
-import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/toPromise';
 
 import { ShoppingList, ShoppingListItem } from '../_models/shoppinglist';

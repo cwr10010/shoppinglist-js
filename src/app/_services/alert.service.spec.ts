@@ -1,11 +1,9 @@
 
-import { TestBed, async, inject } from '@angular/core/testing';
-import { Observable } from 'rxjs/Observable';
-import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
+import { TestBed, inject } from '@angular/core/testing';
 import { Router } from '@angular/router';
 
 import { AlertService } from './alert.service';
-import { Alert, AlertType } from '../_models/alert';
+import { AlertType } from '../_models/alert';
 
 import { RouterMock } from '../_mocks/routing.mock';
 

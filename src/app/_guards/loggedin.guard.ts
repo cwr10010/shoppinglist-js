@@ -4,8 +4,6 @@ import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from
 import { AuthorizationService } from '../_services/authorization.service';
 import { Logger} from '../_helpers/logging';
 
-import { LoginComponent } from '../login/login.component';
-
 @Injectable()
 export class LoggedInGuard implements CanActivate {
 

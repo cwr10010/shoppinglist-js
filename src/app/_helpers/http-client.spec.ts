@@ -1,4 +1,4 @@
-import { TestBed, async, inject } from '@angular/core/testing';
+import { TestBed, inject } from '@angular/core/testing';
 import { of } from 'rxjs';
 
 import { Headers, Http, Response, ResponseOptions } from '@angular/http';

@@ -15,8 +15,6 @@ import { User } from '../_models/user';
 import { LoginMockComponent } from '../_mocks/components.mock';
 import { RouterMock, ActivatedRouteMock } from '../_mocks/routing.mock';
 
-import { Observable } from 'rxjs/Observable';
-
 class RegistrationServiceMock {
   register(registrationData: RegistrationData) { }
   finish() { return Promise.all([]); }

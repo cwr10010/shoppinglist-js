@@ -1,4 +1,4 @@
-import { Headers, Http, ResponseOptions, Response } from '@angular/http';
+import { ResponseOptions, Response } from '@angular/http';
 
 export class HttpClientStub {
   get() {}
